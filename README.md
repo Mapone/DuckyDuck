@@ -1,2 +1,0 @@
-# DuckyDuck
-Richoux
