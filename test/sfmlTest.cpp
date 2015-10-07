@@ -25,10 +25,10 @@ int main()
     ////////////////////////////////////
 
     const int LARGEUR_FENETRE = 800;
-    const int HAUTEUR_FENETRE = 600;
+    const int HAUTEUR_FENETRE = 800;
     const int TAILLE_HUD = 16;
     const int TAILLE_CARRE = 20;
-    const int TIME_GAME = 120;
+    const int TIME_GAME = 20;
     bool first = true;
 
 //----------------------Fenetre----------------------
@@ -65,26 +65,37 @@ int main()
     Text staticTemps;
     staticTemps.setFont(fontOldSchool);
     staticTemps.setString("Temps Restant");
-    staticTemps.setCharacterSize(12);
+    staticTemps.setCharacterSize(16);
     staticTemps.setColor(Color::White);
     staticTemps.setPosition(100,0);
 
     Text temps;
     temps.setFont(fontOldSchool);
     temps.setString("0");
-    temps.setCharacterSize(12);
+    temps.setCharacterSize(16);
     temps.setColor(Color::White);
     temps.setPosition(320,0);
 
     Text fin;
     fin.setFont(fontOldSchool);
-    fin.setString("FELICITATION \n SCORE FINAL: ");
+    fin.setString("FELICITATION \nSCORE FINAL: ");
     fin.setCharacterSize(16);
     fin.setColor(Color::White);
     fin.setPosition(250,400);
 
+
+    int randomX = rand() % (LARGEUR_FENETRE-TAILLE_CARRE);
+    int randomY = rand() % (HAUTEUR_FENETRE-TAILLE_CARRE);
+
+    RectangleShape randomRect(Vector2f(TAILLE_CARRE,TAILLE_CARRE));
+    randomRect.setFillColor(Color::Red);
+    randomRect.setPosition(randomX,randomY);
+
     score.setString("0");
 
+
+    cout << randomRect.getPosition().x << endl;
+    cout << randomRect.getPosition().y << endl;
 
     /********/
     /*TEMPS*/
@@ -93,8 +104,6 @@ int main()
     time_t tempsActuel;
     time(&tempsDepart);
     int tempsEcouler =0, timeleft;
-
-
     while (window.isOpen())
     {
         if(timeleft != 0)
@@ -114,6 +123,27 @@ int main()
             {       
                 if (event.type == Event::Closed)
                     window.close();
+            }
+
+
+            if (Mouse::isButtonPressed(Mouse::Left))
+            {
+
+                Vector2i position = Mouse::getPosition(window);
+
+                cout << position.x << endl;
+                cout << position.y << endl;
+                if(position.x>= randomRect.getPosition().x && position.x<= (randomRect.getPosition().x+TAILLE_CARRE))
+                {
+                    if(position.y>= randomRect.getPosition().y && position.y<= (randomRect.getPosition().y+TAILLE_CARRE))
+                    {
+                        updateScore(10, score);
+                        randomX = rand() % (LARGEUR_FENETRE-TAILLE_CARRE);
+                        randomY = rand() % (HAUTEUR_FENETRE-TAILLE_CARRE)+TAILLE_HUD;
+                        randomRect.setPosition(randomX,randomY);
+                    }
+                   
+                }
             }
 
             window.clear();
