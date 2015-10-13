@@ -35,7 +35,7 @@ public:
 
                 // on en déduit sa position dans la texture du tileset
                 int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
-                cout << tu << " = " << tileNumber << " modulo " << m_tileset.getSize().x << "/" << tileSize.x << endl;
+                //cout << tu << " = " << tileNumber << " modulo " << m_tileset.getSize().x << "/" << tileSize.x << endl;
                 int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
 
                 // on récupère un pointeur vers le quad à définir dans le tableau de vertex
@@ -48,10 +48,10 @@ public:
                 quad[3].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 
                 // on définit ses quatre coordonnées de texture
-                quad[0].texCoords = sf::Vector2f(tu * tileSize.x, tv * tileSize.y);
-                quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y);
-                quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
-                quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
+                quad[0].texCoords = sf::Vector2f(tu * tileSize.x+tu, tv * tileSize.y+tv);
+                quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x+tu, tv * tileSize.y+tv);
+                quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
+                quad[3].texCoords = sf::Vector2f(tu * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
             }
 
         return true;
@@ -78,19 +78,14 @@ private:
 
 
 
-
-
-
-
-
 int main()
 {
     ////////////////////////////////////
     ////////////INITIALISATION//////////
     ////////////////////////////////////
 
-    const int LARGEUR_FENETRE = 800;
-    const int HAUTEUR_FENETRE = 600;
+    const int LARGEUR_FENETRE = 320;
+    const int HAUTEUR_FENETRE = 240;
     const int TAILLE_HUD = 16;
     const int TAILLE_CARRE = 20;
     const int TIME_GAME = 120;
@@ -121,14 +116,14 @@ int main()
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 
-    0,0,3,4,0,0,0,2,2,2,2,0,0,2,2, 
+    0,0,3,4,0,0,0,2,2,2,2,0,0,24,24, 
     0,0,5,6,0,0,0,0,0,0,0,0,0,0,0, 
     0,0,5,6,0,0,0,0,0,0,0,0,0,0,0, 
-    0,0,5,6,0,0,0,0,0,0,0,0,0,0,0, 
+    0,0,5,6,35,0,0,42,0,0,60,0,0,0,0, 
     7,7,7,7,7,7,7,7,7,7,7,7,7,7,7}; 
 
       TileMap map;
-    if (!map.load("tileset1.png", sf::Vector2u(25, 25), level, 15, 13))
+    if (!map.load("tileset2.png", sf::Vector2u(16, 16), level, 15, 13))
         cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
 
 
@@ -143,7 +138,7 @@ int main()
                 window.close();
         }
 
-        window.clear();
+        window.clear(sf::Color::Blue);
         window.draw(map);
         window.display();
     }
