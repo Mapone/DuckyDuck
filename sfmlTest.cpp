@@ -41,7 +41,9 @@ int main()
 
 
     Image niveau;
+cout << "A" << endl;
     TileMap map(niveau);
+    cout << "A" << endl;
     if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel(), 20, 15))
         cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
 

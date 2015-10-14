@@ -9,6 +9,7 @@ TileMap::TileMap(sf::Image niveau)
 {
     level = new int[niveau.getSize().x*niveau.getSize().y];
     loadBMP(niveau);
+    cout << "FIN CONSTRU"<< endl;
 }
 
 TileMap::~TileMap()
@@ -85,15 +86,25 @@ void TileMap::loadBMP(sf::Image niveau)
 
     for (unsigned int i = 0; i < (niveau.getSize().x*niveau.getSize().y*4); i+=4)
     {
-        cout << "RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;
+        cout <<" RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;
 
         if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 255)
-            level[i/4] = 52;
+            level[i/4] = 0;
 
         else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 0)
-            level[i/4] = 25;
+            level[i/4] = 1;
 
         else
+        {
+            cout << "#ERROR: loadBMP(niveau), couleur non existante RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;
             break; 
+        }
     }
+    for (unsigned int j = 0; j < niveau.getSize().y*niveau.getSize().x; ++j)
+    {
+        if(j%niveau.getSize().x == 0)
+            cout << endl;
+        cout << level[j];
+    }
+    cout << "FIN POUR" << endl;
 }
