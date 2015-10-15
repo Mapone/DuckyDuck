@@ -8,8 +8,7 @@ using namespace std;
 TileMap::TileMap(sf::Image niveau)
 {
     level = new int[niveau.getSize().x*niveau.getSize().y];
-    loadBMP(niveau);
-    cout << "FIN CONSTRU"<< endl;
+    level = loadBMP(niveau);
 }
 
 TileMap::~TileMap()
@@ -75,24 +74,46 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(m_vertices, states);
 }
 
-void TileMap::loadBMP(sf::Image niveau)
+int *TileMap::loadBMP(sf::Image niveau)
 {
 
-    if(!niveau.loadFromFile("lvl1.bmp"))
+    if(!niveau.loadFromFile("lvl2.bmp"))
         cout << "#ERROR: Erreur lors du chargement du niveau \"lvl1.bmp\" " << endl;
 
     const uint8_t *t;
     t = niveau.getPixelsPtr();
+    int *lvl = new int[niveau.getSize().x*niveau.getSize().y];
 
     for (unsigned int i = 0; i < (niveau.getSize().x*niveau.getSize().y*4); i+=4)
     {
         cout <<" RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;
 
-        if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 255)
-            level[i/4] = 0;
+        if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 200)
+            lvl[i/4] = 52; //BLOC CIEL
 
-        else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 0)
-            level[i/4] = 1;
+        else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 200 && static_cast<int>(t[i+2]) == 0)
+            lvl[i/4] = 192; //BLOC HERBE
+
+        else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 100 && static_cast<int>(t[i+2]) == 0)
+            lvl[i/4] = 191; //BLOC HERBE BORDURE GAUCHE
+
+        else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 0)
+            lvl[i/4] = 194; //BLOC HERBE BORDURE DROITE
+
+        else if( static_cast<int>(t[i]) == 176 && static_cast<int>(t[i+1]) == 176 && static_cast<int>(t[i+2]) == 176)
+            lvl[i/4] = 183; //BLOC PIERRE NON TRAVERSANT 
+
+        else if( static_cast<int>(t[i]) == 96 && static_cast<int>(t[i+1]) == 96 && static_cast<int>(t[i+2]) == 96)
+            lvl[i/4] = 122; //BLOC PIERRE TRAVERSANT 
+
+        else if( static_cast<int>(t[i]) == 96 && static_cast<int>(t[i+1]) == 56 && static_cast<int>(t[i+2]) == 48)
+            lvl[i/4] = 195; //BLOC TERRE
+
+        else if( static_cast<int>(t[i]) == 138 && static_cast<int>(t[i+1]) == 81 && static_cast<int>(t[i+2]) == 70)
+            lvl[i/4] = 198; //BLOC DEMI-TERRE SUR LA GAUCHE
+
+        else if( static_cast<int>(t[i]) == 63 && static_cast<int>(t[i+1]) == 38 && static_cast<int>(t[i+2]) == 34)
+            lvl[i/4] = 197; //BLOC DEMI-TERRE SUR LA DROITE
 
         else
         {
@@ -104,7 +125,7 @@ void TileMap::loadBMP(sf::Image niveau)
     {
         if(j%niveau.getSize().x == 0)
             cout << endl;
-        cout << level[j];
+        cout << lvl[j];
     }
-    cout << "FIN POUR" << endl;
+    return lvl;
 }

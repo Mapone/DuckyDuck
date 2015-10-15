@@ -11,7 +11,7 @@ public:
 
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    void loadBMP(sf::Image niveau);
+    int *loadBMP(sf::Image niveau);
     sf::VertexArray m_vertices;
     sf::Texture m_tileset;
     int *level;
