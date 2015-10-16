@@ -7,6 +7,7 @@ JEU ALAKON
 #include <stdlib.h> //rand
 #include <SFML/Graphics.hpp>
 #include "TileMap.hpp"
+#include "Personnage.hpp"
 
 using namespace std;
 using namespace sf;
@@ -45,10 +46,9 @@ int main()
     if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel(), 20, 15))
         cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
 
-    RectangleShape rekt;
-    rekt.setSize(sf::Vector2f(16, 16));
-    rekt.setFillColor(sf::Color::Red);
-    rekt.setPosition(32, 16);
+
+    Personnage mario(Vector2f(16,16));
+    mario.getPerso().setPosition(32,16);
 
     Vector2f gravity(0,2);
 
@@ -60,11 +60,10 @@ int main()
             if (event.type == Event::Closed)
                 window.close();
         }
-        rekt.setPosition(rekt.getPosition().x, rekt.getPosition().y+gravity.y);
 
         window.clear(sf::Color::Blue);
         window.draw(map);
-        window.draw(rekt);
+        window.draw(mario.getPerso());
         window.display();
     }
     return 0;

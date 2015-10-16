@@ -86,7 +86,7 @@ int *TileMap::loadBMP(sf::Image niveau)
 
     for (unsigned int i = 0; i < (niveau.getSize().x*niveau.getSize().y*4); i+=4)
     {
-        cout <<" RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;
+        //cout <<" RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;
 
         if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 200)
             lvl[i/4] = 52; //BLOC CIEL
@@ -120,12 +120,6 @@ int *TileMap::loadBMP(sf::Image niveau)
             cout << "#ERROR: loadBMP(niveau), couleur non existante RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;
             break; 
         }
-    }
-    for (unsigned int j = 0; j < niveau.getSize().y*niveau.getSize().x; ++j)
-    {
-        if(j%niveau.getSize().x == 0)
-            cout << endl;
-        cout << lvl[j];
     }
     return lvl;
 }

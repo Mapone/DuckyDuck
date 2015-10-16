@@ -4,14 +4,16 @@
 class Personnage
 {
 public:
-	Personnage(Vector2f taille);
+	Personnage(const sf::Vector2f &taille);
 	~Personnage();
-	Vecor2f getMouvement();
+	sf::Vector2f getMouvement();
+	void setMouvement(const sf::Vector2f &mvt);
+	sf::RectangleShape & getPerso();
 
 
 private:
-	Vector2f _mouvement;
-	RectangleShape _perso;
+	sf::Vector2f _mouvement;
+	sf::RectangleShape _perso;
 };
 
 
