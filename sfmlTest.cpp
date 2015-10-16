@@ -45,6 +45,12 @@ int main()
     if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel(), 20, 15))
         cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
 
+    RectangleShape rekt;
+    rekt.setSize(sf::Vector2f(16, 16));
+    rekt.setFillColor(sf::Color::Red);
+    rekt.setPosition(32, 16);
+
+    Vector2f gravity(0,2);
 
     while (window.isOpen())
     {
@@ -54,9 +60,11 @@ int main()
             if (event.type == Event::Closed)
                 window.close();
         }
+        rekt.setPosition(rekt.getPosition().x, rekt.getPosition().y+gravity.y);
 
         window.clear(sf::Color::Blue);
         window.draw(map);
+        window.draw(rekt);
         window.display();
     }
     return 0;
