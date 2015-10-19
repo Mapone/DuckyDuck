@@ -20,8 +20,8 @@ int main()
     ////////////INITIALISATION//////////
     ////////////////////////////////////
 
-    const int LARGEUR_FENETRE = 320;
-    const int HAUTEUR_FENETRE = 240;
+    const int LARGEUR_FENETRE = 800;
+    const int HAUTEUR_FENETRE = 448;
 
 //----------------------Fenetre----------------------
 //----------------------------------------------------
@@ -43,15 +43,16 @@ int main()
 
     Image niveau;
     TileMap map(niveau);
-    if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel(), 20, 15))
+    if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel(), 50, 28))
         cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
 
 
     Personnage mario(Vector2f(16,16));
-    mario.getPerso().setPosition(32,16);
+    mario.getPerso().setPosition(32,64);
 
-    Vector2f gravity(0,2);
+    Vector2f gravity(0,0.0001);
 
+    bool tmp = true;
     while (window.isOpen())
     {
         Event event;
@@ -60,9 +61,23 @@ int main()
             if (event.type == Event::Closed)
                 window.close();
         }
-
         window.clear(sf::Color::Blue);
         window.draw(map);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && tmp)
+        {
+            mario.addMouvement(Vector2f(0,-20));
+            tmp = false;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+        {
+            mario.addMouvement(Vector2f(-0.2,0));
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            mario.addMouvement(Vector2f(0.2,0));
+        }
+        mario.addMouvement(gravity);
+        mario.move();
         window.draw(mario.getPerso());
         window.display();
     }

@@ -77,7 +77,7 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 int *TileMap::loadBMP(sf::Image niveau)
 {
 
-    if(!niveau.loadFromFile("lvl2.bmp"))
+    if(!niveau.loadFromFile("lvl3.bmp"))
         cout << "#ERROR: Erreur lors du chargement du niveau \"lvl1.bmp\" " << endl;
 
     const uint8_t *t;
