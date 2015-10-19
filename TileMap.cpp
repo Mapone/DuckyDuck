@@ -16,18 +16,37 @@ TileMap::~TileMap()
     delete level;
 }
 
-bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
+bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height, bool* collisions)
 {
     // on charge la texture du tileset
     if (!m_tileset.loadFromFile(tileset))
         return false;
-
+	
+	// Tableau donnant la nature du bloc généré (plein, demi/quart de bloc)
+    int sizeBlocs[]=
+    {
+        1,1,0,0,0,0,0,0,1,1,0,0,3,4,3,4,5,6,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,9,
+        8,7,0,0,0,0,0,0,0,0,0,0,0,0,9,0,9,9,
+        1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        4,3,4,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,
+        0,0,0,0,0,0,0,4,3,0,0,9,1,0,1,1,9,9,
+        9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+    };
+	
+	
     // on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
     m_vertices.setPrimitiveType(sf::Quads);
     m_vertices.resize(width * height * 4);
 
     // on remplit le tableau de vertex, avec un quad par tuile
     for (unsigned int i = 0; i < width; ++i)
+	{
         for (unsigned int j = 0; j < height; ++j)
         {
             // on récupère le numéro de tuile courant
@@ -52,8 +71,97 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
             quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x+tu, tv * tileSize.y+tv);
             quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
             quad[3].texCoords = sf::Vector2f(tu * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
-        }
+			
+			// Si le bloc n'est pas plein, on doit le définir en tant que demi/quart de bloc
+            switch(sizeBlocs[tileNumber])
+            {
+                // Bloc Plein
+                case 0:
+                    collisions[(i+j*width)]=true;
+                    collisions[(i+j*width)+1]=true;
+                    collisions[(i+j*width)+2]=true;
+                    collisions[(i+j*width)+3]=true;
+                    break;
 
+                // Bloc 8x16 partie Basse
+                case 1:
+                    collisions[(i+j*width)]=false;
+                    collisions[(i+j*width)+1]=false;
+                    collisions[(i+j*width)+2]=true;
+                    collisions[(i+j*width)+3]=true;
+                    break;
+
+                // Bloc 8x16 partie Haute
+                case 2:
+                    collisions[(i+j*width)]=true;
+                    collisions[(i+j*width)+1]=true;
+                    collisions[(i+j*width)+2]=false;
+                    collisions[(i+j*width)+3]=false;
+                    break;
+
+                // Bloc 16x8 partie Gauche
+                case 3:
+                    collisions[(i+j*width)]=true;
+                    collisions[(i+j*width)+1]=false;
+                    collisions[(i+j*width)+2]=false;
+                    collisions[(i+j*width)+3]=true;
+                    break;
+
+                // Bloc 16x8 partie Droite
+                case 4:
+                    collisions[(i+j*width)]=false;
+                    collisions[(i+j*width)+1]=true;
+                    collisions[(i+j*width)+2]=true;
+                    collisions[(i+j*width)+3]=false;
+                    break;
+
+                // Bloc 8x8 Haut Gauche
+                case 5:
+                    collisions[(i+j*width)]=true;
+                    collisions[(i+j*width)+1]=false;
+                    collisions[(i+j*width)+2]=false;
+                    collisions[(i+j*width)+3]=false;
+                    break;
+
+                // Bloc 8x8 Haut Droit
+                case 6:
+                    collisions[(i+j*width)]=false;
+                    collisions[(i+j*width)+1]=true;
+                    collisions[(i+j*width)+2]=false;
+                    collisions[(i+j*width)+3]=false;
+                    break;
+           
+                // Bloc 8x8 Bas Gauche
+                case 7:
+                    collisions[(i+j*width)]=false;
+                    collisions[(i+j*width)+1]=false;
+                    collisions[(i+j*width)+2]=false;
+                    collisions[(i+j*width)+3]=true;
+                    break;
+
+                // Bloc 8x8 Bas Droit
+                case 8:
+                    collisions[(i+j*width)]=false;
+                    collisions[(i+j*width)+1]=false;
+                    collisions[(i+j*width)+2]=true;
+                    collisions[(i+j*width)+3]=false;
+                    break;
+
+                // Bloc Transparent
+                case 9:
+                    collisions[(i+j*width)]=false;
+                    collisions[(i+j*width)+1]=false;
+                    collisions[(i+j*width)+2]=false;
+                    collisions[(i+j*width)+3]=false;
+                    break;
+
+                default:
+                    cout << "ERROR : sizeBlocs ne contient pas la nature du bloc : " << tileNumber << endl;
+                    break;
+            }
+		}
+	}
+	
     return true;
 }
 

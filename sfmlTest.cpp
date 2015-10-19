@@ -22,7 +22,10 @@ int main()
 
     const int LARGEUR_FENETRE = 800;
     const int HAUTEUR_FENETRE = 448;
+	const int NB_DIVISION_BLOCS = 4;
+    const int NB_TUILES = (LARGEUR_FENETRE*HAUTEUR_FENETRE*NB_DIVISION_BLOCS)/(16*16);
 
+	
 //----------------------Fenetre----------------------
 //----------------------------------------------------
     ContextSettings settings;
@@ -40,7 +43,11 @@ int main()
     if (!fontOldSchool.loadFromFile("gamefont.ttf"))
         cout << "#ERROR: Erreur lors du chargement de la police \"gamefont.tff\" " << endl;
 
+	
+//--------- Creation du tableau de collisions -------------
+//---------------------------------------------------------
 
+    bool collisions[NB_TUILES*NB_DIVISION_BLOCS];
     Image niveau;
     TileMap map(niveau);
     if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel(), 50, 28))
