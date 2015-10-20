@@ -7,6 +7,7 @@ using namespace std;
 
 TileMap::TileMap(sf::Image niveau)
 {
+    collisions = new bool[10000];
     level = new int[niveau.getSize().x*niveau.getSize().y];
     level = loadBMP(niveau);
 }
@@ -16,7 +17,7 @@ TileMap::~TileMap()
     delete level;
 }
 
-bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height, bool*  collisions)
+bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
 {
     // on charge la texture du tileset
     if (!m_tileset.loadFromFile(tileset))
@@ -25,18 +26,18 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
 	// Tableau donnant la nature du bloc généré (plein, demi/quart de bloc)
     int sizeBlocs[]=
     {
-        1,1,0,0,0,0,0,0,1,1,0,0,3,4,3,4,5,6,9,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,9,9,
-        8,7,0,0,0,0,0,0,0,0,0,0,0,0,9,0,9,9,9,
-        1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-        4,3,4,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
-        0,0,0,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,9,
-        0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,9,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,9,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,
-        0,0,0,0,0,0,0,4,3,0,0,9,1,0,1,1,9,9,9,
-        9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+        1,1,0,0,0,0,0,0,1,1,0,0,3,4,3,4,5,6,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,9,
+        8,7,0,0,0,0,0,0,0,0,0,0,0,0,9,0,9,9,
+        1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        4,3,4,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,
+        0,0,0,0,0,0,0,4,3,0,0,9,1,0,1,1,9,9,
+        9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
     };
 	
 	
@@ -73,7 +74,6 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
             quad[3].texCoords = sf::Vector2f(tu * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
 			
 			// Si le bloc n'est pas plein, on doit le définir en tant que demi/quart de bloc
-            cout << tileNumber << sizeBlocs[tileNumber] << endl;
             switch(sizeBlocs[tileNumber])
             {
                 // Bloc Plein
