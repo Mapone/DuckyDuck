@@ -50,7 +50,7 @@ int main()
     bool collisions[NB_TUILES*NB_DIVISION_BLOCS];
     Image niveau;
     TileMap map(niveau);
-    if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel(), 50, 28))
+    if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel(), 50, 28, collisions))
         cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
 
 

@@ -6,7 +6,7 @@ class TileMap : public sf::Drawable, public sf::Transformable
 public:
 	TileMap(sf::Image niveau);
 	~TileMap();
-    bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height);
+    bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height, bool* collisions);
 	int *getLevel();
 
 private:
