@@ -56,7 +56,7 @@ int main()
     Personnage mario(Vector2f(16,16));
     mario.getPerso().setPosition(32,64);
 
-    Vector2f gravity(0,0.0001);
+    Vector2f gravity(0,0.05);
 
     bool tmp = true;
     while (window.isOpen())

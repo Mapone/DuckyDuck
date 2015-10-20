@@ -73,3 +73,4 @@ void Personnage::move()
 {
 	_perso.setPosition(_perso.getPosition()+_mouvement);
 }
+
