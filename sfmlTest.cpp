@@ -53,7 +53,6 @@ int main()
     if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel(), 50, 28, collisions))
         cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
 
-
     Personnage mario(Vector2f(16,16));
     mario.getPerso().setPosition(32,64);
 
