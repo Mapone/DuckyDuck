@@ -21,6 +21,11 @@ Vector2f Personnage::getMouvement()
 	return _mouvement;
 }
 
+void Personnage::setMouvement(sf::Vector2f v)
+{
+	_mouvement = v;
+}
+
 void Personnage::addMouvement(const Vector2f &mvt)
 {
 	if(_mouvement.x + mvt.x <= MAX_SPEED_X)
@@ -47,7 +52,6 @@ void Personnage::addMouvement(const Vector2f &mvt)
 	//Si il y a un mouvement vers le bas (chute ou application de la gravité, on applique des frottements sur x)
 	if(_mouvement.x>0)
 	{
-		std::cout << _mouvement.x << std::endl;
 		if(_mouvement.x - FROTTEMENTS < 0)
 			_mouvement.x = 0;
 		else
@@ -56,7 +60,6 @@ void Personnage::addMouvement(const Vector2f &mvt)
 
 	if(_mouvement.x<0)
 	{
-		std::cout << _mouvement.x << std::endl;
 		if(_mouvement.x + FROTTEMENTS > 0)
 			_mouvement.x = 0;
 		else
@@ -69,6 +72,7 @@ sf::RectangleShape& Personnage::getPerso()
 	return _perso;
 } 
 
+//Applique le vecteur de mouvement à la RectangleShape du personnage 
 void Personnage::move()
 {
 	_perso.setPosition(_perso.getPosition()+_mouvement);

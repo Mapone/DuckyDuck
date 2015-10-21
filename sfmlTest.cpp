@@ -42,20 +42,20 @@ int main()
         cout << "#ERROR: Erreur lors du chargement de la police \"gamefont.tff\" " << endl;
 
 	
-//--------- Creation du tableau de collisions -------------
+//--------- Chargement du niveau --------------------------
 //---------------------------------------------------------
 
-    Image niveau;
+    String niveau = ("lvl3.bmp");
     TileMap map(niveau);
-    if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel(), 50, 28))
+
+    if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel()))
         cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
 
-    Personnage mario(Vector2f(16,16));
+    Personnage mario(Vector2f(10,10));
     mario.getPerso().setPosition(32,64);
 
-    Vector2f gravity(0,0.05);
+    Vector2f gravity(0,0.2);
 
-    bool tmp = true;
     while (window.isOpen())
     {
         Event event;
@@ -66,10 +66,9 @@ int main()
         }
         window.clear(sf::Color::Blue);
         window.draw(map);
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && tmp)
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             mario.addMouvement(Vector2f(0,-20));
-            tmp = false;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
         {
@@ -79,8 +78,23 @@ int main()
         {
             mario.addMouvement(Vector2f(0.2,0));
         }
-        mario.addMouvement(gravity);
-        mario.move();
+
+        // Si il n'y a pas de collision, on bouge le perso
+        if(map.collision(mario.getPerso(), mario.getMouvement()))
+        {
+            mario.move();
+        }            
+
+        //Si pas de colision en bas, on applique la gravité
+        if(map.collisionBas(mario.getPerso(), mario.getMouvement()))
+            mario.addMouvement(gravity);
+
+
+        if(!map.collision(mario.getPerso(), mario.getMouvement()))
+            mario.setMouvement(Vector2f(mario.getMouvement().x,0));
+
+        cout << mario.getMouvement().x <<":"<< mario.getMouvement().y << endl;
+
         window.draw(mario.getPerso());
         window.display();
     }

@@ -5,25 +5,35 @@
 
 using namespace std;
 
-TileMap::TileMap(sf::Image niveau)
+TileMap::TileMap(string levelName)
 {
-    collisions = new bool[10000];
+    sf::Image niveau;
+    if(!niveau.loadFromFile(levelName))
+        cout << "#ERROR: Erreur lors du chargement du niveau \"" + levelName + "\" " << endl;
+
+
+    mapCollisions = new bool[niveau.getSize().x*niveau.getSize().y*4];
     level = new int[niveau.getSize().x*niveau.getSize().y];
-    level = loadBMP(niveau);
+
+    width = niveau.getSize().x;
+    height = niveau.getSize().y;
+
+    loadBMP(niveau);
 }
 
 TileMap::~TileMap()
 {
     delete level;
+    delete mapCollisions;
 }
 
-bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
+bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles)
 {
     // on charge la texture du tileset
     if (!m_tileset.loadFromFile(tileset))
         return false;
-	
-	// Tableau donnant la nature du bloc généré (plein, demi/quart de bloc)
+    
+    // Tableau donnant la nature du bloc généré (plein, demi/quart de bloc)
     int sizeBlocs[]=
     {
         1,1,0,0,0,0,0,0,1,1,0,0,3,4,3,4,5,6,
@@ -39,15 +49,15 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
         0,0,0,0,0,0,0,4,3,0,0,9,1,0,1,1,9,9,
         9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
     };
-	
-	
+    
+    
     // on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
     m_vertices.setPrimitiveType(sf::Quads);
     m_vertices.resize(width * height * 4);
 
     // on remplit le tableau de vertex, avec un quad par tuile
     for (unsigned int i = 0; i < width; ++i)
-	{
+    {
         for (unsigned int j = 0; j < height; ++j)
         {
             // on récupère le numéro de tuile courant
@@ -72,97 +82,119 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
             quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x+tu, tv * tileSize.y+tv);
             quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
             quad[3].texCoords = sf::Vector2f(tu * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
-			
-			// Si le bloc n'est pas plein, on doit le définir en tant que demi/quart de bloc
+            
+            // Si le bloc n'est pas plein, on doit le définir en tant que demi/quart de bloc
+            
+            cout << i << ":" << j << endl;
+            cout << i + j * width << ":" << level[i + j * width] << endl;
+            
+            switch(level[i + j * width])
+            {
+                case 52:
+                    mapCollisions[i + j * width] = 1;
+                    break;
+
+                case 122:
+                    mapCollisions[i + j * width] = 1;
+                    break;
+
+                default:
+                    mapCollisions[i + j * width] = 0;
+                    break;
+            }
+
+
+
+
+            /*
             switch(sizeBlocs[tileNumber])
             {
                 // Bloc Plein
                 case 0:
-                    collisions[(i+j*width)]=true;
-                    collisions[(i+j*width)+1]=true;
-                    collisions[(i+j*width)+2]=true;
-                    collisions[(i+j*width)+3]=true;
+                    mapCollisions[(i+j*width)]=true;
+                    mapCollisions[(i+j*width)+1]=true;
+                    mapCollisions[(i+j*width)+2]=true;
+                    mapCollisions[(i+j*width)+3]=true;
                     break;
 
                 // Bloc 8x16 partie Basse
                 case 1:
-                    collisions[(i+j*width)]=false;
-                    collisions[(i+j*width)+1]=false;
-                    collisions[(i+j*width)+2]=true;
-                    collisions[(i+j*width)+3]=true;
+                    mapCollisions[(i+j*width)]=false;
+                    mapCollisions[(i+j*width)+1]=false;
+                    mapCollisions[(i+j*width)+2]=true;
+                    mapCollisions[(i+j*width)+3]=true;
                     break;
 
                 // Bloc 8x16 partie Haute
                 case 2:
-                    collisions[(i+j*width)]=true;
-                    collisions[(i+j*width)+1]=true;
-                    collisions[(i+j*width)+2]=false;
-                    collisions[(i+j*width)+3]=false;
+                    mapCollisions[(i+j*width)]=true;
+                    mapCollisions[(i+j*width)+1]=true;
+                    mapCollisions[(i+j*width)+2]=false;
+                    mapCollisions[(i+j*width)+3]=false;
                     break;
 
                 // Bloc 16x8 partie Gauche
                 case 3:
-                    collisions[(i+j*width)]=true;
-                    collisions[(i+j*width)+1]=false;
-                    collisions[(i+j*width)+2]=false;
-                    collisions[(i+j*width)+3]=true;
+                    mapCollisions[(i+j*width)]=true;
+                    mapCollisions[(i+j*width)+1]=false;
+                    mapCollisions[(i+j*width)+2]=false;
+                    mapCollisions[(i+j*width)+3]=true;
                     break;
 
                 // Bloc 16x8 partie Droite
                 case 4:
-                    collisions[(i+j*width)]=false;
-                    collisions[(i+j*width)+1]=true;
-                    collisions[(i+j*width)+2]=true;
-                    collisions[(i+j*width)+3]=false;
+                    mapCollisions[(i+j*width)]=false;
+                    mapCollisions[(i+j*width)+1]=true;
+                    mapCollisions[(i+j*width)+2]=true;
+                    mapCollisions[(i+j*width)+3]=false;
                     break;
 
                 // Bloc 8x8 Haut Gauche
                 case 5:
-                    collisions[(i+j*width)]=true;
-                    collisions[(i+j*width)+1]=false;
-                    collisions[(i+j*width)+2]=false;
-                    collisions[(i+j*width)+3]=false;
+                    mapCollisions[(i+j*width)]=true;
+                    mapCollisions[(i+j*width)+1]=false;
+                    mapCollisions[(i+j*width)+2]=false;
+                    mapCollisions[(i+j*width)+3]=false;
                     break;
 
                 // Bloc 8x8 Haut Droit
                 case 6:
-                    collisions[(i+j*width)]=false;
-                    collisions[(i+j*width)+1]=true;
-                    collisions[(i+j*width)+2]=false;
-                    collisions[(i+j*width)+3]=false;
+                    mapCollisions[(i+j*width)]=false;
+                    mapCollisions[(i+j*width)+1]=true;
+                    mapCollisions[(i+j*width)+2]=false;
+                    mapCollisions[(i+j*width)+3]=false;
                     break;
            
                 // Bloc 8x8 Bas Gauche
                 case 7:
-                    collisions[(i+j*width)]=false;
-                    collisions[(i+j*width)+1]=false;
-                    collisions[(i+j*width)+2]=false;
-                    collisions[(i+j*width)+3]=true;
+                    mapCollisions[(i+j*width)]=false;
+                    mapCollisions[(i+j*width)+1]=false;
+                    mapCollisions[(i+j*width)+2]=false;
+                    mapCollisions[(i+j*width)+3]=true;
                     break;
 
                 // Bloc 8x8 Bas Droit
                 case 8:
-                    collisions[(i+j*width)]=false;
-                    collisions[(i+j*width)+1]=false;
-                    collisions[(i+j*width)+2]=true;
-                    collisions[(i+j*width)+3]=false;
+                    mapCollisions[(i+j*width)]=false;
+                    mapCollisions[(i+j*width)+1]=false;
+                    mapCollisions[(i+j*width)+2]=true;
+                    mapCollisions[(i+j*width)+3]=false;
                     break;
 
                 // Bloc Transparent
                 case 9:
-                    collisions[(i+j*width)]=false;
-                    collisions[(i+j*width)+1]=false;
-                    collisions[(i+j*width)+2]=false;
-                    collisions[(i+j*width)+3]=false;
+                    mapCollisions[(i+j*width)]=false;
+                    mapCollisions[(i+j*width)+1]=false;
+                    mapCollisions[(i+j*width)+2]=false;
+                    mapCollisions[(i+j*width)+3]=false;
                     break;
-
+                
                 default:
                     cout << "ERROR : sizeBlocs ne contient pas la nature du bloc : " << tileNumber << endl;
                     break;
-            }
-		}
+            }*/
+		}        
 	}
-
     return true;
 }
 
@@ -170,6 +202,49 @@ int * TileMap::getLevel()
 {
     return level;
 }
+
+
+bool TileMap::collision(const sf::RectangleShape& shape, const sf::Vector2f& vect)
+{
+    int i,j;
+    bool hautGauche, hautDroite, basGauche, basDroite;
+
+    i = (shape.getPosition().x + vect.x)/16;   
+    j = (shape.getPosition().y + vect.y)/16;
+    hautGauche = mapCollisions[i+j*width];
+
+    i = (shape.getPosition().x + vect.x)/16;   
+    j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+    hautDroite = mapCollisions[i+j*width];
+
+    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
+    j = (shape.getPosition().y + vect.y)/16;
+    basGauche = mapCollisions[i+j*width];
+
+    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
+    j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+    basDroite = mapCollisions[i+j*width];
+
+    return hautGauche && hautDroite && basDroite && basGauche;
+}
+bool TileMap::collisionBas(const sf::RectangleShape& shape, const sf::Vector2f& vect)
+{
+    int i,j;
+    bool basGauche, basDroite;
+    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
+    j = (shape.getPosition().y + vect.y)/16;
+    basGauche = mapCollisions[i+j*width];
+
+    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
+    j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+    basDroite = mapCollisions[i+j*width];
+
+    return basDroite && basGauche;
+}
+
+
+
+
 
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
@@ -183,46 +258,42 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(m_vertices, states);
 }
 
-int *TileMap::loadBMP(sf::Image niveau)
+void TileMap::loadBMP(sf::Image niveau)
 {
-
-    if(!niveau.loadFromFile("lvl3.bmp"))
-        cout << "#ERROR: Erreur lors du chargement du niveau \"lvl1.bmp\" " << endl;
 
     const uint8_t *t;
     t = niveau.getPixelsPtr();
-    int *lvl = new int[niveau.getSize().x*niveau.getSize().y];
 
     for (unsigned int i = 0; i < (niveau.getSize().x*niveau.getSize().y*4); i+=4)
     {
         //cout <<" RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;
 
         if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 200)
-            lvl[i/4] = 52; //BLOC CIEL
+            level[i/4] = 52; //BLOC CIEL
 
         else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 200 && static_cast<int>(t[i+2]) == 0)
-            lvl[i/4] = 192; //BLOC HERBE
+            level[i/4] = 192; //BLOC HERBE
 
         else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 100 && static_cast<int>(t[i+2]) == 0)
-            lvl[i/4] = 191; //BLOC HERBE BORDURE GAUCHE
+            level[i/4] = 191; //BLOC HERBE BORDURE GAUCHE
 
         else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 0)
-            lvl[i/4] = 194; //BLOC HERBE BORDURE DROITE
+            level[i/4] = 194; //BLOC HERBE BORDURE DROITE
 
         else if( static_cast<int>(t[i]) == 176 && static_cast<int>(t[i+1]) == 176 && static_cast<int>(t[i+2]) == 176)
-            lvl[i/4] = 183; //BLOC PIERRE NON TRAVERSANT 
+            level[i/4] = 183; //BLOC PIERRE NON TRAVERSANT 
 
         else if( static_cast<int>(t[i]) == 96 && static_cast<int>(t[i+1]) == 96 && static_cast<int>(t[i+2]) == 96)
-            lvl[i/4] = 122; //BLOC PIERRE TRAVERSANT 
+            level[i/4] = 122; //BLOC PIERRE TRAVERSANT 
 
         else if( static_cast<int>(t[i]) == 96 && static_cast<int>(t[i+1]) == 56 && static_cast<int>(t[i+2]) == 48)
-            lvl[i/4] = 195; //BLOC TERRE
+            level[i/4] = 195; //BLOC TERRE
 
         else if( static_cast<int>(t[i]) == 138 && static_cast<int>(t[i+1]) == 81 && static_cast<int>(t[i+2]) == 70)
-            lvl[i/4] = 198; //BLOC DEMI-TERRE SUR LA GAUCHE
+            level[i/4] = 198; //BLOC DEMI-TERRE SUR LA GAUCHE
 
         else if( static_cast<int>(t[i]) == 63 && static_cast<int>(t[i+1]) == 38 && static_cast<int>(t[i+2]) == 34)
-            lvl[i/4] = 197; //BLOC DEMI-TERRE SUR LA DROITE
+            level[i/4] = 197; //BLOC DEMI-TERRE SUR LA DROITE
 
         else
         {
@@ -230,5 +301,4 @@ int *TileMap::loadBMP(sf::Image niveau)
             break; 
         }
     }
-    return lvl;
 }

@@ -7,6 +7,7 @@ public:
 	Personnage(const sf::Vector2f &taille);
 	~Personnage();
 	sf::Vector2f getMouvement();
+	void setMouvement(sf::Vector2f v);
 	void addMouvement(const sf::Vector2f &mvt);
 	sf::RectangleShape & getPerso();
 	void move();
