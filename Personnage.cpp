@@ -67,7 +67,7 @@ void Personnage::addMouvement(const Vector2f &mvt)
 	}
 }
 
-sf::RectangleShape& Personnage::getPerso()
+sf::RectangleShape Personnage::getPerso() const
 {
 	return _perso;
 } 

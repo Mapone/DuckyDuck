@@ -5,8 +5,9 @@
 
 using namespace std;
 
-TileMap::TileMap(string levelName)
+TileMap::TileMap(string levelName, sf::Vector2f &gravity)
 {
+    _gravity = gravity;
     sf::Image niveau;
     if(!niveau.loadFromFile(levelName))
         cout << "#ERROR: Erreur lors du chargement du niveau \"" + levelName + "\" " << endl;
@@ -19,6 +20,9 @@ TileMap::TileMap(string levelName)
     height = niveau.getSize().y;
 
     loadBMP(niveau);
+
+    if (!load("tileset2.png", sf::Vector2u(16, 16)))
+        cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
 }
 
 TileMap::~TileMap()
@@ -27,8 +31,9 @@ TileMap::~TileMap()
     delete mapCollisions;
 }
 
-bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles)
+bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
 {
+    const int* tiles = level;
     // on charge la texture du tileset
     if (!m_tileset.loadFromFile(tileset))
         return false;
@@ -301,4 +306,9 @@ void TileMap::loadBMP(sf::Image niveau)
             break; 
         }
     }
+}
+
+sf::Vector2f TileMap::getGravity()
+{
+    return _gravity;
 }

@@ -8,6 +8,7 @@ JEU ALAKON
 #include <SFML/Graphics.hpp>
 #include "TileMap.hpp"
 #include "Personnage.hpp"
+#include "Jeu.cpp"
 
 using namespace std;
 using namespace sf;
@@ -34,28 +35,24 @@ int main()
     //Limite à 60fps
     window.setFramerateLimit(60);
 
-//----------------Police et textes -----------------------
-//--------------------------------------------------------
 
-    Font fontOldSchool;
-    if (!fontOldSchool.loadFromFile("gamefont.ttf"))
-        cout << "#ERROR: Erreur lors du chargement de la police \"gamefont.tff\" " << endl;
+//-------------------Chargement des niveaux-----------------------
+//----------------------------------------------------------------
+    
+    Vector2f gravity(0,0.2);
+    TileMap map("lvl3.bmp", gravity);
 
-	
-//--------- Chargement du niveau --------------------------
-//---------------------------------------------------------
-
-    String niveau = ("lvl3.bmp");
-    TileMap map(niveau);
-
-    if (!map.load("tileset2.png", sf::Vector2u(16, 16), map.getLevel()))
-        cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
+//-------------------Creation du personnage-----------------------
+//----------------------------------------------------------------
 
     Personnage mario(Vector2f(10,10));
     mario.getPerso().setPosition(32,64);
 
-    Vector2f gravity(0,0.2);
+    Jeu jeu(map, mario);
 
+	
+//--------- Chargement du niveau --------------------------
+//---------------------------------------------------------
     while (window.isOpen())
     {
         Event event;
@@ -64,6 +61,12 @@ int main()
             if (event.type == Event::Closed)
                 window.close();
         }
+
+
+        window.clear(sf::Color::Blue);
+        window.draw(jeu);
+        window.display();
+        /*
         window.clear(sf::Color::Blue);
         window.draw(map);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -96,7 +99,7 @@ int main()
         cout << mario.getMouvement().x <<":"<< mario.getMouvement().y << endl;
 
         window.draw(mario.getPerso());
-        window.display();
+        window.display();*/
     }
     return 0;
 }
