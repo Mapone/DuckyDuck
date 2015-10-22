@@ -12,7 +12,8 @@ using namespace std;
 Jeu::Jeu(TileMap &t, Personnage &p):
 _heros(p)
 {
-	_levels.push_back(t);
+    TileMap *ptr = &t; 
+	_levels.push_back(ptr);
 	_currentLevel = 0;
 
 	//Initialisation de la Police
@@ -32,11 +33,12 @@ Jeu::~Jeu()
 
 void Jeu::addLevel(TileMap t)
 {
-	_levels.push_back(t);
+	_levels.push_back(&t);
 }
 
-TileMap& Jeu::getCurrentLevel() const
+TileMap* Jeu::getCurrentLevel()
 {
+    //TileMap* ptr = &_levels[_currentLevel];
 	return _levels[_currentLevel];
 }
 
@@ -48,7 +50,7 @@ sf::Font& Jeu::getFont()
 void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-    target.draw(_levels[_currentLevel]);
+    target.draw(*_levels[_currentLevel]);
     //sf::RectangleShape r(sf::Vector2f(2,2));
     target.draw(_heros.getPerso());
 
@@ -67,16 +69,16 @@ void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
     }
 
     // Si il n'y a pas de collision, on bouge le perso
-    if(getCurrentLevel().collision(_heros.getPerso(), _heros.getMouvement()))
+    if(_levels[_currentLevel]->collision(_heros.getPerso(), _heros.getMouvement()))
     {
         _heros.move();
     }            
 
     //Si pas de colision en bas, on applique la gravité
-    if(getCurrentLevel().collisionBas(_heros.getPerso(), _heros.getMouvement()))
-        _heros.addMouvement(getCurrentLevel().getGravity());
+    if(_levels[_currentLevel]->collisionBas(_heros.getPerso(), _heros.getMouvement()))
+        _heros.addMouvement(_levels[_currentLevel]->getGravity());
 
 
-    if(!getCurrentLevel().collision(_heros.getPerso(), _heros.getMouvement()))
+    if(!_levels[_currentLevel]->collision(_heros.getPerso(), _heros.getMouvement()))
         _heros.setMouvement(sf::Vector2f(_heros.getMouvement().x,0));
 }

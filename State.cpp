@@ -3,8 +3,11 @@
 #include "State.hpp"
 
 
-State::State(Jeu *jeu):_jeu(jeu){}
-State::~State(){delete _jeu;}
+State::State(Jeu *jeu) : _jeu(jeu) {}
+State::~State()
+{
+	delete _jeu;
+}
 void State::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	//(void) est utilisé pour ne pas avoir le warning "unused parameter"

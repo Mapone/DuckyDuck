@@ -10,13 +10,13 @@ class Jeu : public sf::Drawable, public sf::Transformable
 		Jeu(TileMap &t, Personnage &p);
 		~Jeu();
 		void addLevel(TileMap t);
-		TileMap& getCurrentLevel() const;
+		TileMap* getCurrentLevel();
 		sf::Font & getFont();
 
 
 	private:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-		std::vector<TileMap> _levels;
+		std::vector<TileMap*> _levels;
 		unsigned int _currentLevel;
 		Personnage &_heros;
 		sf::Font _font;
