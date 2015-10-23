@@ -10,7 +10,7 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
     _gravity = gravity;
     sf::Image niveau;
     if(!niveau.loadFromFile(levelName))
-        cout << "#ERROR: Erreur lors du chargement du niveau \"" + levelName + "\" " << endl;
+        cerr << "#ERROR: Erreur lors du chargement du niveau \"" + levelName + "\" " << endl;
 
 
     mapCollisions = new bool[niveau.getSize().x*niveau.getSize().y*4];
@@ -22,7 +22,7 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
     loadBMP(niveau);
 
     if (!load("tileset2.png", sf::Vector2u(16, 16)))
-        cout << "#ERROR: Erreur lors du chargement du tileset" << endl;
+        cerr << "#ERROR: Erreur lors du chargement du tileset" << endl;
 }
 
 TileMap::~TileMap()
@@ -39,7 +39,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
         return false;
     
     // Tableau donnant la nature du bloc généré (plein, demi/quart de bloc)
-    int sizeBlocs[]=
+    /*int sizeBlocs[]=
     {
         1,1,0,0,0,0,0,0,1,1,0,0,3,4,3,4,5,6,
         0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,9,
@@ -53,7 +53,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
         0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,
         0,0,0,0,0,0,0,4,3,0,0,9,1,0,1,1,9,9,
         9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
-    };
+    };*/
     
     
     // on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
@@ -90,21 +90,18 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
             
             // Si le bloc n'est pas plein, on doit le définir en tant que demi/quart de bloc
             
-            cout << i << ":" << j << endl;
-            cout << i + j * width << ":" << level[i + j * width] << endl;
-            
             switch(level[i + j * width])
             {
                 case 52:
-                    mapCollisions[i + j * width] = 1;
+                    mapCollisions[i + j * width] = 0;
                     break;
 
                 case 122:
-                    mapCollisions[i + j * width] = 1;
+                    mapCollisions[i + j * width] = 0;
                     break;
 
                 default:
-                    mapCollisions[i + j * width] = 0;
+                    mapCollisions[i + j * width] = 1;
                     break;
             }
 
@@ -220,33 +217,83 @@ bool TileMap::collision(const sf::RectangleShape& shape, const sf::Vector2f& vec
 
     i = (shape.getPosition().x + vect.x)/16;   
     j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
-    hautDroite = mapCollisions[i+j*width];
+    basGauche = mapCollisions[i+j*width];
 
     i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
     j = (shape.getPosition().y + vect.y)/16;
-    basGauche = mapCollisions[i+j*width];
+    hautDroite = mapCollisions[i+j*width];
 
     i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
     j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
     basDroite = mapCollisions[i+j*width];
 
-    return hautGauche && hautDroite && basDroite && basGauche;
+    return hautGauche || hautDroite || basDroite || basGauche;
 }
+
 bool TileMap::collisionBas(const sf::RectangleShape& shape, const sf::Vector2f& vect)
 {
     int i,j;
     bool basGauche, basDroite;
-    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
-    j = (shape.getPosition().y + vect.y)/16;
+
+    i = (shape.getPosition().x + vect.x)/16;   
+    j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
     basGauche = mapCollisions[i+j*width];
 
     i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
     j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
     basDroite = mapCollisions[i+j*width];
 
-    return basDroite && basGauche;
+    return basDroite || basGauche;
 }
 
+bool TileMap::collisionHaut(const sf::RectangleShape& shape, const sf::Vector2f& vect)
+{
+    int i,j;
+    bool hautGauche, hautDroite;
+
+    i = (shape.getPosition().x + vect.x)/16;   
+    j = (shape.getPosition().y + vect.y)/16;
+    hautGauche = mapCollisions[i+j*width];
+
+    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
+    j = (shape.getPosition().y + vect.y)/16;
+    hautDroite = mapCollisions[i+j*width];
+
+    return hautGauche || hautDroite;
+
+}
+
+bool TileMap::collisionGauche(const sf::RectangleShape& shape, const sf::Vector2f& vect)
+{
+    int i,j;
+    bool hautGauche, basGauche;
+
+    i = (shape.getPosition().x + vect.x)/16;   
+    j = (shape.getPosition().y + vect.y)/16;
+    hautGauche = mapCollisions[i+j*width];
+
+    i = (shape.getPosition().x + vect.x)/16;   
+    j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+    basGauche = mapCollisions[i+j*width];
+
+    return hautGauche || basGauche;
+}
+
+bool TileMap::collisionDroite(const sf::RectangleShape& shape, const sf::Vector2f& vect)
+{
+    int i,j;
+    bool hautDroite, basDroite;
+
+    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
+    j = (shape.getPosition().y + vect.y)/16;
+    hautDroite = mapCollisions[i+j*width];
+
+    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
+    j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+    basDroite = mapCollisions[i+j*width];
+
+    return hautDroite || basDroite;
+}
 
 
 

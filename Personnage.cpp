@@ -6,7 +6,7 @@ using namespace sf;
 
 const int MAX_SPEED_X = 3;
 const int MAX_SPEED_Y = 5;
-const float FROTTEMENTS = 0.08;
+const float FROTTEMENTS = 0.00;
 
 Personnage::Personnage(const Vector2f &taille)
 {
@@ -77,4 +77,3 @@ void Personnage::move()
 {
 	_perso.setPosition(_perso.getPosition()+_mouvement);
 }
-

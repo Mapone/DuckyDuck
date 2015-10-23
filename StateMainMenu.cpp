@@ -43,6 +43,7 @@ StateMainMenu::~StateMainMenu(){delete _jeu;}
 
 void StateMainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    (void)states;
 	target.draw(_triangle);
 	target.draw(_gameName);
 	target.draw(_Jouer);

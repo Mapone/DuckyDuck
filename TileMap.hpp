@@ -10,6 +10,9 @@ public:
 	int *getLevel();
     bool collision(const sf::RectangleShape& shape, const sf::Vector2f& vect);
     bool collisionBas(const sf::RectangleShape& shape, const sf::Vector2f& vect);
+    bool collisionHaut(const sf::RectangleShape& shape, const sf::Vector2f& vect);
+    bool collisionGauche(const sf::RectangleShape& shape, const sf::Vector2f& vect);
+    bool collisionDroite(const sf::RectangleShape& shape, const sf::Vector2f& vect);
     sf::Vector2f getGravity();
 
 private:

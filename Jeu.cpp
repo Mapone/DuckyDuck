@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <vector>
 #include <SFML/Graphics.hpp>
@@ -55,8 +56,9 @@ void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(_heros.getPerso());
 
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
     {
+        if(_levels[_currentLevel]->collisionBas(_heros.getPerso(),sf::Vector2f(_heros.getMouvement().x,1)))
         _heros.addMouvement(sf::Vector2f(0,-20));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
@@ -69,16 +71,31 @@ void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
     }
 
     // Si il n'y a pas de collision, on bouge le perso
-    if(_levels[_currentLevel]->collision(_heros.getPerso(), _heros.getMouvement()))
+    if(!_levels[_currentLevel]->collision(_heros.getPerso(), _heros.getMouvement()))
     {
-        _heros.move();
-    }            
+        
+        
+    }
+
+        //On cherche d'ou viens la collision
+        if(_levels[_currentLevel]->collisionBas(_heros.getPerso(), _heros.getMouvement()) ||
+           _levels[_currentLevel]->collisionHaut(_heros.getPerso(), _heros.getMouvement()))
+        {
+            _heros.setMouvement(sf::Vector2f(_heros.getMouvement().x,0));
+        }
+
+        if(_levels[_currentLevel]->collisionDroite(_heros.getPerso(),sf::Vector2f(_heros.getMouvement().x,0)) ||
+           _levels[_currentLevel]->collisionGauche(_heros.getPerso(),sf::Vector2f(_heros.getMouvement().x,0)))
+        {
+            _heros.setMouvement(sf::Vector2f(0,_heros.getMouvement().y));
+        }
+
+        cout << _heros.getPerso().getPosition().y + _heros.getPerso().getSize().y << endl;
+
 
     //Si pas de colision en bas, on applique la gravité
-    if(_levels[_currentLevel]->collisionBas(_heros.getPerso(), _heros.getMouvement()))
+    if(!_levels[_currentLevel]->collisionBas(_heros.getPerso(), sf::Vector2f(_heros.getMouvement().x,1)))
         _heros.addMouvement(_levels[_currentLevel]->getGravity());
 
-
-    if(!_levels[_currentLevel]->collision(_heros.getPerso(), _heros.getMouvement()))
-        _heros.setMouvement(sf::Vector2f(_heros.getMouvement().x,0));
+    _heros.move();
 }
