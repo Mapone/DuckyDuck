@@ -32,7 +32,7 @@ int main()
 
     //Ouverture de la fenêtre principale
     RenderWindow window(VideoMode(LARGEUR_FENETRE, HAUTEUR_FENETRE), "DuckyDuck",Style::Default, settings);
-    //Limite à 60fps
+    //Limite de fps
     window.setFramerateLimit(60);
 
 

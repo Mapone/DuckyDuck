@@ -70,32 +70,41 @@ void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
         _heros.addMouvement(sf::Vector2f(0.2,0));
     }
 
-    // Si il n'y a pas de collision, on bouge le perso
-    if(!_levels[_currentLevel]->collision(_heros.getPerso(), _heros.getMouvement()))
+    cout << "MvtB " << _heros.getMouvement().x <<":"<< _heros.getMouvement().y << endl;
+
+    //On cherche d'ou viens la collision
+    if(_levels[_currentLevel]->collisionBas(_heros.getPerso(), _heros.getMouvement()) ||
+       _levels[_currentLevel]->collisionHaut(_heros.getPerso(), _heros.getMouvement()))
     {
-        
-        
+
+        if(_levels[_currentLevel]->collisionBas(_heros.getPerso(), _heros.getMouvement()))
+            cout <<"ColisionBas"<<endl;
+        if(_levels[_currentLevel]->collisionHaut(_heros.getPerso(), _heros.getMouvement()))
+            cout <<"ColisionHaut"<<endl;
+
+        _heros.setMouvement(sf::Vector2f(_heros.getMouvement().x,0));
     }
 
-        //On cherche d'ou viens la collision
-        if(_levels[_currentLevel]->collisionBas(_heros.getPerso(), _heros.getMouvement()) ||
-           _levels[_currentLevel]->collisionHaut(_heros.getPerso(), _heros.getMouvement()))
-        {
-            _heros.setMouvement(sf::Vector2f(_heros.getMouvement().x,0));
-        }
+    if(_levels[_currentLevel]->collisionDroite(_heros.getPerso(),_heros.getMouvement()) ||
+       _levels[_currentLevel]->collisionGauche(_heros.getPerso(),_heros.getMouvement()))
+    {
+        if(_levels[_currentLevel]->collisionDroite(_heros.getPerso(), _heros.getMouvement()))
+            cout <<"ColisionDroite"<<endl;
+        if(_levels[_currentLevel]->collisionGauche(_heros.getPerso(), _heros.getMouvement()))
+            cout <<"ColisionGauche"<<endl;
 
-        if(_levels[_currentLevel]->collisionDroite(_heros.getPerso(),sf::Vector2f(_heros.getMouvement().x,0)) ||
-           _levels[_currentLevel]->collisionGauche(_heros.getPerso(),sf::Vector2f(_heros.getMouvement().x,0)))
-        {
-            _heros.setMouvement(sf::Vector2f(0,_heros.getMouvement().y));
-        }
+        _heros.setMouvement(sf::Vector2f(0,_heros.getMouvement().y));
+    }
 
-        cout << _heros.getPerso().getPosition().y + _heros.getPerso().getSize().y << endl;
-
+    cout << "MvtA " << _heros.getMouvement().x <<":"<< _heros.getMouvement().y << endl;
+    cout << "PosH " << _heros.getPerso().getPosition().x <<":"<< _heros.getPerso().getPosition().y << endl;
 
     //Si pas de colision en bas, on applique la gravité
     if(!_levels[_currentLevel]->collisionBas(_heros.getPerso(), sf::Vector2f(_heros.getMouvement().x,1)))
+    {        
         _heros.addMouvement(_levels[_currentLevel]->getGravity());
+        cout << "gravité" << endl;
+    }
 
     _heros.move();
 }
