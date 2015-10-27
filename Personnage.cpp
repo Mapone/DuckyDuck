@@ -6,7 +6,7 @@ using namespace sf;
 
 const int MAX_SPEED_X = 3;
 const int MAX_SPEED_Y = 5;
-const float FROTTEMENTS = 0.08;
+const float FROTTEMENTS = 0.1;
 
 Personnage::Personnage(const Vector2f &taille)
 {
@@ -76,5 +76,4 @@ void Personnage::move()
 		else
 			_mouvement.x += FROTTEMENTS; 
 	}
-	std::cout << _mouvement.x <<":"<< _mouvement.y << std::endl;
 }

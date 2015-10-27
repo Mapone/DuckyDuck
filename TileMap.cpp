@@ -211,20 +211,20 @@ bool TileMap::collision(const sf::RectangleShape& shape, const sf::Vector2f& vec
     int i,j;
     bool hautGauche, hautDroite, basGauche, basDroite;
 
-    i = (shape.getPosition().x + vect.x)/16;   
-    j = (shape.getPosition().y + vect.y)/16;
+    i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
+    j = (shape.getPosition().y + vect.y + getPosition().y)/16;
     hautGauche = mapCollisions[i+j*width];
 
-    i = (shape.getPosition().x + vect.x)/16;   
-    j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+    i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
+    j = (shape.getPosition().y + shape.getSize().y + vect.y + getPosition().y)/16;
     basGauche = mapCollisions[i+j*width];
 
-    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
-    j = (shape.getPosition().y + vect.y)/16;
+    i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
+    j = (shape.getPosition().y + vect.y + getPosition().y)/16;
     hautDroite = mapCollisions[i+j*width];
 
-    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
-    j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+    i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
+    j = (shape.getPosition().y + shape.getSize().y + vect.y + getPosition().y)/16;
     basDroite = mapCollisions[i+j*width];
 
     return hautGauche || hautDroite || basDroite || basGauche;
@@ -239,21 +239,21 @@ bool TileMap::collisionBas(const sf::RectangleShape& shape, const sf::Vector2f& 
     if(collisionGauche(shape,vect) || collisionDroite(shape,vect))
     {
         i = (shape.getPosition().x + 0)/16;   
-        j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+        j = (shape.getPosition().y + shape.getSize().y + vect.y + getPosition().y)/16;
         basGauche = mapCollisions[i+j*width];
 
         i = (shape.getPosition().x + shape.getSize().x + 0)/16;   
-        j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+        j = (shape.getPosition().y + shape.getSize().y + vect.y + getPosition().y)/16;
         basDroite = mapCollisions[i+j*width];
     }
     else
     {
-        i = (shape.getPosition().x + vect.x)/16;   
-        j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+        i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
+        j = (shape.getPosition().y + shape.getSize().y + vect.y + getPosition().y)/16;
         basGauche = mapCollisions[i+j*width];
 
-        i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
-        j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+        i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
+        j = (shape.getPosition().y + shape.getSize().y + vect.y + getPosition().y)/16;
         basDroite = mapCollisions[i+j*width];
     }
 
@@ -269,21 +269,21 @@ bool TileMap::collisionHaut(const sf::RectangleShape& shape, const sf::Vector2f&
     if(collisionGauche(shape,vect) || collisionDroite(shape,vect))
     {
         i = (shape.getPosition().x + 0)/16;   
-        j = (shape.getPosition().y + vect.y)/16;
+        j = (shape.getPosition().y + vect.y + getPosition().y)/16;
         hautGauche = mapCollisions[i+j*width];
 
         i = (shape.getPosition().x + shape.getSize().x + 0)/16;   
-        j = (shape.getPosition().y + vect.y)/16;
+        j = (shape.getPosition().y + vect.y + getPosition().y)/16;
         hautDroite = mapCollisions[i+j*width];
     }
     else
     {
-        i = (shape.getPosition().x + vect.x)/16;   
-        j = (shape.getPosition().y + vect.y)/16;
+        i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
+        j = (shape.getPosition().y + vect.y + getPosition().y)/16;
         hautGauche = mapCollisions[i+j*width];
 
-        i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
-        j = (shape.getPosition().y + vect.y)/16;
+        i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
+        j = (shape.getPosition().y + vect.y + getPosition().y)/16;
         hautDroite = mapCollisions[i+j*width];
     }
 
@@ -296,12 +296,12 @@ bool TileMap::collisionGauche(const sf::RectangleShape& shape, const sf::Vector2
     int i,j;
     bool hautGauche, basGauche;
 
-    i = (shape.getPosition().x + vect.x)/16;   
-    j = (shape.getPosition().y + vect.y)/16;
+    i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
+    j = (shape.getPosition().y + vect.y + getPosition().y)/16;
     hautGauche = mapCollisions[i+j*width];
 
-    i = (shape.getPosition().x + vect.x)/16;   
-    j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+    i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
+    j = (shape.getPosition().y + shape.getSize().y + vect.y + getPosition().y)/16;
     basGauche = mapCollisions[i+j*width];
 
     return hautGauche || basGauche;
@@ -312,12 +312,12 @@ bool TileMap::collisionDroite(const sf::RectangleShape& shape, const sf::Vector2
     int i,j;
     bool hautDroite, basDroite;
 
-    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
-    j = (shape.getPosition().y + vect.y)/16;
+    i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
+    j = (shape.getPosition().y + vect.y + getPosition().y)/16;
     hautDroite = mapCollisions[i+j*width];
 
-    i = (shape.getPosition().x + shape.getSize().x + vect.x)/16;   
-    j = (shape.getPosition().y + shape.getSize().y + vect.y)/16;
+    i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
+    j = (shape.getPosition().y + shape.getSize().y + vect.y + getPosition().y)/16;
     basDroite = mapCollisions[i+j*width];
 
     return hautDroite || basDroite;
