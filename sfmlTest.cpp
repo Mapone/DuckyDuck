@@ -64,6 +64,7 @@ int main()
 
 
         window.clear(sf::Color::Blue);
+        jeu.processInput();
         window.draw(jeu);
         window.display();
         /*

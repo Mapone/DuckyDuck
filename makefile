@@ -6,7 +6,8 @@ sfml-app: sfmlTest.cpp TileMap.cpp Personnage.cpp Jeu.cpp State.cpp StateMainMen
 		g++ -std=c++11 -W -Wall -c Jeu.cpp
 		g++ -std=c++11 -W -Wall -c State.cpp
 		g++ -std=c++11 -W -Wall -c StateMainMenu.cpp
-		g++ -W -Wall -o $(NAME) sfmlTest.cpp TileMap.o Personnage.o -lsfml-graphics -lsfml-window -lsfml-system -g
+		g++ -std=c++11 -W -Wall -c StateLevel.cpp
+		g++ -W -Wall -o $(NAME) sfmlTest.cpp *.o -lsfml-graphics -lsfml-window -lsfml-system -g
 
 
 clean:

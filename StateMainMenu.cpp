@@ -9,6 +9,8 @@
 
 StateMainMenu::StateMainMenu(Jeu *jeu) : State(jeu)
 {
+    _current = 0;
+
 	sf::Text gameName;
     gameName.setFont(jeu->getFont());
     gameName.setString("DuckyDuck");
@@ -39,7 +41,7 @@ StateMainMenu::StateMainMenu(Jeu *jeu) : State(jeu)
     triangle.setPosition(330,200);
     _triangle = triangle;
 }
-StateMainMenu::~StateMainMenu(){delete _jeu;}
+StateMainMenu::~StateMainMenu(){}
 
 void StateMainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
@@ -49,6 +51,22 @@ void StateMainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 	target.draw(_Jouer);
 	target.draw(_Quitter);
 }
-void StateMainMenu::pressUP(){}
-void StateMainMenu::pressDown(){}
-void StateMainMenu::pressSpace(){}
+void StateMainMenu::pressUp()
+{
+    if( _current != 0)
+        --_current;
+}
+void StateMainMenu::pressDown()
+{
+    if( _current == 0)
+        ++_current;
+}
+void StateMainMenu::pressSpace()
+{
+    State *s = _jeu->getStateLevel();
+    
+    if(_current == 0)
+        _jeu->setState(_jeu->getStateLevel());
+    else
+        _jeu->close();
+}

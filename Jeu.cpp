@@ -1,12 +1,10 @@
-
 #include <iostream>
 #include <vector>
-#include <SFML/Graphics.hpp>
 #include "Personnage.hpp"
 #include "TileMap.hpp"
+#include "Jeu.hpp"
 #include "State.hpp"
 #include "StateMainMenu.hpp"
-#include "Jeu.hpp"
 
 using namespace std;
 
@@ -22,8 +20,9 @@ _heros(p)
         cout << "#ERROR: Erreur lors du chargement de la police \"gamefont.tff\" " << endl;
 
 	//Initialisation des Etats
-	//_stateMainMenu = new StateMainMenu(this);
-	//_actualState = _stateMainMenu;
+    _stateMainMenu = new StateMainMenu(this);
+	//_statePauseGame = new StateMenu(this);
+	_currentState = _stateMainMenu;
 
 }
 
@@ -32,51 +31,72 @@ Jeu::~Jeu()
 	//delete pointeurs
 }
 
+void Jeu::update()
+{
+    processInput();
+    checkCollision();
+}
+
 void Jeu::addLevel(TileMap t)
 {
 	_levels.push_back(&t);
 }
 
-TileMap* Jeu::getCurrentLevel()
+TileMap* Jeu::getCurrentLevel() const
 {
     //TileMap* ptr = &_levels[_currentLevel];
 	return _levels[_currentLevel];
 }
 
-sf::Font& Jeu::getFont()
+const sf::Font& Jeu::getFont() const
 {
 	return _font;
+}
+
+Personnage Jeu::getHero() const
+{
+    return _heros;
+}
+
+void Jeu::setState(State* s)
+{
+    _currentState = s;
+}
+
+StateLevel* Jeu::getStateLevel() const
+{
+    return _stateLevel;
 }
 
 void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-    target.draw(*_levels[_currentLevel]);
-    //sf::RectangleShape r(sf::Vector2f(2,2));
-    target.draw(_heros.getPerso());
+    //On draw l'etat actuel
+    target.draw(*_currentState);
+}
 
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+void Jeu::processInput()
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        if(_levels[_currentLevel]->collisionBas(_heros.getPerso(),sf::Vector2f(_heros.getMouvement().x,1)))
-        _heros.addMouvement(sf::Vector2f(0,-20));
+        _currentState->pressSpace();
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+    {
+        _currentState->pressUp();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
     {
-        _heros.addMouvement(sf::Vector2f(-0.2,0));
+        _currentState->pressRight();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        _heros.addMouvement(sf::Vector2f(0.2,0));
+        _currentState->pressLeft();
     }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
-    {
-        _levels[_currentLevel]->setPosition(_levels[_currentLevel]->getPosition().x -1, _levels[_currentLevel]->getPosition().y);
-        _heros.getPerso().setPosition(sf::Vector2f(0,0));
-    }
-
-
+}
+void Jeu::checkCollision()
+{
+    //COLISIONS
     //On cherche d'ou viens la collision
     if(_levels[_currentLevel]->collisionBas(_heros.getPerso(), _heros.getMouvement()) ||
        _levels[_currentLevel]->collisionHaut(_heros.getPerso(), _heros.getMouvement()))
@@ -96,6 +116,5 @@ void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
     {        
         _heros.addMouvement(_levels[_currentLevel]->getGravity());
     }
-
     _heros.move();
 }

@@ -14,8 +14,8 @@ void State::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	(void)target;
 	(void)states;
 }
-void State::pressUP(){}
+void State::pressUp(){}
 void State::pressDown(){}
-void State::pressLeff(){}
+void State::pressLeft(){}
 void State::pressRight(){}
 void State::pressSpace(){}

@@ -1,6 +1,8 @@
 #ifndef PERSONNAGE_H
 #define PERSONNAGE_H
 
+#include <SFML/Graphics.hpp>
+
 class Personnage
 {
 public:
