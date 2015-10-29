@@ -1,14 +1,43 @@
-NAME=sfml-app
+CXX=g++
+CXXFLAGS=-std=c++11 -W -Wall -g
+CXXLINK=-lsfml-graphics -lsfml-window -lsfml-system
 
-sfml-app: sfmlTest.cpp TileMap.cpp Personnage.cpp Jeu.cpp State.cpp StateMainMenu.cpp
-		g++ -std=c++11 -W -Wall -c TileMap.cpp
-		g++ -std=c++11 -W -Wall -c Personnage.cpp
-		g++ -std=c++11 -W -Wall -c Jeu.cpp
-		g++ -std=c++11 -W -Wall -c State.cpp
-		g++ -std=c++11 -W -Wall -c StateMainMenu.cpp
-		g++ -std=c++11 -W -Wall -c StateLevel.cpp
-		g++ -W -Wall -o $(NAME) sfmlTest.cpp *.o -lsfml-graphics -lsfml-window -lsfml-system -g
+DIR_SRC=src/
+DIR_INC=inc/
+DIR_BIN=bin/
+DIR_RUN=resources/
 
+#Va chercher tous les .cpp présents dans DIR_INC
+SRC=$(shell find $(DIR_SRC) -name "*.cpp" -exec basename {} \;)
+
+#Genere tous les noms de .o en fonction de SRC
+OBJ=$(SRC:%.cpp=$(DIR_BIN)%.o)
+
+#Genere la liste des .d en fonction de OBJ
+DEP=$(OBJ:.o=.d)
+EXE=$(DIR_BIN)DuckyDuck
+
+#Genere l'executable, qui dépend de tous les .o
+$(EXE): $(OBJ)
+	$(CXX) -o $@ $^ $(CXXLINK)
+
+# Genere les .o
+# -MMD pour generer les makefile
+# Crée DIR_BIN si celui-ci n'existe pas
+$(DIR_BIN)%.o: $(DIR_SRC)%.cpp | $(DIR_BIN)
+	$(CXX) $(CXXFLAGS) -I$(DIR_INC) -MMD -c -o $@ $<
+
+run: $(EXE)
+	@cd $(DIR_RUN) && ../$<
+
+#Inclus les makefile générés pour chaque cpp 
+-include $(DEP)
+
+$(DIR_BIN):
+	@mkdir $@
 
 clean:
-	@rm *.o $(NAME)
+	@rm -rf $(DIR_BIN)
+
+# Cibles qui ne sont pas des noms de fichiers
+.PHONY: clean run
