@@ -1,5 +1,4 @@
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include "Personnage.hpp"
 
 using namespace sf;
@@ -10,7 +9,7 @@ const float FROTTEMENTS = 0.08;
 
 Personnage::Personnage(const Vector2f &taille)
 {
-	_perso.setSize(taille);
+	_shape.setSize(taille);
 	_mouvement = Vector2f(0,0);
 }
 Personnage::~Personnage(){}
@@ -49,7 +48,20 @@ void Personnage::addMouvement(const Vector2f &mvt)
 	else
 		_mouvement.y = MAX_SPEED_Y;
 
-	//Si il y a un mouvement vers le bas (chute ou application de la gravité, on applique des frottements sur x)
+}
+
+sf::RectangleShape Personnage::getShape() const
+{
+	return _shape;
+} 
+
+void Personnage::setPosition(sf::Vector2f v)
+{
+	_shape.setPosition(v);
+}
+//Applique le vecteur de mouvement à la RectangleShape du personnage 
+void Personnage::move()
+{
 	if(_mouvement.x>0)
 	{
 		if(_mouvement.x - FROTTEMENTS < 0)
@@ -65,16 +77,5 @@ void Personnage::addMouvement(const Vector2f &mvt)
 		else
 			_mouvement.x += FROTTEMENTS; 
 	}
+	_shape.setPosition(_shape.getPosition()+_mouvement);
 }
-
-sf::RectangleShape& Personnage::getPerso()
-{
-	return _perso;
-} 
-
-//Applique le vecteur de mouvement à la RectangleShape du personnage 
-void Personnage::move()
-{
-	_perso.setPosition(_perso.getPosition()+_mouvement);
-}
-
