@@ -13,16 +13,17 @@ using namespace std;
 using namespace sf;
 
 
-
-int main()
-{
 ////////////////////////////////////
 ////////////INITIALISATION//////////
 ////////////////////////////////////
 
-const int LARGEUR_FENETRE = 800;
-const int HAUTEUR_FENETRE = 448;
+const unsigned int LARGEUR_FENETRE = 800;
+const unsigned int HAUTEUR_FENETRE = 448;
 
+//sf::Vector2u sizeWindow(LARGEUR_FENETRE, HAUTEUR_FENETRE);
+
+int main()
+{
 	
 //----------------------Fenetre----------------------
 //----------------------------------------------------
@@ -55,6 +56,8 @@ const int HAUTEUR_FENETRE = 448;
     
 //--------- Création et ajout des niveaux -----------------
 //---------------------------------------------------------
+
+    //TODO
 
 
 

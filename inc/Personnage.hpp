@@ -14,6 +14,7 @@ public:
 	sf::RectangleShape getShape() const;
 	void setPosition(sf::Vector2f v);
 	void move();
+	void move(sf::Vector2f v);
 
 private:
 	sf::Vector2f _mouvement;

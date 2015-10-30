@@ -19,12 +19,14 @@ public:
   virtual void pressLeft();
   virtual void pressRight();
   virtual void pressSpace();
+  virtual void updateCamera() const;
 
 
 private:
   TileMap& _tilemap;
   Personnage& _perso;
   void checkMapCollision() const;
+
 };
 
 #endif

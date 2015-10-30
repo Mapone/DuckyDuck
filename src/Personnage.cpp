@@ -79,3 +79,23 @@ void Personnage::move()
 	}
 	_shape.setPosition(_shape.getPosition()+_mouvement);
 }
+void Personnage::move(sf::Vector2f v)
+{
+	if(_mouvement.x>0)
+	{
+		if(_mouvement.x - FROTTEMENTS < 0)
+			_mouvement.x = 0;
+		else
+			_mouvement.x -= FROTTEMENTS; 
+	}
+
+	if(_mouvement.x<0)
+	{
+		if(_mouvement.x + FROTTEMENTS > 0)
+			_mouvement.x = 0;
+		else
+			_mouvement.x += FROTTEMENTS; 
+	}
+
+	_shape.setPosition(_shape.getPosition()+v);
+}

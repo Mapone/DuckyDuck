@@ -4,6 +4,10 @@
 
 using namespace std;
 
+const unsigned int LARGEUR_FENETRE = 800;
+const unsigned int HAUTEUR_FENETRE = 448;
+
+
 StateLevel::StateLevel(Jeu* jeu, TileMap& tilemap, Personnage& perso) : State(jeu), _tilemap(tilemap), _perso(perso)
 {}
 
@@ -15,7 +19,8 @@ void  StateLevel::init()
 void StateLevel::update() const
 {
 	checkMapCollision();
-	_perso.move();
+    updateCamera();
+	//_perso.move();
 }
 
 void StateLevel::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -68,5 +73,21 @@ void StateLevel::checkMapCollision() const
     if(!_tilemap.collisionBas(_perso.getShape(), sf::Vector2f(_perso.getMouvement().x,1)))
     {        
         _perso.addMouvement(_tilemap.getGravity());
+    }
+}
+
+void StateLevel::updateCamera() const
+{
+    //On définit un rectangle invisible au milieu de l'ecran
+    //Si le personnage arrive sur le bord de celui ci, il faut bouger la camera (ce qui revient à deplacer la map)
+    //Collision à droite 
+    if(_perso.getShape().getPosition().x > LARGEUR_FENETRE - 200)
+    {
+        _tilemap.setPosition(_tilemap.getPosition().x - _perso.getMouvement().x, _tilemap.getPosition().y);
+        _perso.move(sf::Vector2f(0, _perso.getMouvement().y));
+    }
+    else
+    {
+        _perso.move();
     }
 }
