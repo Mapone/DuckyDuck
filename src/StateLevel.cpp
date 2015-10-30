@@ -6,6 +6,7 @@ using namespace std;
 
 const unsigned int LARGEUR_FENETRE = 800;
 const unsigned int HAUTEUR_FENETRE = 448;
+const unsigned int TAILLE_TUILE = 16;
 
 
 StateLevel::StateLevel(Jeu* jeu, TileMap& tilemap, Personnage& perso) : State(jeu), _tilemap(tilemap), _perso(perso)
@@ -20,7 +21,6 @@ void StateLevel::update() const
 {
 	checkMapCollision();
     updateCamera();
-	//_perso.move();
 }
 
 void StateLevel::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -53,6 +53,11 @@ void StateLevel::pressSpace()
     	_perso.addMouvement(sf::Vector2f(0,-20));
 }
 
+void StateLevel::pressEsc()
+{
+    _jeu->setState(_jeu->getStateEscMenu());
+}
+
 void StateLevel::checkMapCollision() const
 {
     //On cherche d'ou viens la collision
@@ -81,10 +86,19 @@ void StateLevel::updateCamera() const
     //On définit un rectangle invisible au milieu de l'ecran
     //Si le personnage arrive sur le bord de celui ci, il faut bouger la camera (ce qui revient à deplacer la map)
     //Collision à droite 
-    if(_perso.getShape().getPosition().x > LARGEUR_FENETRE - 200)
+
+    using namespace std;
+
+    if(_perso.getShape().getPosition().x >= LARGEUR_FENETRE - 200 && fabs(_tilemap.getPosition().x) + LARGEUR_FENETRE <  _tilemap.getWidth() * TAILLE_TUILE)
     {
         _tilemap.setPosition(_tilemap.getPosition().x - _perso.getMouvement().x, _tilemap.getPosition().y);
-        _perso.move(sf::Vector2f(0, _perso.getMouvement().y));
+        _perso.move(sf::Vector2f(-0.1, _perso.getMouvement().y));
+    }
+    //Collision à gauche
+    else if(_perso.getShape().getPosition().x <= 200 && _tilemap.getPosition().x < 0)
+    {
+        _tilemap.setPosition(_tilemap.getPosition().x - _perso.getMouvement().x, _tilemap.getPosition().y);
+        _perso.move(sf::Vector2f(0.1, _perso.getMouvement().y));
     }
     else
     {

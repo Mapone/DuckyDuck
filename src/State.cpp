@@ -20,3 +20,5 @@ void State::pressDown(){}
 void State::pressLeft(){}
 void State::pressRight(){}
 void State::pressSpace(){}
+void State::pressEsc(){}
+

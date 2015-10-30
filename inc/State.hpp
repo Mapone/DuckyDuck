@@ -12,11 +12,12 @@ public:
   ~State();
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
   virtual void init();
+  virtual void pressSpace() = 0;
   virtual void pressUp() = 0;
   virtual void pressDown() = 0;
+  virtual void pressEsc();
   virtual void pressLeft();
   virtual void pressRight();
-  virtual void pressSpace() = 0;
 
 protected:
 	Jeu *_jeu;

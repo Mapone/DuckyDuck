@@ -5,6 +5,7 @@
 #include "Jeu.hpp"
 #include "State.hpp"
 #include "StateMainMenu.hpp"
+#include "StateEscMenu.hpp"
 #include "StateLevel.hpp"
 
 using namespace std;
@@ -23,6 +24,7 @@ _perso(p)
 
 	//Initialisation des Etats
     _stateMainMenu = new StateMainMenu(this);
+    _stateEscMenu = new StateEscMenu(this);
     _stateLevel = new StateLevel(this, t, p);
 	_currentState = _stateMainMenu;
 
@@ -57,12 +59,16 @@ const sf::Font& Jeu::getFont() const
 void Jeu::setState(State* s)
 {
     _currentState = s;
-    s->init();
 }
 
 StateLevel* Jeu::getStateLevel() const
 {
     return _stateLevel;
+}
+
+StateEscMenu* Jeu::getStateEscMenu() const
+{
+    return _stateEscMenu;
 }
 
 void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const

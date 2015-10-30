@@ -7,6 +7,7 @@ class TileMap;
 class Personnage;
 class State;
 class StateMainMenu;
+class StateEscMenu;
 class StateLevel;
 
 class Jeu : public sf::Drawable, public sf::Transformable
@@ -20,6 +21,7 @@ class Jeu : public sf::Drawable, public sf::Transformable
 		const sf::Font& getFont() const;
 		void setState(State* s);
 		StateLevel* getStateLevel() const;
+		StateEscMenu* getStateEscMenu() const;
 		void close();
 
 
@@ -33,6 +35,7 @@ class Jeu : public sf::Drawable, public sf::Transformable
 		sf::Font _font;
 		State* _currentState;
 		StateMainMenu* _stateMainMenu;
+		StateEscMenu* _stateEscMenu;
 		StateLevel* _stateLevel;
 };
 

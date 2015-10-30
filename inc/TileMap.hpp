@@ -13,7 +13,8 @@ public:
     bool collisionHaut(const sf::RectangleShape& shape, const sf::Vector2f& vect);
     bool collisionGauche(const sf::RectangleShape& shape, const sf::Vector2f& vect);
     bool collisionDroite(const sf::RectangleShape& shape, const sf::Vector2f& vect);
-    sf::Vector2f getGravity();
+    unsigned int getWidth() const;
+    sf::Vector2f getGravity() const;
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
