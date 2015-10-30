@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "StateLevel.hpp"
+#include "StateEscMenu.hpp"
 
 using namespace std;
 

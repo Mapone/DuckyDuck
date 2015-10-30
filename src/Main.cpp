@@ -45,7 +45,7 @@ int main()
 //-------------------Creation du personnage-----------------------
 //----------------------------------------------------------------
 
-    Personnage mario(Vector2f(10,10));
+    Personnage mario(Vector2f(15,15));
     mario.getShape().setPosition(32,64);
 
 //-------------------Création du Jeu------------------------------
@@ -65,7 +65,6 @@ int main()
 ////////////LANCEMENT DU JEU//////////
 /////////////////////////////////////
 
-
     while (window.isOpen())
     {
         Event event;
@@ -75,9 +74,8 @@ int main()
                 window.close();
         }
 
-   // std::cout << mario.getMouvement().x << ":" << mario.getMouvement().x << std::endl;
         window.clear(sf::Color::Black);
-        if(!jeu.update())
+        if(!jeu.update(window))
             break;
         window.draw(jeu);
         window.display();

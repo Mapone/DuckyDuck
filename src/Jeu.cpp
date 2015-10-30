@@ -35,9 +35,9 @@ Jeu::~Jeu()
 	//delete pointeurs
 }
 
-bool Jeu::update()
+bool Jeu::update(sf::RenderWindow& window)
 {
-    processInput();
+    processInput(window);
     return isOpen;
 }
 
@@ -77,8 +77,21 @@ void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(*_currentState);
 }
 
-void Jeu::processInput()
+void Jeu::processInput(sf::RenderWindow& window)
 {
+    sf::Event event;
+    static int i =0;
+    // tant qu'il y a des évènements à traiter...
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::KeyPressed)
+        {
+            if (event.key.code == sf::Keyboard::Escape)
+            {
+                _currentState->pressEsc();        
+            }
+        } 
+    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
         _currentState->pressSpace();

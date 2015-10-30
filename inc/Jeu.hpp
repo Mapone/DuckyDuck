@@ -15,7 +15,7 @@ class Jeu : public sf::Drawable, public sf::Transformable
 	public:
 		Jeu(TileMap &t, Personnage &p);
 		~Jeu();
-		bool update();
+		bool update(sf::RenderWindow& window);
 		void addLevel(TileMap* t);
 		TileMap* getCurrentLevel() const;
 		const sf::Font& getFont() const;
@@ -27,7 +27,7 @@ class Jeu : public sf::Drawable, public sf::Transformable
 
 	private:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-		void processInput();
+		void processInput(sf::RenderWindow& window);
 		bool isOpen;
 		std::vector<TileMap*> _levels;
 		unsigned int _currentLevel;

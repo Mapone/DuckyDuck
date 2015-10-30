@@ -25,4 +25,4 @@ private:
   unsigned int _current;
 };
 
-#endif
+#endif  
