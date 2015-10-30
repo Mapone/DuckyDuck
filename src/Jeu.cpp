@@ -39,14 +39,13 @@ bool Jeu::update()
     return isOpen;
 }
 
-void Jeu::addLevel(TileMap t)
+void Jeu::addLevel(TileMap* t)
 {
-	_levels.push_back(&t);
+	_levels.push_back(t);
 }
 
 TileMap* Jeu::getCurrentLevel() const
 {
-    //TileMap* ptr = &_levels[_currentLevel];
 	return _levels[_currentLevel];
 }
 
@@ -94,29 +93,6 @@ void Jeu::processInput()
     {
         _currentState->pressLeft();
     }
-}
-void Jeu::checkCollision()
-{
-    //On cherche d'ou viens la collision
-    if(_levels[_currentLevel]->collisionBas(_perso.getShape(), _perso.getMouvement()) ||
-       _levels[_currentLevel]->collisionHaut(_perso.getShape(), _perso.getMouvement()))
-    {
-        _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x,0));
-    }
-
-    if(_levels[_currentLevel]->collisionDroite(_perso.getShape(),_perso.getMouvement()) ||
-       _levels[_currentLevel]->collisionGauche(_perso.getShape(),_perso.getMouvement()))
-    {
-
-        _perso.setMouvement(sf::Vector2f(0,_perso.getMouvement().y));
-    }
-
-    //Si pas de colision en bas, on applique la gravité
-    if(!_levels[_currentLevel]->collisionBas(_perso.getShape(), sf::Vector2f(_perso.getMouvement().x,1)))
-    {        
-        _perso.addMouvement(_levels[_currentLevel]->getGravity());
-    }
-    _perso.move();
 }
 
 void Jeu::close()

@@ -39,7 +39,7 @@ const int HAUTEUR_FENETRE = 448;
 //----------------------------------------------------------------
     
     Vector2f gravity(0,0.2);
-    TileMap map("lvl3.bmp", gravity);
+    TileMap map("lvl4.bmp", gravity);
 
 //-------------------Creation du personnage-----------------------
 //----------------------------------------------------------------

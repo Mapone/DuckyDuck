@@ -22,7 +22,7 @@ $(EXE): $(OBJ)
 	$(CXX) -o $@ $^ $(CXXLINK)
 
 # Genere les .o
-# -MMD pour generer les makefile
+# -MMD pour generer les makefiles
 # Crée DIR_BIN si celui-ci n'existe pas
 $(DIR_BIN)%.o: $(DIR_SRC)%.cpp | $(DIR_BIN)
 	$(CXX) $(CXXFLAGS) -I$(DIR_INC) -MMD -c -o $@ $<
@@ -30,7 +30,7 @@ $(DIR_BIN)%.o: $(DIR_SRC)%.cpp | $(DIR_BIN)
 run: $(EXE)
 	@cd $(DIR_RUN) && ../$<
 
-#Inclus les makefile générés pour chaque cpp 
+#Inclus les makefiles générés pour chaque cpp 
 -include $(DEP)
 
 $(DIR_BIN):
@@ -39,5 +39,8 @@ $(DIR_BIN):
 clean:
 	@rm -rf $(DIR_BIN)
 
+debug: $(EXE)
+	@cd $(DIR_RUN) && gdb ../$<
+
 # Cibles qui ne sont pas des noms de fichiers
-.PHONY: clean run
+.PHONY: clean run debug

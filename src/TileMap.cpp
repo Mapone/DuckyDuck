@@ -37,7 +37,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
     // on charge la texture du tileset
     if (!m_tileset.loadFromFile(tileset))
         return false;
-    
+    m_tileset.setSmooth(true);
     // Tableau donnant la nature du bloc généré (plein, demi/quart de bloc)
     /*int sizeBlocs[]=
     {

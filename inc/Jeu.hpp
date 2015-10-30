@@ -15,13 +15,12 @@ class Jeu : public sf::Drawable, public sf::Transformable
 		Jeu(TileMap &t, Personnage &p);
 		~Jeu();
 		bool update();
-		void addLevel(TileMap t);
+		void addLevel(TileMap* t);
 		TileMap* getCurrentLevel() const;
 		const sf::Font& getFont() const;
 		void setState(State* s);
 		StateLevel* getStateLevel() const;
 		void close();
-		void checkCollision();
 
 
 	private:
