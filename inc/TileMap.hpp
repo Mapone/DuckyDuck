@@ -57,10 +57,6 @@ public:
     */
     int *getLevel();
     bool collision(const sf::Vector2f& point, const sf::Vector2f& vect);
-    bool collisionBas(const sf::RectangleShape& shape, const sf::Vector2f& vect);
-    bool collisionHaut(const sf::RectangleShape& shape, const sf::Vector2f& vect);
-    bool collisionGauche(const sf::RectangleShape& shape, const sf::Vector2f& vect);
-    bool collisionDroite(const sf::RectangleShape& shape, const sf::Vector2f& vect);
     
     /**
     * \fn unsigned int getWidth() const
@@ -82,6 +78,13 @@ public:
     */
     sf::Vector2f getGravity() const;
 
+    /**
+    * \fn sf::Vector2f getSpawn() const;
+    *\brief Getter des coordonnées de spawn 
+    *
+    *\return Un Vector2f du spawn.
+    */
+    sf::Vector2f getSpawn() const;
 private:
 
     /**
@@ -112,6 +115,7 @@ private:
     unsigned int width; /** CONST Largeur */
     unsigned int height; /** CONST Hauteur */
     sf::Vector2f _gravity; /** Gravité (2D) */
+    sf::Vector2f _spawn;  /** Point de spawn, en bas à gauche de la tuile */
 };
 
 

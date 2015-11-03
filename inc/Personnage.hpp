@@ -98,7 +98,6 @@ public:
 	*
 	* \param v : Vector2f définissant le mouvement.
 	*/
-	void move();
 	void move(sf::Vector2f v);
 
 private:

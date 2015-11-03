@@ -129,6 +129,8 @@ private:
   */
   void updateCamera() const;
 
+  unsigned int nextTile(float x, bool direction) const;
+
 };
 
 #endif

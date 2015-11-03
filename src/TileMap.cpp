@@ -21,7 +21,7 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
 
     loadBMP(niveau);
 
-    if (!load("tileset2.png", sf::Vector2u(16, 16)))
+    if (!load("tileset2spawn.png", sf::Vector2u(16, 16)))
         cerr << "#ERROR: Erreur lors du chargement du tileset" << endl;
 }
 
@@ -91,7 +91,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
             
             switch(level[i + j * width])
             {
-                case 52:
+                case 2:
                     mapCollisions[i + j * width] = 0;
                     break;
 
@@ -103,96 +103,6 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
                     mapCollisions[i + j * width] = 1;
                     break;
             }
-
-
-
-
-            /*
-            switch(sizeBlocs[tileNumber])
-            {
-                // Bloc Plein
-                case 0:
-                    mapCollisions[(i+j*width)]=true;
-                    mapCollisions[(i+j*width)+1]=true;
-                    mapCollisions[(i+j*width)+2]=true;
-                    mapCollisions[(i+j*width)+3]=true;
-                    break;
-
-                // Bloc 8x16 partie Basse
-                case 1:
-                    mapCollisions[(i+j*width)]=false;
-                    mapCollisions[(i+j*width)+1]=false;
-                    mapCollisions[(i+j*width)+2]=true;
-                    mapCollisions[(i+j*width)+3]=true;
-                    break;
-
-                // Bloc 8x16 partie Haute
-                case 2:
-                    mapCollisions[(i+j*width)]=true;
-                    mapCollisions[(i+j*width)+1]=true;
-                    mapCollisions[(i+j*width)+2]=false;
-                    mapCollisions[(i+j*width)+3]=false;
-                    break;
-
-                // Bloc 16x8 partie Gauche
-                case 3:
-                    mapCollisions[(i+j*width)]=true;
-                    mapCollisions[(i+j*width)+1]=false;
-                    mapCollisions[(i+j*width)+2]=false;
-                    mapCollisions[(i+j*width)+3]=true;
-                    break;
-
-                // Bloc 16x8 partie Droite
-                case 4:
-                    mapCollisions[(i+j*width)]=false;
-                    mapCollisions[(i+j*width)+1]=true;
-                    mapCollisions[(i+j*width)+2]=true;
-                    mapCollisions[(i+j*width)+3]=false;
-                    break;
-
-                // Bloc 8x8 Haut Gauche
-                case 5:
-                    mapCollisions[(i+j*width)]=true;
-                    mapCollisions[(i+j*width)+1]=false;
-                    mapCollisions[(i+j*width)+2]=false;
-                    mapCollisions[(i+j*width)+3]=false;
-                    break;
-
-                // Bloc 8x8 Haut Droit
-                case 6:
-                    mapCollisions[(i+j*width)]=false;
-                    mapCollisions[(i+j*width)+1]=true;
-                    mapCollisions[(i+j*width)+2]=false;
-                    mapCollisions[(i+j*width)+3]=false;
-                    break;
-           
-                // Bloc 8x8 Bas Gauche
-                case 7:
-                    mapCollisions[(i+j*width)]=false;
-                    mapCollisions[(i+j*width)+1]=false;
-                    mapCollisions[(i+j*width)+2]=false;
-                    mapCollisions[(i+j*width)+3]=true;
-                    break;
-
-                // Bloc 8x8 Bas Droit
-                case 8:
-                    mapCollisions[(i+j*width)]=false;
-                    mapCollisions[(i+j*width)+1]=false;
-                    mapCollisions[(i+j*width)+2]=true;
-                    mapCollisions[(i+j*width)+3]=false;
-                    break;
-
-                // Bloc Transparent
-                case 9:
-                    mapCollisions[(i+j*width)]=false;
-                    mapCollisions[(i+j*width)+1]=false;
-                    mapCollisions[(i+j*width)+2]=false;
-                    mapCollisions[(i+j*width)+3]=false;
-                    break;
-                
-                default:
-                    break;
-            }*/
 		}        
 	}
     return true;
@@ -210,121 +120,6 @@ bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect)
     i = (point.x + vect.x - getPosition().x)/16;   
     j = (point.y + vect.y - getPosition().y)/16;
     return mapCollisions[i+j*width];
-
-    /*
-    int i,j;
-    bool hautGauche, hautDroite, basGauche, basDroite;
-
-    i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
-    j = (shape.getPosition().y + vect.y - getPosition().y)/16;
-    hautGauche = mapCollisions[i+j*width];
-
-    i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
-    j = (shape.getPosition().y + shape.getSize().y + vect.y - getPosition().y)/16;
-    basGauche = mapCollisions[i+j*width];
-
-    i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
-    j = (shape.getPosition().y + vect.y - getPosition().y)/16;
-    hautDroite = mapCollisions[i+j*width];
-
-    i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
-    j = (shape.getPosition().y + shape.getSize().y + vect.y - getPosition().y)/16;
-    basDroite = mapCollisions[i+j*width];
-
-    return hautGauche || hautDroite || basDroite || basGauche;*/
-}
-
-bool TileMap::collisionBas(const sf::RectangleShape& shape, const sf::Vector2f& vect)
-{
-    int i,j;
-    bool basGauche, basDroite;
-
-    //Si il y a déjà une collision à droite ou à gauche, on ignore le vecteur en x
-    if(collisionGauche(shape,vect) || collisionDroite(shape,vect))
-    {
-        i = (shape.getPosition().x - getPosition().x)/16;   
-        j = (shape.getPosition().y + shape.getSize().y + vect.y - getPosition().y)/16;
-        basGauche = mapCollisions[i+j*width];
-
-        i = (shape.getPosition().x + shape.getSize().x - getPosition().x)/16;   
-        j = (shape.getPosition().y + shape.getSize().y + vect.y - getPosition().y)/16;
-        basDroite = mapCollisions[i+j*width];
-    }
-    else
-    {
-        i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
-        j = (shape.getPosition().y + shape.getSize().y + vect.y - getPosition().y)/16;
-        basGauche = mapCollisions[i+j*width];
-
-        i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
-        j = (shape.getPosition().y + shape.getSize().y + vect.y - getPosition().y)/16;
-        basDroite = mapCollisions[i+j*width];
-    }
-
-    return basDroite || basGauche;
-}
-
-bool TileMap::collisionHaut(const sf::RectangleShape& shape, const sf::Vector2f& vect)
-{
-    int i,j;
-    bool hautGauche, hautDroite;
-
-    //Si il y a déjà une collision à droite ou à gauche, on ignore le vecteur en x
-    if(collisionGauche(shape,vect) || collisionDroite(shape,vect))
-    {
-        i = (shape.getPosition().x - getPosition().x)/16;   
-        j = (shape.getPosition().y + vect.y - getPosition().y)/16;
-        hautGauche = mapCollisions[i+j*width];
-
-        i = (shape.getPosition().x + shape.getSize().x - getPosition().x)/16;   
-        j = (shape.getPosition().y + vect.y - getPosition().y)/16;
-        hautDroite = mapCollisions[i+j*width];
-    }
-    else
-    {
-        i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
-        j = (shape.getPosition().y + vect.y - getPosition().y)/16;
-        hautGauche = mapCollisions[i+j*width];
-
-        i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
-        j = (shape.getPosition().y + vect.y - getPosition().y)/16;
-        hautDroite = mapCollisions[i+j*width];
-    }
-
-    return hautGauche || hautDroite;
-
-}
-
-bool TileMap::collisionGauche(const sf::RectangleShape& shape, const sf::Vector2f& vect)
-{
-    int i,j;
-    bool hautGauche, basGauche;
-
-    i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
-    j = (shape.getPosition().y + vect.y - getPosition().y)/16;
-    hautGauche = mapCollisions[i+j*width];
-
-    i = (shape.getPosition().x + vect.x - getPosition().x)/16;   
-    j = (shape.getPosition().y + shape.getSize().y + vect.y - getPosition().y)/16;
-    basGauche = mapCollisions[i+j*width];
-
-    return hautGauche || basGauche;
-}
-
-bool TileMap::collisionDroite(const sf::RectangleShape& shape, const sf::Vector2f& vect)
-{
-    int i,j;
-    bool hautDroite, basDroite;
-
-    i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
-    j = (shape.getPosition().y + vect.y - getPosition().y)/16;
-    hautDroite = mapCollisions[i+j*width];
-
-    i = (shape.getPosition().x + shape.getSize().x + vect.x - getPosition().x)/16;   
-    j = (shape.getPosition().y + shape.getSize().y + vect.y - getPosition().y)/16;
-    basDroite = mapCollisions[i+j*width];
-
-    return hautDroite || basDroite;
 }
 
 
@@ -349,7 +144,7 @@ void TileMap::loadBMP(sf::Image niveau)
     for (unsigned int i = 0; i < (niveau.getSize().x*niveau.getSize().y*4); i+=4)
     {
         if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 200)
-            level[i/4] = 52; //BLOC CIEL
+            level[i/4] = 2; //BLOC CIEL
 
         else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 200 && static_cast<int>(t[i+2]) == 0)
             level[i/4] = 192; //BLOC HERBE
@@ -369,12 +164,16 @@ void TileMap::loadBMP(sf::Image niveau)
         else if( static_cast<int>(t[i]) == 96 && static_cast<int>(t[i+1]) == 56 && static_cast<int>(t[i+2]) == 48)
             level[i/4] = 195; //BLOC TERRE
 
-        else if( static_cast<int>(t[i]) == 138 && static_cast<int>(t[i+1]) == 81 && static_cast<int>(t[i+2]) == 70)
-            level[i/4] = 198; //BLOC DEMI-TERRE SUR LA GAUCHE
-
-        else if( static_cast<int>(t[i]) == 63 && static_cast<int>(t[i+1]) == 38 && static_cast<int>(t[i+2]) == 34)
-            level[i/4] = 197; //BLOC DEMI-TERRE SUR LA DROITE
-
+        else if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 0)
+        {
+            level[i/4] = 2; //BLOC DE SPAWN, on place donc un bloc ciel
+            int j = i/4;
+            _spawn.x = (j%width-1)* 16;
+            _spawn.y = ((int)(j/width)-1)* 16;
+            cout << i << " : " << _spawn.x << ":" << _spawn.y << endl;
+        }
+        else if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 255)
+            level[i/4] = 1; //BLOC FIN DE NIVEAU
         else
         {
             cerr << "#ERROR: loadBMP(niveau), couleur non existante RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;

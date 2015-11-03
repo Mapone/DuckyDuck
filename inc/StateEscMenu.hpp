@@ -38,7 +38,7 @@ public:
   *
   * Destructeur de la classe State
   */
-  ~State();
+  ~StateEscMenu();
 
   /**
   * \fn virtual void draw(sf::RenderTarget& target, st::RenderStates states) const
