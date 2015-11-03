@@ -93,15 +93,25 @@ private:
     */
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     
-
+    /**
+    * \fn void loadBMP(sf::Image niveau)
+    * \brief créer un tileset depuis une image
+    *
+    * Prends un image pré-défini qui correspond à un niveau
+    * et le transforme en un tileset
+    * utilisable par le programme.
+    *
+    * \param niveau : image servant de base pour créer le niveau.
+    */
     void loadBMP(sf::Image niveau);
-    sf::VertexArray m_vertices;
-    sf::Texture m_tileset;
-    int *level;
-    bool *mapCollisions;
-    unsigned int width;
-    unsigned int height;
-    sf::Vector2f _gravity;
+
+    sf::VertexArray m_vertices; /** Tableau contenant le niveau */
+    sf::Texture m_tileset; /** TileSet */
+    int *level; /** Tableau contenant les valeurs des tuiles du niveau */
+    bool *mapCollisions; /** Tableau de collisions du niveau */
+    unsigned int width; /** CONST Largeur */
+    unsigned int height; /** CONST Hauteur */
+    sf::Vector2f _gravity; /** Gravité (2D) */
 };
 
 

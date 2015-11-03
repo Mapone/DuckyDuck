@@ -30,10 +30,7 @@ _perso(p)
 
 }
 
-Jeu::~Jeu()
-{
-	//delete pointeurs
-}
+Jeu::~Jeu() {}
 
 bool Jeu::update(sf::RenderWindow& window)
 {
