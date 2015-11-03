@@ -61,25 +61,43 @@ void StateLevel::pressEsc()
 
 void StateLevel::checkMapCollision() const
 {
+    //On applique d'abord la gravité au personnage
+    _perso.addMouvement(_tilemap.getGravity());
+
+    //On initialise des vecteurs pour limiter le nombre d'appels sur _perso
+    sf::Vector2f position = _perso.getShape().getPosition();
+    sf::Vector2f size = _perso.getShape().getSize();
+    sf::Vector2f mvt = _perso.getMouvement();
+
+    bool colHaut, colBas, colGauche, colDroite;
+    bool colXHautGauche, colXHautDroit, colXBasGauche, colXBasDroit; 
+    bool colYHautGauche, colYHautDroit, colYBasGauche, colYBasDroit;
+
+    //On calcule la collision en X et en Y pour chacun des 4 points de notre rectangleShape
+    colXHautGauche = _tilemap.collision(position, sf::Vector2f(mvt.x,0));
+    colXHautDroit = _tilemap.collision(sf::Vector2f(position.x + size.x, position.y), sf::Vector2f(mvt.x,0));
+    colXBasGauche = _tilemap.collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(mvt.x,0));
+    colXBasDroit = _tilemap.collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(mvt.x,0));
+
+    colYHautGauche = _tilemap.collision(position, sf::Vector2f(0,mvt.y));
+    colYHautDroit = _tilemap.collision(sf::Vector2f(position.x + size.x, position.y), sf::Vector2f(0,mvt.y));
+    colYBasGauche = _tilemap.collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(0,mvt.y));
+    colYBasDroit = _tilemap.collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(0,mvt.y));
+
+    //On en déduit les collision des cotés 
+    colHaut = colYHautDroit || colYHautGauche;
+    colBas = colYBasDroit || colYBasGauche;
+    colGauche = colXBasGauche || colXHautGauche;
+    colDroite = colXHautDroit || colXBasDroit;
+
     //On cherche d'ou viens la collision
-    if(_tilemap.collisionBas(_perso.getShape(), _perso.getMouvement()) ||
-       _tilemap.collisionHaut(_perso.getShape(), _perso.getMouvement()))
-    {
-        _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x,0));
-    }
-
-    if(_tilemap.collisionDroite(_perso.getShape(),_perso.getMouvement()) ||
-       _tilemap.collisionGauche(_perso.getShape(),_perso.getMouvement()))
-    {
-
+    if(colGauche || colDroite)
         _perso.setMouvement(sf::Vector2f(0,_perso.getMouvement().y));
-    }
 
-    //Si pas de colision en bas, on applique la gravité
-    if(!_tilemap.collisionBas(_perso.getShape(), sf::Vector2f(_perso.getMouvement().x,1)))
-    {        
-        _perso.addMouvement(_tilemap.getGravity());
-    }
+    if(colHaut || colBas)
+        _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x,0));
+
+    _perso.move();
 }
 
 void StateLevel::updateCamera() const
@@ -93,16 +111,12 @@ void StateLevel::updateCamera() const
     if(_perso.getShape().getPosition().x >= LARGEUR_FENETRE - 200 && fabs(_tilemap.getPosition().x) + LARGEUR_FENETRE <  _tilemap.getWidth() * TAILLE_TUILE)
     {
         _tilemap.setPosition(_tilemap.getPosition().x - _perso.getMouvement().x, _tilemap.getPosition().y);
-        _perso.move(sf::Vector2f(-0.1, _perso.getMouvement().y));
+        _perso.setPosition(sf::Vector2f(LARGEUR_FENETRE - 200, _perso.getShape().getPosition().y));
     }
     //Collision à gauche
     else if(_perso.getShape().getPosition().x <= 200 && _tilemap.getPosition().x < 0)
     {
         _tilemap.setPosition(_tilemap.getPosition().x - _perso.getMouvement().x, _tilemap.getPosition().y);
-        _perso.move(sf::Vector2f(0.1, _perso.getMouvement().y));
-    }
-    else
-    {
-        _perso.move();
+        _perso.setPosition(sf::Vector2f(200, _perso.getShape().getPosition().y));
     }
 }

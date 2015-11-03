@@ -204,8 +204,14 @@ int * TileMap::getLevel()
 }
 
 
-bool TileMap::collision(const sf::RectangleShape& shape, const sf::Vector2f& vect)
+bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect)
 {
+    int i,j;
+    i = (point.x + vect.x - getPosition().x)/16;   
+    j = (point.y + vect.y - getPosition().y)/16;
+    return mapCollisions[i+j*width];
+
+    /*
     int i,j;
     bool hautGauche, hautDroite, basGauche, basDroite;
 
@@ -225,7 +231,7 @@ bool TileMap::collision(const sf::RectangleShape& shape, const sf::Vector2f& vec
     j = (shape.getPosition().y + shape.getSize().y + vect.y - getPosition().y)/16;
     basDroite = mapCollisions[i+j*width];
 
-    return hautGauche || hautDroite || basDroite || basGauche;
+    return hautGauche || hautDroite || basDroite || basGauche;*/
 }
 
 bool TileMap::collisionBas(const sf::RectangleShape& shape, const sf::Vector2f& vect)

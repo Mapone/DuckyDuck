@@ -56,7 +56,7 @@ public:
     * \return Le Level en cours.
     */
     int *getLevel();
-    bool collision(const sf::RectangleShape& shape, const sf::Vector2f& vect);
+    bool collision(const sf::Vector2f& point, const sf::Vector2f& vect);
     bool collisionBas(const sf::RectangleShape& shape, const sf::Vector2f& vect);
     bool collisionHaut(const sf::RectangleShape& shape, const sf::Vector2f& vect);
     bool collisionGauche(const sf::RectangleShape& shape, const sf::Vector2f& vect);
