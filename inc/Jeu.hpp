@@ -3,6 +3,17 @@
 
 #include <SFML/Graphics.hpp>
 
+/**
+* \file Jeu.hpp
+* \brief Gère l'ensemble des outils permettant d'effectuer
+*        une partie de DuckyDuck.
+* \author {N. Guittonneau, P. Raballand}
+* \version 1.0
+* \date 28/10/2015
+*
+* Gère tout la fenêtre et les interactions lors d'une partie
+*/
+
 class TileMap;
 class Personnage;
 class State;
@@ -10,33 +21,130 @@ class StateMainMenu;
 class StateEscMenu;
 class StateLevel;
 
+/**
+* \class Jeu
+* \brief Gère tout la fenêtre et les interactions lors d'une partie
+*/
 class Jeu : public sf::Drawable, public sf::Transformable
 {
-	public:
-		Jeu(TileMap &t, Personnage &p);
-		~Jeu();
-		bool update(sf::RenderWindow& window);
-		void addLevel(TileMap* t);
-		TileMap* getCurrentLevel() const;
-		const sf::Font& getFont() const;
-		void setState(State* s);
-		StateLevel* getStateLevel() const;
-		StateEscMenu* getStateEscMenu() const;
-		void close();
+public:
+
+	/**
+	* \brief Constructeur
+	*
+	* Constructeur de la classe Jeu
+	*
+	* \param t : TileMap à générer, p : Personnage à jouer.
+	*/
+	Jeu(TileMap &t, Personnage &p);
+
+	/**
+    * \brief Destructeur
+    *
+    *  Destructeur de la classe Jeu
+    */
+	~Jeu();
 
 
-	private:
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-		void processInput(sf::RenderWindow& window);
-		bool isOpen;
-		std::vector<TileMap*> _levels;
-		unsigned int _currentLevel;
-		Personnage &_perso;
-		sf::Font _font;
-		State* _currentState;
-		StateMainMenu* _stateMainMenu;
-		StateEscMenu* _stateEscMenu;
-		StateLevel* _stateLevel;
+	bool update(sf::RenderWindow& window);
+
+	/**
+	* \fn void Jeu::addLevel(TileMap t)
+	* \brief Ajout d'un niveau au Jeu.
+	*
+	* Méthode permettant d'ajouter un level depuis une TileMap au Jeu.
+	*
+	* \param t : La TileMap à ajouter comme niveau.
+	*/
+	void addLevel(TileMap* t);
+
+	/**
+	* \fn TileMap* getCurrentLevel() const
+	* \brief Récupère le niveau en cours
+	*
+	* Fonction permettant de récupérer la TileMap du niveau en cours
+	*/
+	TileMap* getCurrentLevel() const;
+
+	/**
+	* \fn const sf::Font& getFont() const
+	* \brief Récupère le Font rattachée
+	*
+	* Récupère la police rattaché au Jeu.
+	*/
+	const sf::Font& getFont() const;
+
+	/**
+	* \fn void setState(State* s)
+	* \brief Setter du State
+	*
+	* Permet de modifier l'état du State.
+	*
+	* \param s : State à modifier.
+	*/
+	void setState(State* s);
+
+	/**
+	* \fn StateLevel* getStateLevel() const
+	* \brief Getter du StateLevel
+	*
+	* Renvoi le StateLevel
+	*
+	* \return Un StateLevel
+	*/
+	StateLevel* getStateLevel() const;
+
+	/**
+	* \fn StateEscMenu* getStateEscMenu() const
+	* \brief Getter du StateEscMenu
+	*
+	* Renvoi le StateEscMenu
+	*
+	* \return Un StateEscMenu
+	*/
+	StateEscMenu* getStateEscMenu() const;
+
+	/**
+	* \fn void close()
+	* \brief Enregistre la fermeture de la fenêtre
+	*
+	* Passe un global bool en false afin d'enregistrer
+	* la fermeture de la fenêtr principale.
+	*/
+	void close();
+
+
+private:
+
+	/**
+	* \fn virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
+	* \brief Appel la création du personnage, et gère les actions utilisateurs.
+	*
+	* Affiche le personnage et lui applique les actions correspondantes. 
+	*
+	* \param target : objet à afficher, states : ???
+	*/
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	
+	/**
+	* \fn void processInput(sf::RenderWindow& window)
+	* \brief Fonction qui attends les entrées et appelle les différentes méthodes.
+	*
+	* Gère les entrées utilisateurs et appelle ensuite la fonction rattachée.
+	*
+	* \param window : la fenêtre sur laquelle on travaille.
+	*/
+	void processInput(sf::RenderWindow& window);
+
+	bool isOpen; /** Informe sur l'état de la fenêtre (open/close) */
+	std::vector<TileMap*> _levels; /** Vecteur de tous les niveaux */
+	unsigned int _currentLevel; /** Niveau en cours */
+	Personnage &_perso; /** Personnage joué */
+	sf::Font _font; /** Police d'écriture */
+	State* _currentState; /** Etat actuel */
+	StateMainMenu* _stateMainMenu; /** Etat Menu Principal */
+	StateEscMenu* _stateEscMenu; /** Etat Menu en Partie */
+	StateLevel* _stateLevel; /** Etat en jeu */
 };
 
 #endif

@@ -80,7 +80,7 @@ void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void Jeu::processInput(sf::RenderWindow& window)
 {
     sf::Event event;
-    static int i =0;
+    //static int i =0;
     // tant qu'il y a des évènements à traiter...
     while (window.pollEvent(event))
     {
