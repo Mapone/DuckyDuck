@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 /**
-* \file Personnage.cpp
+* \file Personnage.hpp
 * \brief Gère l'ensemble des outils neccessaires à
 *	     l'éxécution des différentes méthodes du personnage.
 * \author {N. Guittonneau,P. Raballand}
@@ -16,7 +16,7 @@
 
 /**
 * \class Personnage
-* \brief classe définissant un personnage.
+* \brief Classe définissant un personnage.
 */
 class Personnage
 {
