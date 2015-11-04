@@ -23,6 +23,8 @@ void  StateLevel::init()
 void StateLevel::update() const
 {
 	checkMapCollision();
+    if(checkCollision(_perso.getShape(), *_tilemap.getLevelEnd()))
+        cout << "FIN LEVEL"<< endl;
     updateCamera();
 }
 
@@ -124,9 +126,21 @@ void StateLevel::checkMapCollision() const
 
     if(!(colHaut && colBas && colDroite && colGauche))
         _perso.move(_perso.getMouvement()); 
-
-
 }
+
+bool StateLevel::checkCollision(const sf::RectangleShape& s1, const sf::RectangleShape& s2) const
+{
+    sf::FloatRect boundingBoxS1 = s1.getGlobalBounds();
+    sf::FloatRect boundingBoxS2 = s2.getGlobalBounds();
+
+    if (boundingBoxS1.intersects(boundingBoxS2))
+        return true;
+    else 
+        return false;
+}
+
+
+
 
 unsigned int StateLevel::nextTile(float x, bool direction) const
 {
@@ -138,16 +152,24 @@ void StateLevel::updateCamera() const
     //On définit un rectangle invisible au milieu de l'ecran
     //Si le personnage arrive sur le bord de celui ci, il faut bouger la camera (ce qui revient à deplacer la map)
 
+    int decalX = _tilemap.getPosition().x;
+    int decalY = _tilemap.getPosition().y;
+
     //Collision à droite de l'ecran
     if(_perso.getShape().getPosition().x >= LARGEUR_FENETRE - 200 && fabs(_tilemap.getPosition().x) + LARGEUR_FENETRE <  _tilemap.getWidth() * TAILLE_TUILE)
     {
         _tilemap.setPosition(_tilemap.getPosition().x - _perso.getMouvement().x, _tilemap.getPosition().y);
+        decalX = _tilemap.getPosition().x - decalX; 
+        _tilemap.getLevelEnd()->setPosition(_tilemap.getLevelEnd()->getPosition().x + decalX, _tilemap.getLevelEnd()->getPosition().y + decalY);
         _perso.setPosition(sf::Vector2f(LARGEUR_FENETRE - 200, _perso.getShape().getPosition().y));
     }
     //Collision à gauche
     else if(_perso.getShape().getPosition().x <= 200 && _tilemap.getPosition().x < 0)
     {
+        //TODO DEBUG
         _tilemap.setPosition(_tilemap.getPosition().x - _perso.getMouvement().x, _tilemap.getPosition().y);
+        decalX -= _tilemap.getPosition().x; 
+        _tilemap.getLevelEnd()->setPosition(_tilemap.getLevelEnd()->getPosition().x + decalX, _tilemap.getLevelEnd()->getPosition().y + decalY);
         _perso.setPosition(sf::Vector2f(200, _perso.getShape().getPosition().y));
     }
 }

@@ -85,6 +85,8 @@ public:
     *\return Un Vector2f du spawn.
     */
     sf::Vector2f getSpawn() const;
+    sf::RectangleShape* getLevelEnd();
+
 private:
 
     /**
@@ -107,6 +109,8 @@ private:
     * \param niveau : image servant de base pour créer le niveau.
     */
     void loadBMP(sf::Image niveau);
+    void loadLayer(sf::Image layer);
+
 
     sf::VertexArray m_vertices; /** Tableau contenant le niveau */
     sf::Texture m_tileset; /** TileSet */
@@ -116,6 +120,8 @@ private:
     unsigned int height; /** CONST Hauteur */
     sf::Vector2f _gravity; /** Gravité (2D) */
     sf::Vector2f _spawn;  /** Point de spawn, en bas à gauche de la tuile */
+    sf::RectangleShape _levelEnd; /** Bloc de fin de niveau */
+    sf::Texture flag;
 };
 
 

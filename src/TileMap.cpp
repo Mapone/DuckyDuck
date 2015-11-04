@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <stdint.h> //uint8
 #include <SFML/Graphics.hpp>
 #include "TileMap.hpp"
@@ -8,9 +9,14 @@ using namespace std;
 TileMap::TileMap(string levelName, sf::Vector2f &gravity)
 {
     _gravity = gravity;
-    sf::Image niveau;
-    if(!niveau.loadFromFile(levelName))
-        cerr << "#ERROR: Erreur lors du chargement du niveau \"" + levelName + "\" " << endl;
+    string img_level = levelName + ".bmp";
+    string layer_level = levelName + "_layer.bmp";
+    sf::Image niveau, layer;
+    if(!niveau.loadFromFile(img_level))
+        cerr << "#ERROR: Erreur lors du chargement du niveau \"" + img_level + "\" " << endl;
+
+    if(!layer.loadFromFile(layer_level))
+        cerr << "#ERROR: Erreur lors du chargement du layer \"" + layer_level + "\" " << endl;
 
 
     mapCollisions = new bool[niveau.getSize().x*niveau.getSize().y*4];
@@ -20,6 +26,7 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
     height = niveau.getSize().y;
 
     loadBMP(niveau);
+    loadLayer(layer);
 
     if (!load("tileset2spawn.png", sf::Vector2u(16, 16)))
         cerr << "#ERROR: Erreur lors du chargement du tileset" << endl;
@@ -37,23 +44,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
     // on charge la texture du tileset
     if (!m_tileset.loadFromFile(tileset))
         return false;
-    m_tileset.setSmooth(true);
-    // Tableau donnant la nature du bloc généré (plein, demi/quart de bloc)
-    /*int sizeBlocs[]=
-    {
-        1,1,0,0,0,0,0,0,1,1,0,0,3,4,3,4,5,6,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,9,
-        8,7,0,0,0,0,0,0,0,0,0,0,0,0,9,0,9,9,
-        1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-        4,3,4,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
-        0,0,0,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,
-        0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,
-        0,0,0,0,0,0,0,4,3,0,0,9,1,0,1,1,9,9,
-        9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
-    };*/
+    //m_tileset.setSmooth(true);
     
     
     // on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
@@ -103,8 +94,8 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
                     mapCollisions[i + j * width] = 1;
                     break;
             }
-		}        
-	}
+        }        
+    }
     return true;
 }
 
@@ -138,6 +129,8 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
     // et on dessine enfin le tableau de vertex
     target.draw(m_vertices, states);
+
+    target.draw(_levelEnd);
 }
 
 void TileMap::loadBMP(sf::Image niveau)
@@ -176,8 +169,6 @@ void TileMap::loadBMP(sf::Image niveau)
             _spawn.x = (j%width)* 16;
             _spawn.y = ((int)(j/width)+1)* 16;
         }
-        else if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 255)
-            level[i/4] = 1; //BLOC FIN DE NIVEAU
         else
         {
             cerr << "#ERROR: loadBMP(niveau), couleur non existante RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;
@@ -185,6 +176,46 @@ void TileMap::loadBMP(sf::Image niveau)
         }
     }
 }
+void TileMap::loadLayer(sf::Image layer)
+{
+    const uint8_t *t;
+    t = layer.getPixelsPtr();
+
+    for (unsigned int i = 0; i < (layer.getSize().x*layer.getSize().y*4); i+=4)
+    { 
+        //Si on est sur la couleur "transparent" (0,0,0,0), on passe au prochain tour de boucle
+        int check = static_cast<int>(t[i]) + static_cast<int>(t[i+1]) + static_cast<int>(t[i+2]) + static_cast<int>(t[i+3]);
+        if(!check)
+            continue;
+
+        if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 0)
+        {
+            //POINT DE SPAWN
+            int j = i/4;
+            _spawn.x = (j%width)* 16;
+            _spawn.y = ((int)(j/width)+1)* 16;
+        }
+
+        else if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 255)
+        {
+            //BLOC DE FIN DE NIVEAU
+            int j = i/4;
+            _levelEnd.setSize(sf::Vector2f(16,16));
+            if(!flag.loadFromFile("flag.png"))
+                cerr << "#ERROR: Erreur lors du chargement de la texture \"flag.png\"" << endl;
+            _levelEnd.setTexture(&flag, true);
+            _levelEnd.setPosition((j%width)* 16 , (((int)(j/width)+1)* 16) - _levelEnd.getSize().y);
+            cout << _levelEnd.getPosition().x << ":" << _levelEnd.getPosition().y << endl;
+        }
+        else
+        {
+            cerr << "#ERROR: loadLayer(layer), couleur non existante RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;        
+            break;
+        }
+    }
+}
+
+
 
 sf::Vector2f TileMap::getGravity() const
 {
@@ -194,4 +225,9 @@ sf::Vector2f TileMap::getGravity() const
 unsigned int TileMap::getWidth() const
 {
     return width;
+}
+
+sf::RectangleShape* TileMap::getLevelEnd() 
+{
+    return &_levelEnd;
 }

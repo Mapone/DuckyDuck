@@ -129,6 +129,8 @@ private:
   */
   void updateCamera() const;
 
+  bool checkCollision(const sf::RectangleShape& s1, const sf::RectangleShape& s2) const;
+
   unsigned int nextTile(float x, bool direction) const;
 
 };
