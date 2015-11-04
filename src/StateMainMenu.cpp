@@ -70,7 +70,10 @@ void StateMainMenu::pressDown()
 void StateMainMenu::pressSpace()
 {
     if(_current == 0)
+    {
+        _jeu->initStateLevel();
         _jeu->setState(_jeu->getStateLevel());
+    }
     else
         _jeu->close();
 }

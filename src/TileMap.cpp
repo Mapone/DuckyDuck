@@ -114,6 +114,11 @@ int * TileMap::getLevel()
 }
 
 
+sf::Vector2f TileMap::getSpawn() const
+{
+    return _spawn;
+}
+
 bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect)
 {
     int i,j;
@@ -168,9 +173,8 @@ void TileMap::loadBMP(sf::Image niveau)
         {
             level[i/4] = 2; //BLOC DE SPAWN, on place donc un bloc ciel
             int j = i/4;
-            _spawn.x = (j%width-1)* 16;
-            _spawn.y = ((int)(j/width)-1)* 16;
-            cout << i << " : " << _spawn.x << ":" << _spawn.y << endl;
+            _spawn.x = (j%width)* 16;
+            _spawn.y = ((int)(j/width)+1)* 16;
         }
         else if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 255)
             level[i/4] = 1; //BLOC FIN DE NIVEAU

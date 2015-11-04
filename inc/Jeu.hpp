@@ -104,6 +104,10 @@ public:
 	*/
 	StateEscMenu* getStateEscMenu() const;
 
+
+	void initStateLevel() const;
+
+
 	/**
 	* \fn void close()
 	* \brief Enregistre la fermeture de la fenêtre

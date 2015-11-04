@@ -58,6 +58,11 @@ void Jeu::setState(State* s)
     _currentState = s;
 }
 
+void Jeu::initStateLevel() const
+{
+    _stateLevel->init();
+}
+
 StateLevel* Jeu::getStateLevel() const
 {
     return _stateLevel;

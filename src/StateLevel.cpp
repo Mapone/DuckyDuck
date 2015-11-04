@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h> //floor()
 #include <SFML/Graphics.hpp>
+#include "TileMap.hpp"
 #include "StateLevel.hpp"
 #include "StateEscMenu.hpp"
 
@@ -16,7 +17,7 @@ StateLevel::StateLevel(Jeu* jeu, TileMap& tilemap, Personnage& perso) : State(je
 
 void  StateLevel::init()
 {
-	_perso.setPosition(sf::Vector2f(_tilemap.getSpawn().x,_tilemap.getSpawn().y));
+	_perso.setPosition(sf::Vector2f(_tilemap.getSpawn().x,_tilemap.getSpawn().y - _perso.getShape().getSize().y - 1));
 }
 
 void StateLevel::update() const
