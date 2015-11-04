@@ -205,7 +205,6 @@ void TileMap::loadLayer(sf::Image layer)
                 cerr << "#ERROR: Erreur lors du chargement de la texture \"flag.png\"" << endl;
             _levelEnd.setTexture(&flag, true);
             _levelEnd.setPosition((j%width)* 16 , (((int)(j/width)+1)* 16) - _levelEnd.getSize().y);
-            cout << _levelEnd.getPosition().x << ":" << _levelEnd.getPosition().y << endl;
         }
         else
         {

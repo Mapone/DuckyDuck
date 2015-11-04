@@ -1,8 +1,11 @@
 #include <iostream>
 #include <math.h> //floor()
+#include <chrono>
+#include <thread>
 #include <SFML/Graphics.hpp>
 #include "TileMap.hpp"
 #include "StateLevel.hpp"
+#include "StateStats.hpp"
 #include "StateEscMenu.hpp"
 
 using namespace std;
@@ -20,11 +23,22 @@ void  StateLevel::init()
 	_perso.setPosition(sf::Vector2f(_tilemap.getSpawn().x,_tilemap.getSpawn().y - _perso.getShape().getSize().y - 1));
 }
 
+void StateLevel::setLevel(TileMap& t)
+{
+    cout << "lel" << endl;
+    _tilemap = t;
+    cout << "lol" << endl;
+    init();
+}
+
 void StateLevel::update() const
 {
 	checkMapCollision();
     if(checkCollision(_perso.getShape(), *_tilemap.getLevelEnd()))
-        cout << "FIN LEVEL"<< endl;
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        _jeu->setState(_jeu->getStateStats());
+    }
     updateCamera();
 }
 

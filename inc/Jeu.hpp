@@ -20,6 +20,7 @@ class State;
 class StateMainMenu;
 class StateEscMenu;
 class StateLevel;
+class StateStats;
 
 /**
 * \class Jeu
@@ -103,9 +104,13 @@ public:
 	* \return Un StateEscMenu
 	*/
 	StateEscMenu* getStateEscMenu() const;
+	StateMainMenu* getStateMainMenu() const;
+	StateStats* getStateStats() const;
 
 
 	void initStateLevel() const;
+	bool changeToNextLevel();
+
 
 
 	/**
@@ -148,6 +153,7 @@ private:
 	State* _currentState; /** Etat actuel */
 	StateMainMenu* _stateMainMenu; /** Etat Menu Principal */
 	StateEscMenu* _stateEscMenu; /** Etat Menu en Partie */
+	StateStats* _stateStats; /** Etat Menu statistiques */
 	StateLevel* _stateLevel; /** Etat en jeu */
 };
 

@@ -7,6 +7,7 @@
 #include "StateMainMenu.hpp"
 #include "StateEscMenu.hpp"
 #include "StateLevel.hpp"
+#include "StateStats.hpp"
 
 using namespace std;
 
@@ -25,6 +26,7 @@ _perso(p)
 	//Initialisation des Etats
     _stateMainMenu = new StateMainMenu(this);
     _stateEscMenu = new StateEscMenu(this);
+    _stateStats = new StateStats(this);
     _stateLevel = new StateLevel(this, t, p);
 	_currentState = _stateMainMenu;
 
@@ -63,6 +65,18 @@ void Jeu::initStateLevel() const
     _stateLevel->init();
 }
 
+bool Jeu::changeToNextLevel()
+{
+    if(++_currentLevel < _levels.size())
+    {
+        ++_currentLevel;
+        _stateLevel->setLevel(*getCurrentLevel());
+        return true;
+    }
+    return false;
+}
+
+
 StateLevel* Jeu::getStateLevel() const
 {
     return _stateLevel;
@@ -73,6 +87,18 @@ StateEscMenu* Jeu::getStateEscMenu() const
     return _stateEscMenu;
 }
 
+StateStats* Jeu::getStateStats() const
+{
+    return _stateStats;
+}
+
+StateMainMenu* Jeu::getStateMainMenu() const
+{
+    return _stateMainMenu;
+}
+
+
+
 void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
@@ -82,7 +108,6 @@ void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void Jeu::processInput(sf::RenderWindow& window)
 {
     sf::Event event;
-    //static int i =0;
     // tant qu'il y a des évènements à traiter...
     while (window.pollEvent(event))
     {

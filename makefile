@@ -28,7 +28,7 @@ $(DIR_BIN)%.o: $(DIR_SRC)%.cpp | $(DIR_BIN)
 	$(CXX) $(CXXFLAGS) -I$(DIR_INC) -MMD -c -o $@ $<
 
 run: $(EXE)
-	@cd $(DIR_RUN) && ../$<
+	cd $(DIR_RUN) && ../$<
 
 #Inclus les makefiles générés pour chaque cpp 
 -include $(DEP)

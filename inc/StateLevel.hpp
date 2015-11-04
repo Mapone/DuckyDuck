@@ -53,6 +53,9 @@ public:
   */
   virtual void init();
 
+
+  virtual void setLevel(TileMap& t);
+
   /**
   * \fn virtual void pressSpace() = 0;
   * \brief Action à effectuer quand Espace est appuyé
