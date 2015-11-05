@@ -14,7 +14,7 @@ public:
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
   virtual void pressUp();
   virtual void pressDown();
-  virtual void pressSpace();
+  virtual void pressEnter();
 
 private:
 	sf::Text _gameName;

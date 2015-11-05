@@ -33,7 +33,7 @@ public:
   * 
   * \param jeu : Jeu sur lequel le Pattern State s'applique, perso : Personnage jouable
   */
-  StateLevel(Jeu* jeu, TileMap& tilemap, Personnage& perso);
+  StateLevel(Jeu* jeu, TileMap* tilemap, Personnage& perso);
 
   /**
   * \fn virtual void draw(sf::RenderTarget& target, st::RenderStates states) const
@@ -54,7 +54,7 @@ public:
   virtual void init();
 
 
-  virtual void setLevel(TileMap& t);
+  virtual void setLevel(TileMap* t);
 
   /**
   * \fn virtual void pressSpace() = 0;
@@ -107,7 +107,7 @@ public:
 
 private:
 
-  TileMap& _tilemap; /** TileMap du niveau */
+  TileMap* _tilemap; /** TileMap du niveau */
   Personnage& _perso; /** Personnage jouable */
 
   /**

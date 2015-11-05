@@ -67,7 +67,7 @@ void StateMainMenu::pressDown()
         _triangle.setPosition(330,250);    
     }
 }
-void StateMainMenu::pressSpace()
+void StateMainMenu::pressEnter()
 {
     if(_current == 0)
     {

@@ -5,6 +5,8 @@
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 
+class TileMap;
+
 class StateStats : public State
 {
 public:
@@ -13,7 +15,8 @@ public:
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
   virtual void pressUp();
   virtual void pressDown();
-  virtual void pressSpace();
+  virtual void pressEnter();
+  void setIsLevelFinished(bool IsLevelFinished);
 
 private:
 	sf::Text _levelName;
@@ -24,6 +27,7 @@ private:
   sf::Text _timeTxt;
   sf::Text _timeNb;
 	sf::Text _pressSpace;
+  bool _isLevelFinished;
 };
 
 #endif

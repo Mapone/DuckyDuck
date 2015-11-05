@@ -21,4 +21,5 @@ void State::pressLeft(){}
 void State::pressRight(){}
 void State::pressSpace(){}
 void State::pressEsc(){}
+void State::pressEnter(){}
 

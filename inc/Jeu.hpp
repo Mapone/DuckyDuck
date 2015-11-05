@@ -46,8 +46,7 @@ public:
     */
 	~Jeu();
 
-
-	bool update(sf::RenderWindow& window);
+	void start();
 
 	/**
 	* \fn void Jeu::addLevel(TileMap t)
@@ -105,7 +104,7 @@ public:
 	*/
 	StateEscMenu* getStateEscMenu() const;
 	StateMainMenu* getStateMainMenu() const;
-	StateStats* getStateStats() const;
+	StateStats* getStateStats(bool IsLevelFinished) const;
 
 
 	void initStateLevel() const;
@@ -136,14 +135,13 @@ private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	
 	/**
-	* \fn void processInput(sf::RenderWindow& window)
+	* \fn void input()
 	* \brief Fonction qui attends les entrées et appelle les différentes méthodes.
 	*
 	* Gère les entrées utilisateurs et appelle ensuite la fonction rattachée.
 	*
-	* \param window : la fenêtre sur laquelle on travaille.
 	*/
-	void processInput(sf::RenderWindow& window);
+	void input();
 
 	bool isOpen; /** Informe sur l'état de la fenêtre (open/close) */
 	std::vector<TileMap*> _levels; /** Vecteur de tous les niveaux */

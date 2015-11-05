@@ -15,30 +15,43 @@ const unsigned int HAUTEUR_FENETRE = 448;
 const unsigned int TAILLE_TUILE = 16;
 
 
-StateLevel::StateLevel(Jeu* jeu, TileMap& tilemap, Personnage& perso) : State(jeu), _tilemap(tilemap), _perso(perso)
+StateLevel::StateLevel(Jeu* jeu, TileMap* tilemap, Personnage& perso) : State(jeu), _tilemap(tilemap), _perso(perso)
 {}
 
 void  StateLevel::init()
 {
-	_perso.setPosition(sf::Vector2f(_tilemap.getSpawn().x,_tilemap.getSpawn().y - _perso.getShape().getSize().y - 1));
+	_perso.setPosition(sf::Vector2f(_tilemap->getSpawn().x,_tilemap->getSpawn().y - _perso.getShape().getSize().y - 1));
+    _perso.setMouvement(sf::Vector2f(0,0));
+    _tilemap->setPosition(0,0);
 }
 
-void StateLevel::setLevel(TileMap& t)
+void StateLevel::setLevel(TileMap* t)
 {
-    cout << "lel" << endl;
     _tilemap = t;
-    cout << "lol" << endl;
     init();
 }
 
 void StateLevel::update() const
 {
+    //On check les collisions sur la map
 	checkMapCollision();
-    if(checkCollision(_perso.getShape(), *_tilemap.getLevelEnd()))
+
+    //On check la collision avec le bloc de fin de niveau
+    if(checkCollision(_perso.getShape(), *_tilemap->getLevelEnd()))
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-        _jeu->setState(_jeu->getStateStats());
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        _jeu->setState(_jeu->getStateStats(true));
+        return;
     }
+
+    if(_perso.getShape().getPosition().y > 450)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        _jeu->setState(_jeu->getStateStats(false));
+        return;
+    }
+
+
     updateCamera();
 }
 
@@ -46,7 +59,7 @@ void StateLevel::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	(void)states;
 	update();
-	target.draw(_tilemap);
+	target.draw(*_tilemap);
 	target.draw(_perso.getShape());
 }
 
@@ -73,8 +86,8 @@ void StateLevel::pressSpace()
     sf::Vector2f position = _perso.getShape().getPosition();
     sf::Vector2f size = _perso.getShape().getSize();
 
-    colYBasGauche = _tilemap.collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(0,1));
-    colYBasDroit = _tilemap.collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(0,1));
+    colYBasGauche = _tilemap->collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(0,1));
+    colYBasDroit = _tilemap->collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(0,1));
     colBas = colYBasDroit || colYBasGauche;
 
     if(colBas)
@@ -89,7 +102,7 @@ void StateLevel::pressEsc()
 void StateLevel::checkMapCollision() const
 {
     //On applique d'abord la gravité au personnage
-    _perso.addMouvement(_tilemap.getGravity());
+    _perso.addMouvement(_tilemap->getGravity());
 
     //On initialise des vecteurs pour limiter le nombre d'appels sur _perso
     sf::Vector2f position = _perso.getShape().getPosition();
@@ -101,15 +114,15 @@ void StateLevel::checkMapCollision() const
     bool colYHautGauche, colYHautDroit, colYBasGauche, colYBasDroit;
 
     //On calcule la collision en X et en Y pour chacun des 4 points de notre rectangleShape
-    colXHautGauche = _tilemap.collision(position, sf::Vector2f(mvt.x,0));
-    colXHautDroit = _tilemap.collision(sf::Vector2f(position.x + size.x, position.y), sf::Vector2f(mvt.x,0));
-    colXBasGauche = _tilemap.collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(mvt.x,0));
-    colXBasDroit = _tilemap.collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(mvt.x,0));
+    colXHautGauche = _tilemap->collision(position, sf::Vector2f(mvt.x,0));
+    colXHautDroit = _tilemap->collision(sf::Vector2f(position.x + size.x, position.y), sf::Vector2f(mvt.x,0));
+    colXBasGauche = _tilemap->collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(mvt.x,0));
+    colXBasDroit = _tilemap->collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(mvt.x,0));
 
-    colYHautGauche = _tilemap.collision(position, sf::Vector2f(0,mvt.y));
-    colYHautDroit = _tilemap.collision(sf::Vector2f(position.x + size.x, position.y), sf::Vector2f(0,mvt.y));
-    colYBasGauche = _tilemap.collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(0,mvt.y));
-    colYBasDroit = _tilemap.collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(0,mvt.y));
+    colYHautGauche = _tilemap->collision(position, sf::Vector2f(0,mvt.y));
+    colYHautDroit = _tilemap->collision(sf::Vector2f(position.x + size.x, position.y), sf::Vector2f(0,mvt.y));
+    colYBasGauche = _tilemap->collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(0,mvt.y));
+    colYBasDroit = _tilemap->collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(0,mvt.y));
 
     //On en déduit les collision des cotés 
     colHaut = colYHautDroit || colYHautGauche;
@@ -135,7 +148,7 @@ void StateLevel::checkMapCollision() const
     {
         _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x,0));
         sf::Vector2f position = _perso.getShape().getPosition();
-        _perso.setPosition(sf::Vector2f( position.x ,nextTile(position.y, false) - size.y+0.01));
+        _perso.setPosition(sf::Vector2f( position.x ,nextTile(position.y, false) + 0.01));
     }
 
     if(!(colHaut && colBas && colDroite && colGauche))
@@ -166,24 +179,24 @@ void StateLevel::updateCamera() const
     //On définit un rectangle invisible au milieu de l'ecran
     //Si le personnage arrive sur le bord de celui ci, il faut bouger la camera (ce qui revient à deplacer la map)
 
-    int decalX = _tilemap.getPosition().x;
-    int decalY = _tilemap.getPosition().y;
+    int decalX = _tilemap->getPosition().x;
+    int decalY = _tilemap->getPosition().y;
 
     //Collision à droite de l'ecran
-    if(_perso.getShape().getPosition().x >= LARGEUR_FENETRE - 200 && fabs(_tilemap.getPosition().x) + LARGEUR_FENETRE <  _tilemap.getWidth() * TAILLE_TUILE)
+    if(_perso.getShape().getPosition().x >= LARGEUR_FENETRE - 200 && fabs(_tilemap->getPosition().x) + LARGEUR_FENETRE <  _tilemap->getWidth() * TAILLE_TUILE)
     {
-        _tilemap.setPosition(_tilemap.getPosition().x - _perso.getMouvement().x, _tilemap.getPosition().y);
-        decalX = _tilemap.getPosition().x - decalX; 
-        _tilemap.getLevelEnd()->setPosition(_tilemap.getLevelEnd()->getPosition().x + decalX, _tilemap.getLevelEnd()->getPosition().y + decalY);
+        _tilemap->setPosition(_tilemap->getPosition().x - _perso.getMouvement().x, _tilemap->getPosition().y);
+        decalX = _tilemap->getPosition().x - decalX; 
+        _tilemap->getLevelEnd()->setPosition(_tilemap->getLevelEnd()->getPosition().x + decalX, _tilemap->getLevelEnd()->getPosition().y + decalY);
         _perso.setPosition(sf::Vector2f(LARGEUR_FENETRE - 200, _perso.getShape().getPosition().y));
     }
     //Collision à gauche
-    else if(_perso.getShape().getPosition().x <= 200 && _tilemap.getPosition().x < 0)
+    else if(_perso.getShape().getPosition().x <= 200 && _tilemap->getPosition().x < 0)
     {
         //TODO DEBUG
-        _tilemap.setPosition(_tilemap.getPosition().x - _perso.getMouvement().x, _tilemap.getPosition().y);
-        decalX -= _tilemap.getPosition().x; 
-        _tilemap.getLevelEnd()->setPosition(_tilemap.getLevelEnd()->getPosition().x + decalX, _tilemap.getLevelEnd()->getPosition().y + decalY);
+        _tilemap->setPosition(_tilemap->getPosition().x - _perso.getMouvement().x, _tilemap->getPosition().y);
+        decalX -= _tilemap->getPosition().x; 
+        _tilemap->getLevelEnd()->setPosition(_tilemap->getLevelEnd()->getPosition().x + decalX, _tilemap->getLevelEnd()->getPosition().y + decalY);
         _perso.setPosition(sf::Vector2f(200, _perso.getShape().getPosition().y));
     }
 }

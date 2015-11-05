@@ -67,7 +67,7 @@ void StateEscMenu::pressDown()
         _triangle.setPosition(330,250);    
     }
 }
-void StateEscMenu::pressSpace()
+void StateEscMenu::pressEnter()
 {
     if(_current == 0)
         pressEsc();

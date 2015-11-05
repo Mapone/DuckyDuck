@@ -86,7 +86,7 @@ public:
     */
     sf::Vector2f getSpawn() const;
     sf::RectangleShape* getLevelEnd();
-
+    std::string getLevelName() const;
 private:
 
     /**
@@ -122,6 +122,7 @@ private:
     sf::Vector2f _spawn;  /** Point de spawn, en bas à gauche de la tuile */
     sf::RectangleShape _levelEnd; /** Bloc de fin de niveau */
     sf::Texture flag;
+    std::string _levelName;
 };
 
 

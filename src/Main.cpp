@@ -3,87 +3,56 @@ JEU ALAKON
 **************************************/
 
 #include <iostream>
-#include <string> //to_String
 #include <SFML/Graphics.hpp>
 #include "TileMap.hpp"
 #include "Personnage.hpp"
 #include "Jeu.hpp"
 
 using namespace std;
-using namespace sf;
 
+//TODO
+/*
+Si y'a le temps:
+    - Arret du programme si la map n'est pas valide (pas de spawn ou de fin)
+    - Remplacer la touche entrée par espace dans les menus (chiant à faire)
+    - Sortie de map
+
+
+*/
 
 ////////////////////////////////////
 ////////////INITIALISATION//////////
 ////////////////////////////////////
 
-const unsigned int LARGEUR_FENETRE = 800;
-const unsigned int HAUTEUR_FENETRE = 448;
-
-//sf::Vector2u sizeWindow(LARGEUR_FENETRE, HAUTEUR_FENETRE);
-
 int main()
 {
-	
-//----------------------Fenetre----------------------
-//----------------------------------------------------
-    ContextSettings settings;
-    settings.antialiasingLevel = 8;
-
-    //Ouverture de la fenêtre principale
-    RenderWindow window(VideoMode(LARGEUR_FENETRE, HAUTEUR_FENETRE), "DuckyDuck",Style::Default, settings);
-    //Limite de fps
-    window.setFramerateLimit(60);
-
-
 //-------------------Chargement du premier niveau-----------------
 //----------------------------------------------------------------
     
-    Vector2f gravity(0,0.2);
+    sf::Vector2f gravity(0,0.2);
     TileMap map1("lvl4", gravity);
-
-    TileMap map2("lvl3", gravity);
 
 //-------------------Creation du personnage-----------------------
 //----------------------------------------------------------------
 
-    Personnage mario(Vector2f(15,15));
-    mario.getShape().setPosition(32,64);
+    Personnage mario(sf::Vector2f(15,15));
 
 //-------------------Création du Jeu------------------------------
 //----------------------------------------------------------------
 
-    Jeu jeu(map2, mario);
-    jeu.addLevel(&map1);
+    Jeu jeu(map1, mario);
 
     
 //--------- Création et ajout des niveaux -----------------
 //---------------------------------------------------------
-
-    //TODO
-
-
+    TileMap map2("lvl3", gravity);
+    jeu.addLevel(&map2);
 
 ///////////////////////////////////////
 ////////////LANCEMENT DU JEU//////////
 /////////////////////////////////////
 
-    while (window.isOpen())
-    {
-        Event event;
-        while (window.pollEvent(event))
-        {       
-            if (event.type == Event::Closed)
-                window.close();
-        }
+    jeu.start();
 
-        window.clear(sf::Color::Black);
-        if(!jeu.update(window))
-            break;
-        window.draw(jeu);
-        window.display();
-    }
-    
-    window.close();
     return 0;
 }

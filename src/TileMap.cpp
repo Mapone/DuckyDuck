@@ -8,6 +8,7 @@ using namespace std;
 
 TileMap::TileMap(string levelName, sf::Vector2f &gravity)
 {
+    _levelName = levelName;
     _gravity = gravity;
     string img_level = levelName + ".bmp";
     string layer_level = levelName + "_layer.bmp";
@@ -18,9 +19,13 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
     if(!layer.loadFromFile(layer_level))
         cerr << "#ERROR: Erreur lors du chargement du layer \"" + layer_level + "\" " << endl;
 
-
+    //Initialisation des tableaux et variables
     mapCollisions = new bool[niveau.getSize().x*niveau.getSize().y*4];
     level = new int[niveau.getSize().x*niveau.getSize().y];
+
+    //_spawn et _levelEnd sont initialisé avec des valeures impossibles
+    _spawn.x = -1;
+    _levelEnd.setPosition(-1,-1);
 
     width = niveau.getSize().x;
     height = niveau.getSize().y;
@@ -110,8 +115,16 @@ sf::Vector2f TileMap::getSpawn() const
     return _spawn;
 }
 
-bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect)
+string TileMap::getLevelName() const
 {
+    return _levelName;
+}
+
+
+bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect)
+{   
+   /* if(point.x<-0.5 || point.x>width*16+0.5 || point.y < -0.5 || point.y >height*16)
+        return true;*/
     int i,j;
     i = (point.x + vect.x - getPosition().x)/16;   
     j = (point.y + vect.y - getPosition().y)/16;
@@ -208,10 +221,18 @@ void TileMap::loadLayer(sf::Image layer)
         }
         else
         {
-            cerr << "#ERROR: loadLayer(layer), couleur non existante RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;        
-            break;
+            int j,k,l;
+            j = i/4;
+            k = (j%width)* 16;
+            l = ((int)(j/width)+1)* 16;
+            cerr << "#ERROR: loadLayer(layer), couleur non existante RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << " en position " << k << ":" << l <<endl;
         }
     }
+
+    if(_spawn.x == -1)
+                cerr << "#ERROR: Pas de spawn trouvé pour \"" + _levelName + "\"" << endl;
+    if(_levelEnd.getPosition().x == -1)
+                cerr << "#ERROR: Pas de fin de niveau trouvé pour \"" + _levelName + "\"" << endl;
 }
 
 

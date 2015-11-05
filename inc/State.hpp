@@ -64,7 +64,7 @@ public:
   *
   * Gère les actions rattachées à la barre d'espace.
   */
-  virtual void pressSpace() = 0;
+  virtual void pressSpace();
 
   /**
   * \fn virtual void pressUp() = 0;
@@ -105,6 +105,14 @@ public:
   * Gère les actions rattachées à la touche Droite.
   */
   virtual void pressRight();
+
+  /**
+  * \fn virtual void pressEnter;
+  * \brief Action à effectuer quand la touche Entrée est appuyé
+  *
+  * Gère les actions rattachées à la touche Entrée.
+  */
+  virtual void pressEnter();
 
 protected:
 	Jeu *_jeu; /** Jeu rattaché au Pattern */

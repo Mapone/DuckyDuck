@@ -74,12 +74,12 @@ public:
   */
 
   /**
-  * \fn virtual void pressSpace() = 0;
-  * \brief Action à effectuer quand Espace est appuyé
+  * \fn virtual void pressEnter() = 0;
+  * \brief Action à effectuer quand Entrée est appuyé
   *
-  * Gère les actions rattachées à la barre d'espace.
+  * Gère les actions rattachées à la touhce Entrée.
   */
-  virtual void pressSpace();
+  virtual void pressEnter();
 
   /**
   * \fn virtual void pressEsc() = 0;
