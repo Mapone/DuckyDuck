@@ -179,24 +179,23 @@ void StateLevel::updateCamera() const
     //On définit un rectangle invisible au milieu de l'ecran
     //Si le personnage arrive sur le bord de celui ci, il faut bouger la camera (ce qui revient à deplacer la map)
 
-    int decalX = _tilemap->getPosition().x;
-    int decalY = _tilemap->getPosition().y;
+    float decalX = _tilemap->getPosition().x;
+    float decalY = _tilemap->getPosition().y;
 
     //Collision à droite de l'ecran
-    if(_perso.getShape().getPosition().x >= LARGEUR_FENETRE - 200 && fabs(_tilemap->getPosition().x) + LARGEUR_FENETRE <  _tilemap->getWidth() * TAILLE_TUILE)
+    if(_perso.getShape().getPosition().x >= LARGEUR_FENETRE - 300 && fabs(_tilemap->getPosition().x) + LARGEUR_FENETRE <  _tilemap->getWidth() * TAILLE_TUILE)
     {
         _tilemap->setPosition(_tilemap->getPosition().x - _perso.getMouvement().x, _tilemap->getPosition().y);
         decalX = _tilemap->getPosition().x - decalX; 
         _tilemap->getLevelEnd()->setPosition(_tilemap->getLevelEnd()->getPosition().x + decalX, _tilemap->getLevelEnd()->getPosition().y + decalY);
-        _perso.setPosition(sf::Vector2f(LARGEUR_FENETRE - 200, _perso.getShape().getPosition().y));
+        _perso.setPosition(sf::Vector2f(LARGEUR_FENETRE - 300, _perso.getShape().getPosition().y));
     }
     //Collision à gauche
-    else if(_perso.getShape().getPosition().x <= 200 && _tilemap->getPosition().x < 0)
+    else if(_perso.getShape().getPosition().x <= 300 && _tilemap->getPosition().x < 0)
     {
-        //TODO DEBUG
         _tilemap->setPosition(_tilemap->getPosition().x - _perso.getMouvement().x, _tilemap->getPosition().y);
-        decalX -= _tilemap->getPosition().x; 
+        decalX = (_tilemap->getPosition().x - decalX);
         _tilemap->getLevelEnd()->setPosition(_tilemap->getLevelEnd()->getPosition().x + decalX, _tilemap->getLevelEnd()->getPosition().y + decalY);
-        _perso.setPosition(sf::Vector2f(200, _perso.getShape().getPosition().y));
+        _perso.setPosition(sf::Vector2f(300, _perso.getShape().getPosition().y));
     }
 }

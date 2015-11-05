@@ -100,9 +100,13 @@ public:
 	*/
 	void move(sf::Vector2f v);
 
+	void restartClock();
+	sf::Time getElapsedTime() const;
+
 private:
 	sf::Vector2f _mouvement; /** Prochain mouvement */
 	sf::RectangleShape _shape; /** HitBox du Personnage */
+	sf::Clock _clock;
 };
 
 

@@ -27,7 +27,7 @@ _perso(p)
 	//Initialisation des Etats
     _stateMainMenu = new StateMainMenu(this);
     _stateEscMenu = new StateEscMenu(this);
-    _stateStats = new StateStats(this);
+    _stateStats = new StateStats(this,p);
     _stateLevel = new StateLevel(this, &t, p);
 	_currentState = _stateMainMenu;
 
@@ -192,4 +192,9 @@ void Jeu::input()
 void Jeu::close()
 {
     isOpen = false;
+}
+
+void Jeu::restartCharClock() const
+{
+    _perso.restartClock();
 }

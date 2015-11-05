@@ -121,6 +121,9 @@ public:
 	*/
 	void close();
 
+	void restartCharClock() const;
+
+
 
 private:
 

@@ -80,3 +80,13 @@ void Personnage::move(sf::Vector2f v)
 
 	_shape.setPosition(_shape.getPosition()+v);
 }
+
+void Personnage::restartClock()
+{
+	_clock.restart();
+}
+
+sf::Time Personnage::getElapsedTime() const
+{
+	return _clock.getElapsedTime();
+}

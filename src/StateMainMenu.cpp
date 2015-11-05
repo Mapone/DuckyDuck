@@ -71,6 +71,7 @@ void StateMainMenu::pressEnter()
 {
     if(_current == 0)
     {
+        _jeu->restartCharClock();
         _jeu->initStateLevel();
         _jeu->setState(_jeu->getStateLevel());
     }

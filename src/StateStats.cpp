@@ -7,7 +7,7 @@
 #include "StateLevel.hpp"
 #include "StateMainMenu.hpp"
 
-StateStats::StateStats(Jeu *jeu) : State(jeu)
+StateStats::StateStats(Jeu *jeu, Personnage& p) : State(jeu), _perso(p)
 {
     _isLevelFinished = true;
  
@@ -80,6 +80,8 @@ void StateStats::pressUp(){}
 void StateStats::pressDown(){}
 void StateStats::pressEnter()
 {
+    _perso.restartClock();
+
     if(_isLevelFinished)
     {
         //On regarde si il existe un niveau suivant
@@ -101,7 +103,12 @@ void StateStats::pressEnter()
 void StateStats::setIsLevelFinished(bool IsLevelFinished)
 {
     _isLevelFinished = IsLevelFinished;
+    init();
+}
 
+void StateStats::init()
+{
+    using namespace std;
     //On Ecrit le texte suivant la situiation
     if(_isLevelFinished)
         _levelName.setString("Niveau Fini: " + _jeu->getCurrentLevel()->getLevelName());
@@ -110,6 +117,7 @@ void StateStats::setIsLevelFinished(bool IsLevelFinished)
 
     //On determine ensuite la position du texte
     int posX = 400 - ((_levelName.getString().toAnsiString().size() * 20)/2); 
-     _levelName.setPosition(posX,100);
+    _levelName.setPosition(posX,100);
 
+    _timeNb.setString(to_string((int)_perso.getElapsedTime().asSeconds()));
 }

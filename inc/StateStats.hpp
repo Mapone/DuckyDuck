@@ -5,12 +5,12 @@
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 
-class TileMap;
+class Personnage;
 
 class StateStats : public State
 {
 public:
-  StateStats(Jeu *jeu);
+  StateStats(Jeu *jeu, Personnage& p);
   ~StateStats();
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
   virtual void pressUp();
@@ -19,6 +19,7 @@ public:
   void setIsLevelFinished(bool IsLevelFinished);
 
 private:
+  void init();
 	sf::Text _levelName;
   sf::Text _scoreTxt;
 	sf::Text _scoreNb;
@@ -28,6 +29,7 @@ private:
   sf::Text _timeNb;
 	sf::Text _pressSpace;
   bool _isLevelFinished;
+  Personnage& _perso;
 };
 
 #endif
