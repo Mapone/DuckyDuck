@@ -113,7 +113,7 @@ void StateStats::init()
     if(_isLevelFinished)
         _levelName.setString("Niveau Fini: " + _jeu->getCurrentLevel()->getLevelName());
     else
-        _levelName.setString("Vous etes mort !");
+        _levelName.setString("GAME OVER :)");
 
     //On determine ensuite la position du texte
     int posX = 400 - ((_levelName.getString().toAnsiString().size() * 20)/2); 

@@ -20,7 +20,12 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
         cerr << "#ERROR: Erreur lors du chargement du layer \"" + layer_level + "\" " << endl;
 
     //Initialisation des tableaux et variables
-    mapCollisions = new bool[niveau.getSize().x*niveau.getSize().y*4];
+    mapCollisions = new bool[(niveau.getSize().x+1)*niveau.getSize().y*4];
+
+    for (unsigned int i = 0; i<(niveau.getSize().x+1)*niveau.getSize().y*4 ; ++i)
+        mapCollisions[i] = false;
+
+
     level = new int[niveau.getSize().x*niveau.getSize().y];
 
     //_spawn et _levelEnd sont initialisé avec des valeures impossibles
@@ -197,8 +202,8 @@ void TileMap::loadLayer(sf::Image layer)
     for (unsigned int i = 0; i < (layer.getSize().x*layer.getSize().y*4); i+=4)
     { 
         //Si on est sur la couleur "transparent" (0,0,0,0), on passe au prochain tour de boucle
-        int check = static_cast<int>(t[i]) + static_cast<int>(t[i+1]) + static_cast<int>(t[i+2]) + static_cast<int>(t[i+3]);
-        if(!check)
+        int check = static_cast<int>(t[i]) + static_cast<int>(t[i+1]) + static_cast<int>(t[i+2]);
+        if(check == 765)
             continue;
 
         if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 0)
