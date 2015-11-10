@@ -136,6 +136,9 @@ private:
 
   unsigned int nextTile(float x, bool direction) const;
 
+  void enemyMove() const;
+
+
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <math.h> //floor()
 #include <chrono>
 #include <thread>
@@ -7,6 +8,7 @@
 #include "StateLevel.hpp"
 #include "StateStats.hpp"
 #include "StateEscMenu.hpp"
+#include "Enemy.hpp"
 
 using namespace std;
 
@@ -51,16 +53,24 @@ void StateLevel::update() const
         return;
     }
 
-
+    enemyMove();
     updateCamera();
+}
+
+void StateLevel::enemyMove() const
+{
+    _tilemap->getEnemies()[0].move();
 }
 
 void StateLevel::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	(void)states;
-	update();
-	target.draw(*_tilemap);
-	target.draw(_perso.getShape());
+    (void)states;
+    update();
+    target.draw(*_tilemap);
+    target.draw(_perso.getShape());
+
+    target.draw(_tilemap->getEnemies()[0].getShape());
+
 }
 
 void StateLevel::pressUp()

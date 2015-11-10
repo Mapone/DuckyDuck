@@ -1,6 +1,9 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
 
+#include <vector>
+#include "Enemy.hpp"
+
 /**
 * \file TileMap.hpp
 * \brief Gère les différentes interactions avec la map.
@@ -87,6 +90,8 @@ public:
     sf::Vector2f getSpawn() const;
     sf::RectangleShape* getLevelEnd();
     std::string getLevelName() const;
+    std::vector<Enemy> getEnemies();
+
 private:
 
     /**
@@ -123,6 +128,7 @@ private:
     sf::RectangleShape _levelEnd; /** Bloc de fin de niveau */
     sf::Texture flag;
     std::string _levelName;
+    std::vector<Enemy> _enemies;
 };
 
 

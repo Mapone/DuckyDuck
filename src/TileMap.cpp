@@ -3,6 +3,7 @@
 #include <stdint.h> //uint8
 #include <SFML/Graphics.hpp>
 #include "TileMap.hpp"
+#include "AI_LandBase.hpp"
 
 using namespace std;
 
@@ -27,6 +28,11 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
 
 
     level = new int[niveau.getSize().x*niveau.getSize().y];
+
+    Enemy e(sf::Vector2f(16,16));
+    e.setPosition(sf::Vector2f(200,20));
+    _enemies.push_back(e);
+
 
     //_spawn et _levelEnd sont initialisé avec des valeures impossibles
     _spawn.x = -1;
@@ -114,7 +120,6 @@ int * TileMap::getLevel()
     return level;
 }
 
-
 sf::Vector2f TileMap::getSpawn() const
 {
     return _spawn;
@@ -124,6 +129,12 @@ string TileMap::getLevelName() const
 {
     return _levelName;
 }
+
+std::vector<Enemy> TileMap::getEnemies()
+{
+    return _enemies;
+}
+
 
 
 bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect)
