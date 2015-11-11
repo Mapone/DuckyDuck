@@ -51,15 +51,7 @@ public:
     */
     bool load(const std::string& tileset, sf::Vector2u tileSize);
 	
-    /**
-    * \fn int *getLevel()
-    * \brief Getter du Level
-    *
-    * Fonction renvoyant le niveau qui est en cours.
-    *
-    * \return Le Level en cours.
-    */
-    int *getLevel();
+
     bool collision(const sf::Vector2f& point, const sf::Vector2f& vect) const;
     bool collisionHaut(const AliveEntity& ae) const;
     bool collisionBas(const AliveEntity& ae) const;
@@ -99,6 +91,7 @@ public:
     std::vector<Enemy*> getEnemies();
     unsigned int nextTileY(float x) const;
     unsigned int previousTileY(float x) const;
+    void reset();
 
 
 private:
@@ -138,6 +131,7 @@ private:
     sf::Texture flag;
     std::string _levelName;
     std::vector<Enemy*> _enemies;
+    sf::Image _layer;
 };
 
 

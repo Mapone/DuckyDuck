@@ -14,11 +14,11 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
     _gravity = gravity;
     string img_level = levelName + ".bmp";
     string layer_level = levelName + "_layer.bmp";
-    sf::Image niveau, layer;
+    sf::Image niveau;
     if(!niveau.loadFromFile(img_level))
         cerr << "#ERROR: Erreur lors du chargement du niveau \"" + img_level + "\" " << endl;
 
-    if(!layer.loadFromFile(layer_level))
+    if(!_layer.loadFromFile(layer_level))
         cerr << "#ERROR: Erreur lors du chargement du layer \"" + layer_level + "\" " << endl;
 
     //Initialisation des tableaux et variables
@@ -39,7 +39,7 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
     height = niveau.getSize().y;
 
     loadBMP(niveau);
-    loadLayer(layer);
+    loadLayer(_layer);
 
     if (!load("tileset2spawn.png", sf::Vector2u(16, 16)))
         cerr << "#ERROR: Erreur lors du chargement du tileset" << endl;
@@ -49,6 +49,11 @@ TileMap::~TileMap()
 {
     delete level;
     delete mapCollisions;
+
+    for (auto *e : _enemies)
+    {
+        delete e;
+    }
 }
 
 bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
@@ -186,8 +191,6 @@ bool TileMap::collisionGauche(const AliveEntity& ae) const
 }
 
 
-
-
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     // on applique la transformation
@@ -199,7 +202,7 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
     // et on dessine enfin le tableau de vertex
     target.draw(m_vertices, states);
 
-    target.draw(_levelEnd);
+    //target.draw(_levelEnd);
 }
 
 /**********************************************************/
@@ -304,6 +307,12 @@ void TileMap::loadLayer(sf::Image layer)
 }
 
 
+
+
+/**********************************************************/
+/*********** GETTER ET PETITES METHODES ******************/
+/********************************************************/
+
 unsigned int TileMap::nextTileY(float x) const
 {
     return ((int)(x/16) + 1)*16;
@@ -314,10 +323,14 @@ unsigned int TileMap::previousTileY(float x) const
     return ((int)(x/16))*16;
 } 
 
-
-/**********************************************************/
-/************************** GETTER ***********************/
-/********************************************************/
+void TileMap::reset()
+{
+    for (auto *e : _enemies)
+    {
+        delete e;
+    }
+    loadLayer(_layer);
+}
 
 
 sf::Vector2f TileMap::getGravity() const
@@ -333,11 +346,6 @@ unsigned int TileMap::getWidth() const
 sf::RectangleShape* TileMap::getLevelEnd() 
 {
     return &_levelEnd;
-}
-
-int * TileMap::getLevel()
-{
-    return level;
 }
 
 sf::Vector2f TileMap::getSpawn() const

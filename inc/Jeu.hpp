@@ -109,6 +109,7 @@ public:
 
 	void initStateLevel() const;
 	bool changeToNextLevel();
+	TileMap* resetLevel();
 
 
 

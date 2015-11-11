@@ -108,16 +108,15 @@ void StateStats::setIsLevelFinished(bool IsLevelFinished)
 
 void StateStats::init()
 {
-    using namespace std;
     //On Ecrit le texte suivant la situiation
     if(_isLevelFinished)
         _levelName.setString("Niveau Fini: " + _jeu->getCurrentLevel()->getLevelName());
     else
-        _levelName.setString("GAME OVER :)");
+        _levelName.setString("GAME OVER !");
 
     //On determine ensuite la position du texte
     int posX = 400 - ((_levelName.getString().toAnsiString().size() * 20)/2); 
     _levelName.setPosition(posX,100);
 
-    _timeNb.setString(to_string((int)_perso.getElapsedTime().asSeconds()));
+    _timeNb.setString(std::to_string((int)_perso.getElapsedTime().asSeconds()));
 }

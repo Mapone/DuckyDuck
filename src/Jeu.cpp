@@ -92,6 +92,7 @@ void Jeu::start()
             }
         }
         window.clear(sf::Color::Black);
+        _currentState->update();
         input();
         window.draw(*this);
         window.display();
@@ -197,4 +198,12 @@ void Jeu::close()
 void Jeu::restartCharClock() const
 {
     _perso.restartClock();
+}
+
+TileMap* Jeu::resetLevel()
+{
+    string name = _levels[_currentLevel]->getLevelName();
+    sf::Vector2f grav = _levels[_currentLevel]->getGravity();
+    _levels[_currentLevel] = new TileMap(name, grav);
+    return _levels[_currentLevel];
 }

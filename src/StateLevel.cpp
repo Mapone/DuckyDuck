@@ -33,7 +33,7 @@ void StateLevel::setLevel(TileMap* t)
     init();
 }
 
-void StateLevel::update() const
+void StateLevel::update()
 {
     //On check les collisions sur la map
 	checkMapCollision();
@@ -46,15 +46,25 @@ void StateLevel::update() const
         return;
     }
 
-    if(_perso.getShape().getPosition().y > 450)
+    if(_perso.getShape().getPosition().y > 450 || collisionEnemy())
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        _tilemap = _jeu->resetLevel();
         _jeu->setState(_jeu->getStateStats(false));
         return;
     }
-
     enemyMove();
     updateCamera();
+}
+
+bool StateLevel::collisionEnemy() const
+{
+    for (auto *enemy : _tilemap->getEnemies())
+    {
+        if(checkCollision(_perso.getShape(),enemy->getShape()))
+            return true;
+    }
+    return false;
 }
 
 void StateLevel::enemyMove() const
@@ -68,7 +78,6 @@ void StateLevel::enemyMove() const
 void StateLevel::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     (void)states;
-    update();
     target.draw(*_tilemap);
     target.draw(_perso.getShape());
 

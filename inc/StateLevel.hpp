@@ -104,6 +104,7 @@ public:
   */
   virtual void pressRight();
 
+  void update();
 
 private:
 
@@ -115,7 +116,6 @@ private:
   * \brief Vérifie les collisions de la map
   *  et update la caméra.
   */
-  void update() const;
 
   /**
   * \fn void checkMapCollision() const
@@ -133,6 +133,7 @@ private:
   void updateCamera() const;
 
   bool checkCollision(const sf::RectangleShape& s1, const sf::RectangleShape& s2) const;
+  bool collisionEnemy() const;
 
   void enemyMove() const;
 

@@ -48,7 +48,7 @@ public:
   *
   * \param target : objet à dessiner, states : applique la transformation (SFML Function)
   */
-  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
   /**
   * \fn virtual void init()
@@ -113,6 +113,9 @@ public:
   * Gère les actions rattachées à la touche Entrée.
   */
   virtual void pressEnter();
+
+  virtual void update();
+
 
 protected:
 	Jeu *_jeu; /** Jeu rattaché au Pattern */
