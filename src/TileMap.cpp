@@ -91,7 +91,6 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
             quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
             quad[3].texCoords = sf::Vector2f(tu * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
             
-            // Si le bloc n'est pas plein, on doit le définir en tant que demi/quart de bloc
             
             switch(level[i + j * width])
             {
@@ -118,13 +117,15 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
 
 
 bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect) const
-{   
-   /* if(point.x<-0.5 || point.x>width*16+0.5 || point.y < -0.5 || point.y >height*16)
-        return true;*/
+{
     int i,j;
-    i = (point.x + vect.x - getPosition().x)/16;   
-    j = (point.y + vect.y - getPosition().y)/16;
-    return mapCollisions[i+j*width];
+    i = (point.x + vect.x - getPosition().x);   
+    j = (point.y + vect.y - getPosition().y);
+
+    if(i < 0 || j< 0 || i > (int)(width*16-1))
+        return true;
+    else
+        return mapCollisions[(i/16)+(j/16)*width];
 }
 
 
