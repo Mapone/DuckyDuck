@@ -59,7 +59,10 @@ void StateLevel::update() const
 
 void StateLevel::enemyMove() const
 {
-    _tilemap->getEnemies()[0].move();
+    for (auto *enemy : _tilemap->getEnemies())
+    {
+        enemy->move();
+    }
 }
 
 void StateLevel::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -69,8 +72,10 @@ void StateLevel::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(*_tilemap);
     target.draw(_perso.getShape());
 
-    target.draw(_tilemap->getEnemies()[0].getShape());
-
+    for (auto *enemy : _tilemap->getEnemies())
+    {
+        target.draw(enemy->getShape());
+    }
 }
 
 void StateLevel::pressUp()
@@ -151,14 +156,14 @@ void StateLevel::checkMapCollision() const
     {
         _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x,0));
         sf::Vector2f position = _perso.getShape().getPosition();
-        _perso.setPosition(sf::Vector2f( position.x ,nextTile(position.y + size.y, true) - size.y-0.01));
+        _perso.setPosition(sf::Vector2f( position.x ,_tilemap->nextTileY(position.y + size.y) - size.y-0.01));
     }
 
     if(colHaut)
     {
         _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x,0));
         sf::Vector2f position = _perso.getShape().getPosition();
-        _perso.setPosition(sf::Vector2f( position.x ,nextTile(position.y, false) + 0.01));
+        _perso.setPosition(sf::Vector2f( position.x ,_tilemap->previousTileY(position.y) + 0.01));
     }
 
     if(!(colHaut && colBas && colDroite && colGauche))
@@ -176,14 +181,6 @@ bool StateLevel::checkCollision(const sf::RectangleShape& s1, const sf::Rectangl
         return false;
 }
 
-
-
-
-unsigned int StateLevel::nextTile(float x, bool direction) const
-{
-    return ((int)(x/TAILLE_TUILE) + (direction ? 1 : 0))*16;
-} 
-
 void StateLevel::updateCamera() const
 {
     //On définit un rectangle invisible au milieu de l'ecran
@@ -197,7 +194,7 @@ void StateLevel::updateCamera() const
     {
         _tilemap->setPosition(_tilemap->getPosition().x - _perso.getMouvement().x, _tilemap->getPosition().y);
         decalX = _tilemap->getPosition().x - decalX; 
-        _tilemap->getLevelEnd()->setPosition(_tilemap->getLevelEnd()->getPosition().x + decalX, _tilemap->getLevelEnd()->getPosition().y + decalY);
+        _tilemap->getLevelEnd()->setPosition(_tilemap->getLevelEnd()->getPosition().x + decalX, _tilemap->getLevelEnd()->getPosition().y);
         _perso.setPosition(sf::Vector2f(LARGEUR_FENETRE - 300, _perso.getShape().getPosition().y));
     }
     //Collision à gauche
@@ -205,7 +202,7 @@ void StateLevel::updateCamera() const
     {
         _tilemap->setPosition(_tilemap->getPosition().x - _perso.getMouvement().x, _tilemap->getPosition().y);
         decalX = (_tilemap->getPosition().x - decalX);
-        _tilemap->getLevelEnd()->setPosition(_tilemap->getLevelEnd()->getPosition().x + decalX, _tilemap->getLevelEnd()->getPosition().y + decalY);
+        _tilemap->getLevelEnd()->setPosition(_tilemap->getLevelEnd()->getPosition().x + decalX, _tilemap->getLevelEnd()->getPosition().y);
         _perso.setPosition(sf::Vector2f(300, _perso.getShape().getPosition().y));
     }
 }

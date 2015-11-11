@@ -7,7 +7,8 @@
 class Enemy : public AliveEntity
 {
 public:
-	Enemy(const sf::Vector2f &taille);
+	Enemy(const sf::Vector2f &taille, const TileMap& tilemap);
+	~Enemy();
 	void move();
 protected:
 	AI* _AI;

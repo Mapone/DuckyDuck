@@ -9,8 +9,11 @@ class AI_LandBase : public AI
 {
   
 public:
-  AI_LandBase(Enemy* enemy);
+  AI_LandBase(Enemy* enemy, const TileMap& tilemap);
   virtual void move();
+
+private:
+	bool _directionX;
 };
 
 #endif

@@ -17,7 +17,7 @@ public:
 	*
 	* \return Un Vector2f équivalent au prochain mouvement de l'entité
 	*/
-	sf::Vector2f getMouvement();
+	sf::Vector2f getMouvement() const;
 
 	/**
 	* \fn void setMouvement(sf::Vector2f v)
@@ -28,6 +28,9 @@ public:
 	* \param v : vecteur 2 dimensions qui définira le nouveau mouvement 
 	*/
 	void setMouvement(sf::Vector2f v);
+
+	void addMouvement(const sf::Vector2f &mvt);
+	void addMouvement(float x, float y);
 
 	/**
 	* \fn sf::RectangleShape getShape() const
@@ -50,6 +53,9 @@ public:
 	* \return Vector2f correspondant au nouveau mouvement.
 	*/
 	void setPosition(sf::Vector2f v);
+
+	void setPosition(float x, float y);
+	const sf::Vector2f & getPosition() const;
 
 
 protected:

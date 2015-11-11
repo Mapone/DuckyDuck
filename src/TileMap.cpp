@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "TileMap.hpp"
 #include "AI_LandBase.hpp"
+#include "AliveEntity.hpp"
 
 using namespace std;
 
@@ -28,10 +29,6 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
 
 
     level = new int[niveau.getSize().x*niveau.getSize().y];
-
-    Enemy e(sf::Vector2f(16,16));
-    e.setPosition(sf::Vector2f(200,20));
-    _enemies.push_back(e);
 
 
     //_spawn et _levelEnd sont initialisé avec des valeures impossibles
@@ -115,29 +112,12 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
     return true;
 }
 
-int * TileMap::getLevel()
-{
-    return level;
-}
-
-sf::Vector2f TileMap::getSpawn() const
-{
-    return _spawn;
-}
-
-string TileMap::getLevelName() const
-{
-    return _levelName;
-}
-
-std::vector<Enemy> TileMap::getEnemies()
-{
-    return _enemies;
-}
+/**********************************************************/
+/*************************COLLISIONS**********************/
+/********************************************************/
 
 
-
-bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect)
+bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect) const
 {   
    /* if(point.x<-0.5 || point.x>width*16+0.5 || point.y < -0.5 || point.y >height*16)
         return true;*/
@@ -146,6 +126,65 @@ bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect)
     j = (point.y + vect.y - getPosition().y)/16;
     return mapCollisions[i+j*width];
 }
+
+
+bool TileMap::collisionHaut(const AliveEntity& ae) const
+{
+    bool colYHautDroit, colYHautGauche;
+
+    sf::Vector2f position = ae.getPosition();
+    sf::Vector2f size = ae.getShape().getSize();
+    sf::Vector2f mvt = ae.getMouvement();
+
+    colYHautDroit = collision(sf::Vector2f(position.x + size.x, position.y), sf::Vector2f(0,mvt.y));
+    colYHautGauche = collision(position, sf::Vector2f(0,mvt.y));
+
+    return colYHautDroit || colYHautGauche;
+}
+
+bool TileMap::collisionBas(const AliveEntity& ae) const
+{
+    bool colYBasDroit, colYBasGauche;
+
+    sf::Vector2f position = ae.getPosition();
+    sf::Vector2f size = ae.getShape().getSize();
+    sf::Vector2f mvt = ae.getMouvement();
+
+    colYBasDroit = collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(0,mvt.y));
+    colYBasGauche = collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(0,mvt.y));
+
+    return colYBasDroit || colYBasGauche;
+}
+
+bool TileMap::collisionDroite(const AliveEntity& ae) const
+{
+    bool colXBasDroit, colXHautDroit;
+
+    sf::Vector2f position = ae.getPosition();
+    sf::Vector2f size = ae.getShape().getSize();
+    sf::Vector2f mvt = ae.getMouvement();
+
+    colXHautDroit = collision(sf::Vector2f(position.x + size.x, position.y), sf::Vector2f(mvt.x,0));
+    colXBasDroit = collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(mvt.x,0));
+
+    return colXBasDroit || colXHautDroit;
+}
+
+bool TileMap::collisionGauche(const AliveEntity& ae) const
+{
+    bool colXHautGauche, colXBasGauche;
+
+    sf::Vector2f position = ae.getPosition();
+    sf::Vector2f size = ae.getShape().getSize();
+    sf::Vector2f mvt = ae.getMouvement();
+
+    colXHautGauche = collision(position, sf::Vector2f(mvt.x,0));
+    colXBasGauche = collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(mvt.x,0));
+
+    return colXHautGauche || colXBasGauche;
+}
+
+
 
 
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -161,6 +200,10 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
     target.draw(_levelEnd);
 }
+
+/**********************************************************/
+/***************** CONSTRUCTION DU NIVEAU ****************/
+/********************************************************/
 
 void TileMap::loadBMP(sf::Image niveau)
 {
@@ -235,12 +278,20 @@ void TileMap::loadLayer(sf::Image layer)
             _levelEnd.setTexture(&flag, true);
             _levelEnd.setPosition((j%width)* 16 , (((int)(j/width)+1)* 16) - _levelEnd.getSize().y);
         }
+        else if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 0)
+        {
+            //ENNEMI TERRESTRE BASIQUE
+            int j = i/4;
+            Enemy* e = new Enemy(sf::Vector2f(16,16),*this);
+            e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width)+1)* 16));
+            _enemies.push_back(e);
+        }
         else
         {
             int j,k,l;
             j = i/4;
-            k = (j%width)* 16;
-            l = ((int)(j/width)+1)* 16;
+            k = (j%width);
+            l = (int)(j/width)+1;
             cerr << "#ERROR: loadLayer(layer), couleur non existante RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << " en position " << k << ":" << l <<endl;
         }
     }
@@ -251,6 +302,21 @@ void TileMap::loadLayer(sf::Image layer)
                 cerr << "#ERROR: Pas de fin de niveau trouvé pour \"" + _levelName + "\"" << endl;
 }
 
+
+unsigned int TileMap::nextTileY(float x) const
+{
+    return ((int)(x/16) + 1)*16;
+} 
+
+unsigned int TileMap::previousTileY(float x) const
+{
+    return ((int)(x/16))*16;
+} 
+
+
+/**********************************************************/
+/************************** GETTER ***********************/
+/********************************************************/
 
 
 sf::Vector2f TileMap::getGravity() const
@@ -266,4 +332,24 @@ unsigned int TileMap::getWidth() const
 sf::RectangleShape* TileMap::getLevelEnd() 
 {
     return &_levelEnd;
+}
+
+int * TileMap::getLevel()
+{
+    return level;
+}
+
+sf::Vector2f TileMap::getSpawn() const
+{
+    return _spawn;
+}
+
+string TileMap::getLevelName() const
+{
+    return _levelName;
+}
+
+std::vector<Enemy*> TileMap::getEnemies()
+{
+    return _enemies;
 }

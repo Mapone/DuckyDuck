@@ -4,6 +4,7 @@
 #include <vector>
 #include "Enemy.hpp"
 
+class AliveEntity;
 /**
 * \file TileMap.hpp
 * \brief Gère les différentes interactions avec la map.
@@ -59,7 +60,12 @@ public:
     * \return Le Level en cours.
     */
     int *getLevel();
-    bool collision(const sf::Vector2f& point, const sf::Vector2f& vect);
+    bool collision(const sf::Vector2f& point, const sf::Vector2f& vect) const;
+    bool collisionHaut(const AliveEntity& ae) const;
+    bool collisionBas(const AliveEntity& ae) const;
+    bool collisionDroite(const AliveEntity& ae) const;
+    bool collisionGauche(const AliveEntity& ae) const;
+
     
     /**
     * \fn unsigned int getWidth() const
@@ -90,7 +96,10 @@ public:
     sf::Vector2f getSpawn() const;
     sf::RectangleShape* getLevelEnd();
     std::string getLevelName() const;
-    std::vector<Enemy> getEnemies();
+    std::vector<Enemy*> getEnemies();
+    unsigned int nextTileY(float x) const;
+    unsigned int previousTileY(float x) const;
+
 
 private:
 
@@ -128,7 +137,7 @@ private:
     sf::RectangleShape _levelEnd; /** Bloc de fin de niveau */
     sf::Texture flag;
     std::string _levelName;
-    std::vector<Enemy> _enemies;
+    std::vector<Enemy*> _enemies;
 };
 
 

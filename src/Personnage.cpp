@@ -33,7 +33,6 @@ void Personnage::addMouvement(const Vector2f &mvt)
 	}
 	else
 		_mouvement.y = MAX_SPEED_Y;
-
 }
 
 void Personnage::move(sf::Vector2f v)
