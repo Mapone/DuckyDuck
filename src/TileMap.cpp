@@ -202,7 +202,7 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
     // et on dessine enfin le tableau de vertex
     target.draw(m_vertices, states);
 
-    //target.draw(_levelEnd);
+    target.draw(_levelEnd);
 }
 
 /**********************************************************/

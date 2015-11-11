@@ -204,14 +204,23 @@ void StateLevel::updateCamera() const
         _tilemap->setPosition(_tilemap->getPosition().x - _perso.getMouvement().x, _tilemap->getPosition().y);
         decalX = _tilemap->getPosition().x - decalX; 
         _tilemap->getLevelEnd()->setPosition(_tilemap->getLevelEnd()->getPosition().x + decalX, _tilemap->getLevelEnd()->getPosition().y);
+        for (auto *enemy : _tilemap->getEnemies())
+        {
+            enemy->setPosition(enemy->getPosition().x - _perso.getMouvement().x, enemy->getPosition().y);
+        }
         _perso.setPosition(sf::Vector2f(LARGEUR_FENETRE - 300, _perso.getShape().getPosition().y));
+
     }
     //Collision à gauche
     else if(_perso.getShape().getPosition().x <= 300 && _tilemap->getPosition().x < 0)
     {
         _tilemap->setPosition(_tilemap->getPosition().x - _perso.getMouvement().x, _tilemap->getPosition().y);
-        decalX = (_tilemap->getPosition().x - decalX);
+        decalX = _tilemap->getPosition().x - decalX;
         _tilemap->getLevelEnd()->setPosition(_tilemap->getLevelEnd()->getPosition().x + decalX, _tilemap->getLevelEnd()->getPosition().y);
+        for (auto *enemy : _tilemap->getEnemies())
+        {
+            enemy->setPosition(enemy->getPosition().x - _perso.getMouvement().x, enemy->getPosition().y);
+        }
         _perso.setPosition(sf::Vector2f(300, _perso.getShape().getPosition().y));
     }
 }
