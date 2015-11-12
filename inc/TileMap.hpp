@@ -70,6 +70,16 @@ public:
     unsigned int getWidth() const;
 
     /**
+    * \fn unsigned int getHeight() const
+    * \brief Getter de Height
+    *
+    * Retourne la hauteur du Level.
+    *
+    * \return La hauteur du Level.
+    */
+    unsigned int getHeight() const;
+
+    /**
     * \fn sf::Vector2f getGravity() const
     * \brief Getter de la Gravité
     *
@@ -92,6 +102,8 @@ public:
     unsigned int nextTileY(float x) const;
     unsigned int previousTileY(float x) const;
     void reset();
+    void changePositionX(float gap);
+    void changePositionY(double gap);
 
 
 private:

@@ -3,8 +3,9 @@
 #include <stdint.h> //uint8
 #include <SFML/Graphics.hpp>
 #include "TileMap.hpp"
-#include "AI_LandBase.hpp"
 #include "AliveEntity.hpp"
+#include "Spawner.hpp"
+#include "Walker.hpp"
 
 using namespace std;
 
@@ -257,6 +258,9 @@ void TileMap::loadLayer(sf::Image layer)
     const uint8_t *t;
     t = layer.getPixelsPtr();
 
+    Enemy* walkerPrototype = new Walker(sf::Vector2f(15,15),*this);
+    Spawner* walkerSpawner = new Spawner(walkerPrototype);
+
     for (unsigned int i = 0; i < (layer.getSize().x*layer.getSize().y*4); i+=4)
     { 
         //Si on est sur la couleur "transparent" (0,0,0,0), on passe au prochain tour de boucle
@@ -286,8 +290,8 @@ void TileMap::loadLayer(sf::Image layer)
         {
             //ENNEMI TERRESTRE BASIQUE
             int j = i/4;
-            Enemy* e = new Enemy(sf::Vector2f(16,16),*this);
-            e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width)+1)* 16));
+            Enemy* e = walkerSpawner->spawnEnemy();
+            e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
             _enemies.push_back(e);
         }
         else
@@ -312,6 +316,27 @@ void TileMap::loadLayer(sf::Image layer)
 /**********************************************************/
 /*********** GETTER ET PETITES METHODES ******************/
 /********************************************************/
+
+void TileMap::changePositionX(float gap)
+{
+    setPosition(getPosition().x - gap, getPosition().y);
+    getLevelEnd()->setPosition(getLevelEnd()->getPosition().x -gap, getLevelEnd()->getPosition().y);
+    for (auto *enemy : getEnemies())
+    {
+        enemy->setPosition(enemy->getPosition().x - gap, enemy->getPosition().y);
+    }
+}
+
+void TileMap::changePositionY(double gap)
+{
+    setPosition(getPosition().x, getPosition().y - gap);
+    getLevelEnd()->setPosition(getLevelEnd()->getPosition().x, getLevelEnd()->getPosition().y - gap);
+    for (auto *enemy : getEnemies())
+    {
+        enemy->setPosition(enemy->getPosition().x, enemy->getPosition().y- gap);
+    }
+}
+
 
 unsigned int TileMap::nextTileY(float x) const
 {
@@ -341,6 +366,11 @@ sf::Vector2f TileMap::getGravity() const
 unsigned int TileMap::getWidth() const
 {
     return width;
+}
+
+unsigned int TileMap::getHeight() const
+{
+    return height;
 }
 
 sf::RectangleShape* TileMap::getLevelEnd() 

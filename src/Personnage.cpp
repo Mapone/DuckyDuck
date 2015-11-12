@@ -2,10 +2,11 @@
 #include "Personnage.hpp"
 
 using namespace sf;
+using namespace std;
 
 const int MAX_SPEED_X = 3;
 const int MAX_SPEED_Y = 5;
-const float FROTTEMENTS = 0.08;
+const float FROTTEMENTS = 0.1;
 
 Personnage::Personnage(const Vector2f &taille) : AliveEntity(taille)
 {}
@@ -13,6 +14,12 @@ Personnage::~Personnage(){}
 
 void Personnage::addMouvement(const Vector2f &mvt)
 {
+/*
+	cout << "MOVE param "<< mvt.x << ":" << mvt.y << endl;
+	cout << "MOVE OP en y"<< mvt.y + _mouvement.y << endl;
+	cout << "MOVE AVANT "<< getMouvement().x << ":" << getMouvement().y << endl;*/
+
+
 	if(_mouvement.x + mvt.x <= MAX_SPEED_X)
 	{
 		if(_mouvement.x + mvt.x >= -MAX_SPEED_X)
@@ -33,6 +40,9 @@ void Personnage::addMouvement(const Vector2f &mvt)
 	}
 	else
 		_mouvement.y = MAX_SPEED_Y;
+
+	/*cout << "MOVE APRES "<< getMouvement().x << ":" << getMouvement().y << endl;
+	cout << endl;*/
 }
 
 void Personnage::move(sf::Vector2f v)
@@ -52,7 +62,6 @@ void Personnage::move(sf::Vector2f v)
 		else
 			_mouvement.x += FROTTEMENTS; 
 	}
-
 	_shape.setPosition(_shape.getPosition()+v);
 }
 
