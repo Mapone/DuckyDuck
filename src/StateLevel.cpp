@@ -165,7 +165,7 @@ void StateLevel::checkMapCollision() const
     {
         _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x,0));
         //sf::Vector2f position = _perso.getShape().getPosition();
-        //_perso.setPosition(sf::Vector2f( position.x ,_tilemap->nextTileY(position.y + size.y) - size.y-0.02));
+        //_perso.setPosition(sf::Vector2f( position.x ,(_tilemap->nextTileY(position.y + size.y) - size.y) - 0.01));
     }
 
     if(colHaut)
@@ -198,26 +198,26 @@ void StateLevel::updateCamera() const
     //Collision à droite de l'ecran
     if(_perso.getShape().getPosition().x >= LARGEUR_FENETRE - 300 && fabs(_tilemap->getPosition().x) + LARGEUR_FENETRE <  _tilemap->getWidth() * TAILLE_TUILE)
     {
-        _tilemap->changePositionX(_perso.getMouvement().x);
+        _tilemap->changePositionX(_perso.getPosition().x - (LARGEUR_FENETRE - 300));
         _perso.setPosition(sf::Vector2f(LARGEUR_FENETRE - 300, _perso.getShape().getPosition().y));
     }
     //Collision à gauche
     else if(_perso.getShape().getPosition().x <= 300 && _tilemap->getPosition().x < 0)
     {
-        _tilemap->changePositionX(_perso.getMouvement().x);
+        _tilemap->changePositionX(_perso.getPosition().x - 300);
         _perso.setPosition(sf::Vector2f(300, _perso.getShape().getPosition().y));
     }
 
     //Collision en bas de l'ecran
-    if(_perso.getShape().getPosition().y >= HAUTEUR_FENETRE - 128 && fabs(_tilemap->getPosition().y) + HAUTEUR_FENETRE <  _tilemap->getHeight() * TAILLE_TUILE)
+    if(_perso.getShape().getPosition().y > HAUTEUR_FENETRE - 128 && fabs(_tilemap->getPosition().y) + HAUTEUR_FENETRE <  _tilemap->getHeight() * TAILLE_TUILE)
     {
-        _tilemap->changePositionY(_perso.getMouvement().y);
+        _tilemap->changePositionY(_perso.getPosition().y - (HAUTEUR_FENETRE - 128));
         _perso.setPosition(sf::Vector2f(_perso.getPosition().x, HAUTEUR_FENETRE - 128));
     }
     //Collision en haut de l'écran
     else if(_perso.getShape().getPosition().y <= 128 && _tilemap->getPosition().y < 0)
     {
-        _tilemap->changePositionY(_perso.getMouvement().y);
+        _tilemap->changePositionY(_perso.getPosition().y - 128);
         _perso.setPosition(sf::Vector2f(_perso.getPosition().x,128));
     }
 }

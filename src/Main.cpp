@@ -30,7 +30,7 @@ int main()
 //----------------------------------------------------------------
     
     sf::Vector2f gravity(0,0.2);
-    TileMap map("montagne", gravity);
+    TileMap map("lvl4", gravity);
 
 //-------------------Creation du personnage-----------------------
 //----------------------------------------------------------------
@@ -45,7 +45,7 @@ int main()
     
 //--------- Création et ajout des niveaux -----------------
 //---------------------------------------------------------
-    TileMap map1("lvl4", gravity);
+    TileMap map1("montagne", gravity);
     jeu.addLevel(&map1);
     TileMap map2("lvl3", gravity);
     jeu.addLevel(&map2);

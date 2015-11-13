@@ -13,8 +13,8 @@ TileMap::TileMap(string levelName, sf::Vector2f &gravity)
 {
     _levelName = levelName;
     _gravity = gravity;
-    string img_level = levelName + ".bmp";
-    string layer_level = levelName + "_layer.bmp";
+    string img_level = levelName + ".png";
+    string layer_level = levelName + "_layer.png";
     sf::Image niveau;
     if(!niveau.loadFromFile(img_level))
         cerr << "#ERROR: Erreur lors du chargement du niveau \"" + img_level + "\" " << endl;
