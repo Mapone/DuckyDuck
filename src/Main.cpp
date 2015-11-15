@@ -15,8 +15,6 @@ using namespace std;
 Si y'a le temps:
     - Arret du programme si la map n'est pas valide (pas de spawn ou de fin)
     - Remplacer la touche entrée par espace dans les menus (chiant à faire)
-    - Sortie de map
-
 
 */
 
@@ -35,7 +33,17 @@ int main()
 //-------------------Creation du personnage-----------------------
 //----------------------------------------------------------------
 
-    Personnage mario(sf::Vector2f(15,15));
+    //On crée une image contenant la texture du personnage
+    sf::Image i;
+    if(!i.loadFromFile("Duck.png"))
+    cerr << "#ERROR: Erreur lors du chargement d'image \"Duck.png\"" << endl;
+
+    //On inverse l'image pour que le personnage regarde vers la droite
+    i.flipHorizontally();
+
+    //On initialize une texture
+    sf::Texture t;
+    Personnage mario(sf::Vector2f(15,15), i, t);
 
 //-------------------Création du Jeu------------------------------
 //----------------------------------------------------------------

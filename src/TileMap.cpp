@@ -327,7 +327,7 @@ void TileMap::changePositionX(float gap)
     }
 }
 
-void TileMap::changePositionY(double gap)
+void TileMap::changePositionY(float gap)
 {
     setPosition(getPosition().x, getPosition().y - gap);
     getLevelEnd()->setPosition(getLevelEnd()->getPosition().x, getLevelEnd()->getPosition().y - gap);
@@ -335,6 +335,11 @@ void TileMap::changePositionY(double gap)
     {
         enemy->setPosition(enemy->getPosition().x, enemy->getPosition().y- gap);
     }
+}
+
+void TileMap::killEnemy(Enemy* e)
+{
+    _enemies.erase(std::remove(_enemies.begin(), _enemies.end(), e), _enemies.end());
 }
 
 

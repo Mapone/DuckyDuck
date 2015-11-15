@@ -56,6 +56,7 @@ public:
 
 	void setPosition(float x, float y);
 	const sf::Vector2f & getPosition() const;
+	const sf::Vector2f & getSize() const;
 
 
 protected:

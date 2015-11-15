@@ -29,7 +29,7 @@ public:
 	*
 	* \param taille : taille (en 2D) du personnage.
 	*/
-	Personnage(const sf::Vector2f &taille);
+	Personnage(const sf::Vector2f &taille, sf::Image &i, sf::Texture &t);
 
 	/**
 	* \brief Destructeur
@@ -63,8 +63,15 @@ public:
 	void restartClock();
 	sf::Time getElapsedTime() const;
 
+	void flipRight();
+	void flipLeft();
+
+
 private:
 	sf::Clock _clock;
+	sf::Image _imgDuck;
+	sf::Texture _textureDuck;
+	bool lookRight;
 };
 
 

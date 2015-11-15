@@ -49,3 +49,8 @@ const sf::Vector2f & AliveEntity::getPosition() const
 	return _shape.getPosition();
 }
 
+const sf::Vector2f & AliveEntity::getSize() const
+{
+	return _shape.getSize();
+}
+

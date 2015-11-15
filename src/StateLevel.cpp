@@ -38,6 +38,7 @@ void StateLevel::update()
     //On check les collisions sur la map
     checkMapCollision();
     updateCamera();
+    enemyMove();
 
     //On check la collision avec le bloc de fin de niveau
     if(checkCollision(_perso.getShape(), *_tilemap->getLevelEnd()))
@@ -54,7 +55,6 @@ void StateLevel::update()
         _jeu->setState(_jeu->getStateStats(false));
         return;
     }
-    enemyMove();
 }
 
 bool StateLevel::collisionEnemy() const
@@ -62,7 +62,17 @@ bool StateLevel::collisionEnemy() const
     for (auto *enemy : _tilemap->getEnemies())
     {
         if(checkCollision(_perso.getShape(),enemy->getShape()))
-            return true;
+        {
+            if((_perso.getPosition().y + _perso.getSize().y) <= enemy->getPosition().y + 5)
+            {
+                _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x, -5));
+                _tilemap->killEnemy(enemy);
+            }
+            else
+            { 
+                return true;
+            }
+        }
     }
     return false;
 }
@@ -96,11 +106,13 @@ void StateLevel::pressDown(){}
 void StateLevel::pressLeft()
 {
 	_perso.addMouvement(sf::Vector2f(-0.2,0));
+    _perso.flipLeft();
 }
 
 void StateLevel::pressRight()
 {
-	_perso.addMouvement(sf::Vector2f(0.2,0));
+    _perso.addMouvement(sf::Vector2f(0.2,0));
+    _perso.flipRight();
 }
 
 void StateLevel::pressSpace()

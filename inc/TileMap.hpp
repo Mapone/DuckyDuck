@@ -103,7 +103,8 @@ public:
     unsigned int previousTileY(float x) const;
     void reset();
     void changePositionX(float gap);
-    void changePositionY(double gap);
+    void changePositionY(float gap);
+    void killEnemy(Enemy* e);
 
 
 private:
