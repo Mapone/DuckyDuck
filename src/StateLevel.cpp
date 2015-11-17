@@ -25,6 +25,7 @@ void  StateLevel::init()
 	_perso.setPosition(sf::Vector2f(_tilemap->getSpawn().x,_tilemap->getSpawn().y - _perso.getShape().getSize().y - 1));
     _perso.setMouvement(sf::Vector2f(0,0));
     _tilemap->setPosition(0,0);
+    _perso.setTotalScore(_perso.getTotalScore()+_perso.getCurrentScore());
     _perso.setCurrentScore(0);
     _perso.setCurrentKill(0);
 }
