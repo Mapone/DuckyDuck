@@ -118,5 +118,7 @@ void StateStats::init()
     int posX = 400 - ((_levelName.getString().toAnsiString().size() * 20)/2); 
     _levelName.setPosition(posX,100);
 
+    _scoreNb.setString(std::to_string((int)_perso.getCurrentScore()));
+    _enemyNb.setString(std::to_string((int)_perso.getCurrentKill()));
     _timeNb.setString(std::to_string((int)_perso.getElapsedTime().asSeconds()));
 }

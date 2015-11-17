@@ -96,11 +96,25 @@ public:
 	void flipLeft();
 
 
+	unsigned int getCurrentKill() const;
+	unsigned int getCurrentScore() const;
+	unsigned int getTotalKill() const;
+	unsigned int getTotalScore() const;
+	void setCurrentKill(unsigned int k);
+	void setCurrentScore(unsigned int s);
+	void setTotalKill(unsigned int k);
+	void setTotalScore(unsigned int s);
+
+
 private:
 	sf::Clock _clock; /** Clock gérer par SFML */
 	sf::Image _imgDuck; /** Image du personnage */
 	sf::Texture _textureDuck; /** Texture créer par l'image */
 	bool _lookRight; /** Direction D/G vers ou le personnage est touné */
+	unsigned int _currentScore;/** Score temporaire du personnage*/
+	unsigned int _currentKill;/** Nombre d'enemis tué temporaire du personnage */
+	unsigned int _totalScore;/** Score total du personnage*/
+	unsigned int _totalKill;/** Nombre total d'ennemis tués */
 };
 
 

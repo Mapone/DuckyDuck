@@ -1,7 +1,6 @@
 #include <iostream>
 #include "AliveEntity.hpp"
 
-
 AliveEntity::AliveEntity(const sf::Vector2f &taille)
 {
 	_shape.setSize(taille);

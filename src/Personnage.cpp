@@ -14,6 +14,10 @@ Personnage::Personnage(const Vector2f &taille, Image &i, Texture &t) : AliveEnti
 	_shape.setTexture(&_textureDuck, true);
 	_textureDuck.update(_imgDuck);
 	_lookRight = true;
+	_currentScore = 0;
+	_currentKill = 0;
+	_totalScore = 0;
+	_totalKill = 0;
 }
 Personnage::~Personnage(){}
 
@@ -98,4 +102,37 @@ void Personnage::flipLeft()
 		_textureDuck.update(_imgDuck);
 		_lookRight = false;
 	}
+}
+
+unsigned int Personnage::getCurrentKill() const
+{
+	return _currentKill;
+}
+unsigned int Personnage::getCurrentScore() const
+{
+	return _currentScore;
+}
+unsigned int Personnage::getTotalKill() const
+{
+	return _totalKill;
+}
+unsigned int Personnage::getTotalScore() const
+{
+	return _totalScore;
+}
+void Personnage::setCurrentKill(unsigned int k)
+{
+	_currentKill = k;
+}
+void Personnage::setCurrentScore(unsigned int s)
+{
+	_currentScore = s;
+}
+void Personnage::setTotalKill(unsigned int k)
+{
+	_totalKill = k;
+}
+void Personnage::setTotalScore(unsigned int s)
+{
+	_totalScore = s;
 }

@@ -25,6 +25,8 @@ void  StateLevel::init()
 	_perso.setPosition(sf::Vector2f(_tilemap->getSpawn().x,_tilemap->getSpawn().y - _perso.getShape().getSize().y - 1));
     _perso.setMouvement(sf::Vector2f(0,0));
     _tilemap->setPosition(0,0);
+    _perso.setCurrentScore(0);
+    _perso.setCurrentKill(0);
 }
 
 void StateLevel::setLevel(TileMap* t)
@@ -37,6 +39,14 @@ void StateLevel::update()
 {
     //On check les collisions sur la map
     checkMapCollision();
+
+    if(_perso.getShape().getPosition().y > 450 || collisionEnemy())
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        _tilemap = _jeu->resetLevel();
+        _jeu->setState(_jeu->getStateStats(false));
+        return;
+    }
     updateCamera();
     enemyMove();
 
@@ -66,6 +76,7 @@ bool StateLevel::collisionEnemy() const
             if((_perso.getPosition().y + _perso.getSize().y) <= enemy->getPosition().y + 5)
             {
                 _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x, -5));
+                _perso.setCurrentKill(_perso.getCurrentKill() + 1);
                 _tilemap->killEnemy(enemy);
             }
             else

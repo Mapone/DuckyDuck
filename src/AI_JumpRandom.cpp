@@ -19,11 +19,12 @@ void AI_JumpRandom::move()
     else
     	_enemy->addMouvement(-1,0);
 
-    bool colGauche, colDroite, colBas;
+    bool colGauche, colDroite, colBas, colHaut;
 
     colGauche = _tileMap.collisionGauche(*_enemy);
     colDroite = _tileMap.collisionDroite(*_enemy);
     colBas = _tileMap.collisionBas(*_enemy);
+    colHaut = _tileMap.collisionHaut(*_enemy);
 
     //Je change de sens si je detecte une collision
     if(colGauche || colDroite)
@@ -34,7 +35,10 @@ void AI_JumpRandom::move()
     }
 
     if(colBas)
-    _enemy->setMouvement(sf::Vector2f(_enemy->getMouvement().x,-3));
+    _enemy->setMouvement(sf::Vector2f(_enemy->getMouvement().x,-8));
+
+    if(colHaut)
+    _enemy->setMouvement(sf::Vector2f(_enemy->getMouvement().x,0));
     	
 
     if(!(colDroite && colGauche))
