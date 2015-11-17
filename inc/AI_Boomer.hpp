@@ -1,13 +1,13 @@
-#ifndef AI_JUMPRANDOM_H
-#define AI_JUMPRANDOM_H
+#ifndef AI_BOOMER_H
+#define AI_BOOMER_H
 
 #include <SFML/Graphics.hpp>
 #include "AI.hpp"
 
 
 /**
-* \file AI_JumpRandom.hpp
-* \brief AI des enemy sautant
+* \file AI_Boomer.hpp
+* \brief AI des boomers
 * \author {N. Guittonneau, P. Raballand}
 * \version 1.0
 * \date 14/11/2015
@@ -17,13 +17,13 @@
 * Hérite du AI.
 */
 
-class Enemy;
+class Boomer;
 
 /**
-* \class AI_JumpRandom
+* \class AI_Boomer
 * \brief Classe gérant l'AI des ennemi qui sautent.
 */
-class AI_JumpRandom : public AI
+class AI_Boomer : public AI
 {
   
 public:
@@ -31,11 +31,11 @@ public:
 	/**
 	* \brief Constructeur
 	*
-	* Constructeur de la classe AI_JumpRandom.
+	* Constructeur de la classe AI_Boomer.
 	*
 	* \param enemy : Ennemi utilisant l'IA, tilemap : TileMap sur laquelle l'Enemy est.
 	*/
-    AI_JumpRandom(Enemy* enemy, const TileMap& tilemap);
+    AI_Boomer(Boomer* Boomer, const TileMap& tilemap);
 
     /**
 	* \fn virtual void move()
@@ -47,9 +47,9 @@ public:
     virtual void move();
 
 private:
+	Boomer* _boomer;
+	sf::Clock _clock; /** Clock gérer par SFML */
 
-	bool _directionX; /** Bool qui vérifiant si l'on doit inverser le mouvement en X (collision) */
-	sf::Clock _clock; /** ??? */
 };
 
 #endif

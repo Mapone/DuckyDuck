@@ -106,6 +106,16 @@ public:
 	void setPosition(float x, float y);
 
 	/**
+	 * @brief Setter de la taille
+	 * @details Setter de la taille
+	 * 
+	 * @param x Nouvelle taille en x
+	 * @param y Nouvelle taille en y
+	 */
+	void setSize(float x, float y);
+
+
+	/**
 	* \fn const sf::Vector2f & getPosition() const
 	* \brief Getter de la position
 	*

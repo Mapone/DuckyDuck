@@ -43,6 +43,11 @@ void AliveEntity::setPosition(float x, float y)
 	_shape.setPosition(sf::Vector2f(x,y));
 }
 
+void AliveEntity::setSize(float x, float y)
+{
+	_shape.setSize(sf::Vector2f(x,y));
+}
+
 const sf::Vector2f & AliveEntity::getPosition() const
 {
 	return _shape.getPosition();

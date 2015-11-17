@@ -5,7 +5,8 @@
 #include "TileMap.hpp"
 #include "AliveEntity.hpp"
 #include "Spawner.hpp"
-#include "Walker.hpp"
+#include "Jumper.hpp"
+#include "Boomer.hpp"
 
 using namespace std;
 
@@ -258,8 +259,12 @@ void TileMap::loadLayer(sf::Image layer)
     const uint8_t *t;
     t = layer.getPixelsPtr();
 
-    Enemy* walkerPrototype = new Walker(sf::Vector2f(15,15),*this);
+
+    Enemy* walkerPrototype = new Jumper(sf::Vector2f(15,15),*this, 7, 5);
     Spawner* walkerSpawner = new Spawner(walkerPrototype);
+
+    Enemy* boomerPrototype = new Boomer(sf::Vector2f(15,15),*this,1);
+    Spawner* boomerSpawner = new Spawner(boomerPrototype);
 
     for (unsigned int i = 0; i < (layer.getSize().x*layer.getSize().y*4); i+=4)
     { 
@@ -288,9 +293,17 @@ void TileMap::loadLayer(sf::Image layer)
         }
         else if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 0)
         {
-            //ENNEMI TERRESTRE BASIQUE
-            int j = i/4;
+            //JUMPER
+           int j = i/4;
             Enemy* e = walkerSpawner->spawnEnemy();
+            e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
+            _enemies.push_back(e);
+        }
+        else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 0)
+        {
+            //BOOMER
+           int j = i/4;
+            Enemy* e = boomerSpawner->spawnEnemy();
             e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
             _enemies.push_back(e);
         }
