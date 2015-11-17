@@ -40,23 +40,18 @@ void StateLevel::update()
 {
     //On check les collisions sur la map
     checkMapCollision();
-
-    if(_perso.getShape().getPosition().y > 450 || collisionEnemy())
-    {
-        std::this_thread::sleep_for(std::chrono::milliseconds(800));
-        _tilemap = _jeu->resetLevel();
-        _jeu->setState(_jeu->getStateStats(false));
-        return;
-    }
     updateCamera();
+    checkCollision();
     enemyMove();
+}
 
+void StateLevel::checkCollision()
+{
     //On check la collision avec le bloc de fin de niveau
     if(checkCollision(_perso.getShape(), *_tilemap->getLevelEnd()))
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(800));
         _jeu->setState(_jeu->getStateStats(true));
-        return;
     }
 
     if(_perso.getShape().getPosition().y > 450 || collisionEnemy())
@@ -64,7 +59,6 @@ void StateLevel::update()
         std::this_thread::sleep_for(std::chrono::milliseconds(800));
         _tilemap = _jeu->resetLevel();
         _jeu->setState(_jeu->getStateStats(false));
-        return;
     }
 }
 
@@ -72,18 +66,28 @@ bool StateLevel::collisionEnemy() const
 {
     for (auto *enemy : _tilemap->getEnemies())
     {
-        if(checkCollision(_perso.getShape(),enemy->getShape()))
+        if(collisionEnemy(enemy))
+            return true;
+    }
+    return false;
+}
+
+bool StateLevel::collisionEnemy(Enemy *e) const
+{
+    //Si il y a collision avec le perso
+    if(checkCollision(_perso.getShape(),e->getShape()))
+    { 
+        //Si le perso est situé au dessus de l'ennemi, avec une marge de 5 pixels (vitesse max du perso en Y), on le tue
+        if((_perso.getPosition().y + _perso.getSize().y) <= e->getPosition().y + 5)
         {
-            if((_perso.getPosition().y + _perso.getSize().y) <= enemy->getPosition().y + 5)
-            {
-                _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x, -5));
-                _perso.setCurrentKill(_perso.getCurrentKill() + 1);
-                _tilemap->killEnemy(enemy);
-            }
-            else
-            { 
-                return true;
-            }
+            _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x, -5));
+            _perso.setCurrentKill(_perso.getCurrentKill() + 1);
+            _tilemap->killEnemy(e);
+            return false;
+        }
+        else
+        { 
+            return true;
         }
     }
     return false;
@@ -94,6 +98,7 @@ void StateLevel::enemyMove() const
     for (auto *enemy : _tilemap->getEnemies())
     {
         enemy->move();
+        collisionEnemy(enemy);
     }
 }
 

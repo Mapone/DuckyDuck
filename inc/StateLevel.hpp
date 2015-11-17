@@ -134,6 +134,12 @@ private:
   void updateCamera() const;
 
   /**
+   * @brief Collisions globales entre toutes les entités et le personnage
+   * @details Vérification et application des conséquences en cas de collisions entre le personnage et chaque ennemis (appel de collisionEnemy) et le bloc fin de niveau
+   */
+  void checkCollision();
+
+  /**
   * \fn bool checkCollision(const sf::RectangleShape& s1, const sf::RectangleShape& s2) const
   * \brief Vérifie la collision entre 2 objets
   *
@@ -146,7 +152,7 @@ private:
 
   /**
   * \fn bool collisionEnemy() const
-  * \brief Vérifie la collision entre le personnage et tout les ennmis
+  * \brief Vérifie la collision entre le personnage et tous les ennmis
   *
   * Vérifie s'il existe une collision entre les ennemis et notre personnage
   *
@@ -155,10 +161,21 @@ private:
   bool collisionEnemy() const;
 
   /**
-  * \fn void enemyMove() const
-  * \brief Fait bouger tout les ennemis
+  * \fn bool collisionEnemy(Enemy *e) const
+  * \brief Vérifie la collision entre le personnage un ennemi
   *
-  * Appelle la fonction move de tout les Enemy de la TileMap
+  * Vérifie s'il existe une collision entre un ennemi et notre personnage
+  *
+  *\param *e : l'ennemi à tester 
+  * \return L'état de la collision
+  */
+  bool collisionEnemy(Enemy *e) const;
+
+  /**
+  * \fn void enemyMove() const
+  * \brief Fait bouger tout les ennemis et verifie leur collision avec le perso
+  *
+  * Appelle la fonction move de tout les Enemy de la TileMap verifie leur collision avec le perso
   */
   void enemyMove() const;
 
