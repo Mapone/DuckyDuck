@@ -2,14 +2,14 @@
 #define STATELEVEL_H
 
 /**
-* \file State.hpp
-* \brief State
+* \file StateLevel.hpp
+* \brief Etat en jeu
 * 
 * \author {N. Guittonneau, P. Raballand}
 * \version 1.0
 * \date 3/11/2015
 *
-* Interface du Pattern State
+* Etat StateLevel rattaché au Pattern State
 */
 
 #include <SFML/Graphics.hpp>
@@ -53,7 +53,14 @@ public:
   */
   virtual void init();
 
-
+  /**
+  * \fn virtual void setLevel(TileMap* t)
+  * \brief Setter de la TileMap.
+  *
+  * Initialise la TileMap du level, et l'initialise
+  *
+  * \param t : la nouvelle TileMap
+  */
   virtual void setLevel(TileMap* t);
 
   /**
@@ -112,12 +119,6 @@ private:
   Personnage& _perso; /** Personnage jouable */
 
   /**
-  * \fn void update() const;
-  * \brief Vérifie les collisions de la map
-  *  et update la caméra.
-  */
-
-  /**
   * \fn void checkMapCollision() const
   * \brief Vérifie les collisions et agit en conséquence
   *
@@ -132,9 +133,33 @@ private:
   */
   void updateCamera() const;
 
+  /**
+  * \fn bool checkCollision(const sf::RectangleShape& s1, const sf::RectangleShape& s2) const
+  * \brief Vérifie la collision entre 2 objets
+  *
+  * Vérifie s'il existe une collision entre deux objets
+  *
+  * \param s1 : objet 1, s2 : objet 2
+  * \return L'état de la collision
+  */
   bool checkCollision(const sf::RectangleShape& s1, const sf::RectangleShape& s2) const;
+
+  /**
+  * \fn bool collisionEnemy() const
+  * \brief Vérifie la collision entre le personnage et tout les ennmis
+  *
+  * Vérifie s'il existe une collision entre les ennemis et notre personnage
+  *
+  * \return L'état de la collision
+  */
   bool collisionEnemy() const;
 
+  /**
+  * \fn void enemyMove() const
+  * \brief Fait bouger tout les ennemis
+  *
+  * Appelle la fonction move de tout les Enemy de la TileMap
+  */
   void enemyMove() const;
 
 

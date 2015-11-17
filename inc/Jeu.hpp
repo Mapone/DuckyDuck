@@ -46,6 +46,12 @@ public:
     */
 	~Jeu();
 
+	/**
+	* \fn void start()
+	* \brief Lance le jeu
+	*
+	* Ouvre la fenêtre et lance le jeu
+	*/
 	void start();
 
 	/**
@@ -103,15 +109,54 @@ public:
 	* \return Un StateEscMenu
 	*/
 	StateEscMenu* getStateEscMenu() const;
+
+	/**
+	* /fn StateMainMenu* getStateMainMenu() const
+	* \brief Getter du StateMainMenu
+	*
+	* Renvoi le StateMainMenu
+	*
+	* \return Un StateMainMenu
+	*/
 	StateMainMenu* getStateMainMenu() const;
+
+	/**
+	* /fn getStateStats* getStateMainMenu() const
+	* \brief Getter du getStateStats
+	*
+	* Renvoi le getStateStats
+	*
+	* \param IsLevelFinished : bool qui donne l'information si le niveau est finit ou non.
+	* \return Un getStateStats
+	*/
 	StateStats* getStateStats(bool IsLevelFinished) const;
 
-
+	/**
+	* \fn void initStateLevel() const
+	* \brief Appelle l'initialisation des stats
+	*
+	* Appelle la procédure init du StateLevel.
+	*/
 	void initStateLevel() const;
+
+	/**
+	* \fn bool changeToNextLevel()
+	* \brief Passe au niveau suivant
+	*
+	* Si il reste un niveau a charger, alors on le charge
+	* en tant que niveau en cours.
+	*
+	* \return Un boolean qui dit si le changement a été effectué.
+	*/
 	bool changeToNextLevel();
+
+	/**
+	* \fn TileMap* resetLevel()
+	* \brief Reset le level
+	*
+	* \retrun La TileMap reset.
+	*/
 	TileMap* resetLevel();
-
-
 
 	/**
 	* \fn void close()
@@ -122,6 +167,12 @@ public:
 	*/
 	void close();
 
+	/**
+	* \fn restartCharClock
+	* \brief Reset le timer du personnage.
+	*
+	* Appelle la fonction restartClock du personnage.
+	*/
 	void restartCharClock() const;
 
 
@@ -143,7 +194,6 @@ private:
 	* \brief Fonction qui attends les entrées et appelle les différentes méthodes.
 	*
 	* Gère les entrées utilisateurs et appelle ensuite la fonction rattachée.
-	*
 	*/
 	void input();
 

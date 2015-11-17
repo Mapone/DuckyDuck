@@ -114,11 +114,19 @@ public:
   */
   virtual void pressEnter();
 
+  /**
+  * \fn virtual void update()
+  * \brief Update le niveau en cours
+  *
+  * Vérifie les collisions, mets à jour la caméra
+  * On vérifie aussi la fin de niveau, les conditions de mort
+  * Et enfin on bouge les ennemis.
+  */
   virtual void update();
 
 
 protected:
-	Jeu *_jeu; /** Jeu rattaché au Pattern */
+  Jeu *_jeu; /** Jeu rattaché au Pattern */
 };
 
 #endif

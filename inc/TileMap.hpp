@@ -50,12 +50,60 @@ public:
     * \param tileset : string contenant le nom du fichier contenant les tuiles, tileSize : taille des tuiles
     */
     bool load(const std::string& tileset, sf::Vector2u tileSize);
-	
-
+    
+    /**
+    * \fn bool collision(const sf::Vector2f& point, const sf::Vector2f& vect) const
+    * \brief Vérifie la collision entre un point affecté par un vector et la map
+    *
+    * Vérifie si le point est en collision avec la map après son déplacement
+    *
+    * \param point : point à vérifier, vect : mouvement à appliquer pour la vérification
+    * \return Renvoi s'il y a une collision
+    */
     bool collision(const sf::Vector2f& point, const sf::Vector2f& vect) const;
+
+    /**
+    * \fn bool collisionHaut(const AliveEntity& ae) const
+    * \brief Vérifie la collision sur le haut de l'AliveEntity
+    *
+    * Vérifie si une collision existe entre le haut du paramètre et la map
+    *
+    * \param ae : objet à vérifier
+    * \return L'état de la collision
+    */
     bool collisionHaut(const AliveEntity& ae) const;
+
+    /**
+    * \fn bool collisionBas(const AliveEntity& ae) const
+    * \brief Vérifie la collision sur le bas de l'AliveEntity
+    *
+    * Vérifie si une collision existe entre le bas du paramètre et la map
+    *
+    * \param ae : objet à vérifier
+    * \return L'état de la collision
+    */
     bool collisionBas(const AliveEntity& ae) const;
+
+    /**
+    * \fn bool collisionDroite(const AliveEntity& ae) const
+    * \brief Vérifie la collision sur la droite de l'AliveEntity
+    *
+    * Vérifie si une collision existe entre la droite du paramètre et la map
+    *
+    * \param ae : objet à vérifier
+    * \return L'état de la collision
+    */
     bool collisionDroite(const AliveEntity& ae) const;
+
+    /**
+    * \fn bool collisionGauche(const AliveEntity& ae) const
+    * \brief Vérifie la collision sur la gauche de l'AliveEntity
+    *
+    * Vérifie si une collision existe entre la gauche du paramètre et la map
+    *
+    * \param ae : objet à vérifier
+    * \return L'état de la collision
+    */
     bool collisionGauche(const AliveEntity& ae) const;
 
     
@@ -96,16 +144,98 @@ public:
     *\return Un Vector2f du spawn.
     */
     sf::Vector2f getSpawn() const;
-    sf::RectangleShape* getLevelEnd();
-    std::string getLevelName() const;
-    std::vector<Enemy*> getEnemies();
-    unsigned int nextTileY(float x) const;
-    unsigned int previousTileY(float x) const;
-    void reset();
-    void changePositionX(float gap);
-    void changePositionY(float gap);
-    void killEnemy(Enemy* e);
 
+    /**
+    * \fn sf::RectangleShape* getLevelEnd()
+    * \brief Getter de la fin du niveau
+    *
+    * Récupère la RectangleShape du bloc de fin de niveau
+    *
+    * \return La RectangleShape de fin de niveau
+    */
+    sf::RectangleShape* getLevelEnd();
+
+    /**
+    * \fn std::string getLevelName() const
+    * \brief Getter du nom du niveau
+    *
+    * Récupère le nom du niveau en cours
+    *
+    * \return Le nom du niveau  
+    */
+    std::string getLevelName() const;
+
+    /**
+    * \fn std::vector<Enemy*> getEnemies()
+    * \brief Getter des ennemis
+    *
+    * Récupère un vector contenant la liste
+    * de tout les ennemis de la TileMap
+    *
+    * \return La liste des ennemis de la map
+    */
+    std::vector<Enemy*> getEnemies();
+
+    /**
+    * \fn unsigned int nextTileY(float x) const
+    * \brief Retourne la tuile suivante
+    *
+    * Renvoi le pixel ou commence la tuile
+    * suivant celle en parametre
+    *
+    * \return La tuile suivante
+    */
+    unsigned int nextTileY(float x) const;
+
+    /**
+    * \fn unsigned int previousTileY(float x) const
+    * \brief Retourne la tuile précédante
+    *
+    * Renvoi le pixel ou commence la tuile
+    * précédant celle en parametre
+    *
+    * \return La tuile précédante
+    */
+    unsigned int previousTileY(float x) const;
+
+    /**
+    * \fn void reset()
+    * \brief Réinitialise la map
+    *
+    * Supprime tout les ennemis
+    * et recharge le layer
+    */
+    void reset();
+
+    /**
+    * \fn void changePositionX(float gap)
+    * \brief Décale tout les objets de la TileMap
+    *
+    * Décale tout de gap pixels en X
+    *
+    * \param gap : valeur du décalage
+    */
+    void changePositionX(float gap);
+
+    /**
+    * \fn void changePositionY(double gap)
+    * \brief Décale tout les objets de la TileMap
+    *
+    * Décale tout de gap pixels en Y
+    *
+    * \param gap : valeur du décalage
+    */
+    void changePositionY(float gap);
+
+    /**
+    * \fn void killEnemy(Enemy*e)
+    * \brief Supprime l'Enemy tué
+    *
+    * Supprime un ennemi lors de sa mort
+    *
+    * \param e : ennemi tué
+    */
+    void killEnemy(Enemy* e);
 
 private:
 
@@ -120,7 +250,7 @@ private:
     
     /**
     * \fn void loadBMP(sf::Image niveau)
-    * \brief créer un tileset depuis une image
+    * \brief Créer un tileset depuis une image
     *
     * Prends un image pré-défini qui correspond à un niveau
     * et le transforme en un tileset
@@ -129,6 +259,15 @@ private:
     * \param niveau : image servant de base pour créer le niveau.
     */
     void loadBMP(sf::Image niveau);
+
+    /**
+    * \fn void loadLayer(sf::Image layer)
+    * \brief Ajoute les données du layer à la TileMap
+    *
+    * Ajoute les coordonnées du spawn, de la fin et du spawn des ennemis.
+    *
+    * \param layer : image du layer
+    */
     void loadLayer(sf::Image layer);
 
 
@@ -141,11 +280,9 @@ private:
     sf::Vector2f _gravity; /** Gravité (2D) */
     sf::Vector2f _spawn;  /** Point de spawn, en bas à gauche de la tuile */
     sf::RectangleShape _levelEnd; /** Bloc de fin de niveau */
-    sf::Texture flag;
-    std::string _levelName;
-    std::vector<Enemy*> _enemies;
-    sf::Image _layer;
+    sf::Texture flag; /** Texture du drapeau final */
+    std::string _levelName; /** Nom du niveau */
+    std::vector<Enemy*> _enemies; /** Liste des Enemy */
+    sf::Image _layer; /** Layer du niveau */
 };
-
-
 #endif

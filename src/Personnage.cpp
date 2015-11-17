@@ -13,7 +13,7 @@ Personnage::Personnage(const Vector2f &taille, Image &i, Texture &t) : AliveEnti
 	_textureDuck.loadFromImage(_imgDuck);
 	_shape.setTexture(&_textureDuck, true);
 	_textureDuck.update(_imgDuck);
-	lookRight = true;
+	_lookRight = true;
 }
 Personnage::~Personnage(){}
 
@@ -82,20 +82,20 @@ sf::Time Personnage::getElapsedTime() const
 
 void Personnage::flipRight()
 {
-	if(!lookRight)
+	if(!_lookRight)
 	{
 		_imgDuck.flipHorizontally();
 		_textureDuck.update(_imgDuck);
-		lookRight = true;
+		_lookRight = true;
 	}
 }
 
 void Personnage::flipLeft()
 {
-	if(lookRight)
+	if(_lookRight)
 	{
 		_imgDuck.flipHorizontally();
 		_textureDuck.update(_imgDuck);
-		lookRight = false;
+		_lookRight = false;
 	}
 }

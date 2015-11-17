@@ -9,7 +9,7 @@
 * \brief Gère l'ensemble des outils neccessaires à
 *	     l'éxécution des différentes méthodes du personnage.
 * \author {N. Guittonneau,P. Raballand}
-* \version 1.0
+* \version 1.1
 * \date 29/10/2015
 *
 * Gère toutes les méthodes d'un personnage
@@ -27,7 +27,7 @@ public:
 	*
 	* Constructeur de la classe Personnage.
 	*
-	* \param taille : taille (en 2D) du personnage.
+	* \param taille : taille (en 2D) du personnage, i : image du personnage, t : texture du personnage.
 	*/
 	Personnage(const sf::Vector2f &taille, sf::Image &i, sf::Texture &t);
 
@@ -60,18 +60,47 @@ public:
 	*/
 	void move(sf::Vector2f v);
 
+	/**
+	* \fn void restartClock()
+	* \brief relance la clock du personnage
+	*
+	* Appelle un fonction de SFML qui reset la clock.
+	*/
 	void restartClock();
+
+	/**
+	* \fn sf::Time getElapsedTime() const
+	* \brief Récupère le temps écoulé
+	*
+	* Retourne le temps passé depuis
+	* la dernière ré-initialisation de la clock
+	*
+	* \return La durée qui s'est écoulé depuis le début du niveau
+	*/
 	sf::Time getElapsedTime() const;
 
+	/**
+	* \fn void flipRight()
+	* \brief Tourne la texture vers la droite
+	*
+	* Fait regarder le canard à droite
+	*/
 	void flipRight();
+	
+	/**
+	* \fn void flipLeft()
+	* \brief Tourne la texture à gauche
+	*
+	* Fait regarder le canard à gauche
+	*/
 	void flipLeft();
 
 
 private:
-	sf::Clock _clock;
-	sf::Image _imgDuck;
-	sf::Texture _textureDuck;
-	bool lookRight;
+	sf::Clock _clock; /** Clock gérer par SFML */
+	sf::Image _imgDuck; /** Image du personnage */
+	sf::Texture _textureDuck; /** Texture créer par l'image */
+	bool _lookRight; /** Direction D/G vers ou le personnage est touné */
 };
 
 
