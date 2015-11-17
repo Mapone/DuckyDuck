@@ -35,7 +35,7 @@ void AI_JumpRandom::move()
     }
 
     if(colBas)
-    _enemy->setMouvement(sf::Vector2f(_enemy->getMouvement().x,-8));
+    _enemy->setMouvement(sf::Vector2f(_enemy->getMouvement().x,-4));
 
     if(colHaut)
     _enemy->setMouvement(sf::Vector2f(_enemy->getMouvement().x,0));
