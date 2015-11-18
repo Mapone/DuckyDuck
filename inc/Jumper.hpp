@@ -15,6 +15,7 @@
 */
 
 class TileMap;
+class Personnage;
 
 /**
 * \class Jumper
@@ -37,6 +38,7 @@ public:
 
 	Jumper(const sf::Vector2f &taille, const sf::Vector2f &position,  TileMap& tilemap, int speed, int jumpHeight);
 
+	Jumper(const sf::Vector2f &taille, TileMap& tilemap, const Personnage& perso, int speed, int jumpHeight);
 
 	/**
 	* \fn Enemy* clone();

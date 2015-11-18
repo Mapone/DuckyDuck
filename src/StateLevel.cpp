@@ -99,6 +99,10 @@ void StateLevel::enemyMove() const
     {
         enemy->move();
         collisionEnemy(enemy);
+
+        //Si il tombe dans un trou
+        if(enemy->getPosition().y > _tilemap->getHeight()*16)
+            _tilemap->killEnemy(enemy);
     }
 }
 

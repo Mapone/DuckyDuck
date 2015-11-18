@@ -10,7 +10,7 @@
 
 using namespace std;
 
-TileMap::TileMap(string levelName, sf::Vector2f &gravity)
+TileMap::TileMap(string levelName, sf::Vector2f &gravity, const Personnage& p): _perso(p)
 {
     _levelName = levelName;
     _gravity = gravity;
@@ -259,13 +259,16 @@ void TileMap::loadLayer(sf::Image layer)
     const uint8_t *t;
     t = layer.getPixelsPtr();
 
+
+    Enemy* jumperPrototype = new Jumper(sf::Vector2f(15,15),*this, 2, 5);
+    Spawner* jumperSpawner = new Spawner(jumperPrototype);
+
     Enemy* tmp = new Jumper(sf::Vector2f(5,5),*this, 1, 3);
-
-    Enemy* walkerPrototype = new Jumper(sf::Vector2f(15,15),*this, 7, 5);
-    Spawner* walkerSpawner = new Spawner(walkerPrototype);
-
     Enemy* boomerPrototype = new Boomer(sf::Vector2f(15,15),*this,1,tmp);
     Spawner* boomerSpawner = new Spawner(boomerPrototype);
+
+
+
 
     for (unsigned int i = 0; i < (layer.getSize().x*layer.getSize().y*4); i+=4)
     { 
@@ -296,7 +299,7 @@ void TileMap::loadLayer(sf::Image layer)
         {
             //JUMPER
            int j = i/4;
-            Enemy* e = walkerSpawner->spawnEnemy();
+            Enemy* e = jumperSpawner->spawnEnemy();
             e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
             _enemies.push_back(e);
         }
@@ -305,6 +308,14 @@ void TileMap::loadLayer(sf::Image layer)
             //BOOMER
            int j = i/4;
             Enemy* e = boomerSpawner->spawnEnemy();
+            e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
+            _enemies.push_back(e);
+        }
+        else if( static_cast<int>(t[i]) == 127 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 127)
+        {
+            //FOLLOWER
+           int j = i/4;
+            Enemy* e = new Jumper(sf::Vector2f(15,15),*this, _perso, 2, 5); 
             e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
             _enemies.push_back(e);
         }
@@ -353,6 +364,7 @@ void TileMap::changePositionY(float gap)
 
 void TileMap::killEnemy(Enemy* e)
 {
+    cout << "DIE"<< endl;
     _enemies.erase(std::remove(_enemies.begin(), _enemies.end(), e), _enemies.end());
 }
 

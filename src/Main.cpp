@@ -24,12 +24,6 @@ Si y'a le temps:
 
 int main()
 {
-//-------------------Chargement du premier niveau-----------------
-//----------------------------------------------------------------
-    
-    sf::Vector2f gravity(0,0.2);
-    TileMap map("lvl4", gravity);
-
 //-------------------Creation du personnage-----------------------
 //----------------------------------------------------------------
 
@@ -43,19 +37,26 @@ int main()
 
     //On initialize une texture
     sf::Texture t;
-    Personnage mario(sf::Vector2f(15,15), i, t);
+    Personnage ducky(sf::Vector2f(15,15), i, t);
+
+
+//-------------------Chargement du premier niveau-----------------
+//----------------------------------------------------------------
+    
+    sf::Vector2f gravity(0,0.2);
+    TileMap map("lvl4", gravity, ducky);
 
 //-------------------Création du Jeu------------------------------
 //----------------------------------------------------------------
 
-    Jeu jeu(map, mario);
+    Jeu jeu(map, ducky);
 
     
 //--------- Création et ajout des niveaux -----------------
 //---------------------------------------------------------
-    TileMap map1("montagne", gravity);
+    TileMap map1("montagne", gravity, ducky);
     jeu.addLevel(&map1);
-    TileMap map2("lvl3", gravity);
+    TileMap map2("lvl3", gravity, ducky);
     jeu.addLevel(&map2);
 
 ///////////////////////////////////////

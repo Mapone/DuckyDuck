@@ -5,6 +5,7 @@
 #include "Enemy.hpp"
 
 class AliveEntity;
+class Personnage;
 /**
 * \file TileMap.hpp
 * \brief Gère les différentes interactions avec la map.
@@ -31,7 +32,7 @@ public:
     *
     * \param niveau : string définissant le niveau par des tuiles, gravity : Vecteur 2D initialisant la gravité. 
     */
-    TileMap(std::string niveau, sf::Vector2f &gravity);
+    TileMap(std::string niveau, sf::Vector2f &gravity, const Personnage& p);
 
     /**
     * \brief Destrcuteur
@@ -292,5 +293,6 @@ private:
     std::string _levelName; /** Nom du niveau */
     std::vector<Enemy*> _enemies; /** Liste des Enemy */
     sf::Image _layer; /** Layer du niveau */
+    const Personnage& _perso;/** Le personnage principal, necessaire pour la création de certains ennemis*/
 };
 #endif

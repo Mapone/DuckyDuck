@@ -1,0 +1,46 @@
+#include <iostream>
+#include "AI_Follower.hpp"
+#include "TileMap.hpp"
+#include "Jumper.hpp"
+#include "Personnage.hpp"
+
+AI_Follower::AI_Follower(Jumper* follower, const TileMap& tilemap, const Personnage& p) : AI(follower,tilemap), _follower(follower), _perso(p)
+{
+	_directionX = false;
+}
+
+void AI_Follower::move()
+{
+	 //On applique d'abord la gravité
+    _follower->addMouvement(_tileMap.getGravity());
+
+    //On applique le futur mouvement
+    if(_perso.getPosition().x > _follower->getPosition().x)
+    	_follower->addMouvement(_follower->getSpeed(),0);
+    else
+    	_follower->addMouvement(-_follower->getSpeed(),0);
+
+    bool colGauche, colDroite, colBas, colHaut;
+
+    colGauche = _tileMap.collisionGauche(*_follower);
+    colDroite = _tileMap.collisionDroite(*_follower);
+    colBas = _tileMap.collisionBas(*_follower);
+    colHaut = _tileMap.collisionHaut(*_follower);
+
+    if(colHaut || colBas)
+    _follower->setMouvement(sf::Vector2f(_follower->getMouvement().x,0));
+
+    //Je change de sens si je detecte une collision
+    if(colGauche || colDroite)
+        _follower->setMouvement(sf::Vector2f(0,-_follower->getJumpHeight()));
+    
+
+    	
+
+    if(!(colDroite && colGauche))
+        _follower->setPosition(_follower->getPosition().x + _follower->getMouvement().x, _follower->getPosition().y + _follower->getMouvement().y); 
+
+    //On reste le mouvement en x
+    _follower->setMouvement(sf::Vector2f(0,_follower->getMouvement().y));
+
+}
