@@ -315,7 +315,7 @@ void TileMap::loadLayer(sf::Image layer)
         {
             //FOLLOWER
            int j = i/4;
-            Enemy* e = new Jumper(sf::Vector2f(15,15),*this, _perso, 2, 5); 
+            Enemy* e = new Jumper(sf::Vector2f(15,15),*this, _perso, 2, 3); 
             e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
             _enemies.push_back(e);
         }
@@ -364,7 +364,6 @@ void TileMap::changePositionY(float gap)
 
 void TileMap::killEnemy(Enemy* e)
 {
-    cout << "DIE"<< endl;
     _enemies.erase(std::remove(_enemies.begin(), _enemies.end(), e), _enemies.end());
 }
 

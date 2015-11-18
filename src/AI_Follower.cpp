@@ -25,22 +25,25 @@ void AI_Follower::move()
     colGauche = _tileMap.collisionGauche(*_follower);
     colDroite = _tileMap.collisionDroite(*_follower);
     colBas = _tileMap.collisionBas(*_follower);
-    colHaut = _tileMap.collisionHaut(*_follower);
 
-    if(colHaut || colBas)
+    if(colBas)
     _follower->setMouvement(sf::Vector2f(_follower->getMouvement().x,0));
 
     //Je change de sens si je detecte une collision
     if(colGauche || colDroite)
-        _follower->setMouvement(sf::Vector2f(0,-_follower->getJumpHeight()));
+        _follower->setMouvement(sf::Vector2f(0,_follower->getMouvement().y));
     
-
-    	
+    if(colBas && (colGauche || colDroite))
+        _follower->addMouvement(sf::Vector2f(0,-_follower->getJumpHeight()));
+        
+    colHaut = _tileMap.collisionHaut(*_follower);
+    if(colHaut)
+        _follower->setMouvement(sf::Vector2f(_follower->getMouvement().x,0));
 
     if(!(colDroite && colGauche))
         _follower->setPosition(_follower->getPosition().x + _follower->getMouvement().x, _follower->getPosition().y + _follower->getMouvement().y); 
 
-    //On reste le mouvement en x
+    //On reset le mouvement en x
     _follower->setMouvement(sf::Vector2f(0,_follower->getMouvement().y));
 
 }
