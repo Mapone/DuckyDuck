@@ -237,6 +237,14 @@ public:
     */
     void killEnemy(Enemy* e);
 
+    /**
+     * @brief Ajoute un enemy au niveau
+     * @details Ajoute un enemy au niveau
+     * 
+     * @param e L'ennemi à ajouter
+     */
+    void addEnemy(Enemy *e);
+
 private:
 
     /**

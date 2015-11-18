@@ -82,7 +82,7 @@ bool StateLevel::collisionEnemy(Enemy *e) const
         {
             _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x, -5));
             _perso.setCurrentKill(_perso.getCurrentKill() + 1);
-            _tilemap->killEnemy(e);
+            e->jumpOn();
             return false;
         }
         else

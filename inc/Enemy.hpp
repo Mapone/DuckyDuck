@@ -36,7 +36,7 @@ public:
 	*
 	* \param taille : taille de l'objet, tilemap : TileMap à laquelle l'ennemi est rattaché.
 	*/
-	Enemy(const sf::Vector2f &taille, const TileMap &tilemap);
+	Enemy(const sf::Vector2f &taille, TileMap &tilemap);
 
 	/**
 	* \brief Destrcuteur
@@ -65,11 +65,17 @@ public:
 	*/
 	virtual Enemy* clone() = 0;
 
+	/**
+	 * @brief Actions à faire si on saute sur l'ennemi
+	 * @details Actions à faire si on saute sur l'ennemi
+	 */
+	virtual void jumpOn();
+
 protected:
 	AI* _AI; /** IA de l'ennemi */
 
 	//L'enemi doit avoir conscience de sa TileMap
-	const TileMap& _tileMap; /** TileMap sur laquelle l'ennemi existe. */
+	TileMap& _tileMap; /** TileMap sur laquelle l'ennemi existe. */
 
 };
 

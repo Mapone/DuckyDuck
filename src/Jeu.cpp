@@ -64,7 +64,9 @@ void Jeu::start()
         {       
             //Si on ferme la fenêtre par n'importe quel moyen (croix, ALT+F4...)
             if (event.type == Event::Closed)
+            {
                 window.close();
+            }
 
             //On regarde si une touche a été pressée
             if (event.type == sf::Event::KeyPressed)

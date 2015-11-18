@@ -259,11 +259,12 @@ void TileMap::loadLayer(sf::Image layer)
     const uint8_t *t;
     t = layer.getPixelsPtr();
 
+    Enemy* tmp = new Jumper(sf::Vector2f(5,5),*this, 1, 3);
 
     Enemy* walkerPrototype = new Jumper(sf::Vector2f(15,15),*this, 7, 5);
     Spawner* walkerSpawner = new Spawner(walkerPrototype);
 
-    Enemy* boomerPrototype = new Boomer(sf::Vector2f(15,15),*this,1);
+    Enemy* boomerPrototype = new Boomer(sf::Vector2f(15,15),*this,1,tmp);
     Spawner* boomerSpawner = new Spawner(boomerPrototype);
 
     for (unsigned int i = 0; i < (layer.getSize().x*layer.getSize().y*4); i+=4)
@@ -355,6 +356,10 @@ void TileMap::killEnemy(Enemy* e)
     _enemies.erase(std::remove(_enemies.begin(), _enemies.end(), e), _enemies.end());
 }
 
+void TileMap::addEnemy(Enemy *e)
+{
+    _enemies.push_back(e);
+}
 
 unsigned int TileMap::nextTileY(float x) const
 {

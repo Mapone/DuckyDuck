@@ -15,6 +15,7 @@
 */
 
 class TileMap;
+class Spawner;
 
 /**
 * \class Boomer
@@ -31,8 +32,11 @@ public:
 	 * @param taille Taille de la hitbox
 	 * @param tilemap Map sur laquelle est l'ennemi
 	 * @param grossissement par frame 
+	 * @param l'ennemi qui sortiera une fois le boomer tué
 	 */
-	Boomer(const sf::Vector2f &taille, const TileMap& tilemap, int fatPerFrame);
+	Boomer(const sf::Vector2f &taille, TileMap& tilemap, int fatPerFrame, Enemy* prototype);
+
+	~Boomer();
 
 	/**
 	* \fn Enemy* clone();
@@ -51,8 +55,13 @@ public:
 	 */
 	unsigned int getFatPerFrame() const;
 
+	void jumpOn();
+
+
 private:
 	unsigned int _fatPerFrame;
+	Spawner* _jumperSpawn;
+	Enemy* _prototype;
 };
 
 

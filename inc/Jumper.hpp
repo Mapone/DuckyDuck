@@ -33,7 +33,7 @@ public:
 	 * @param int Sa vitesse, en pixels par frame
 	 * @param int Sa hauteur de saut, poussée en Y
 	 */
-	Jumper(const sf::Vector2f &taille, const TileMap& tilemap, int speed, int jumpHeight);
+	Jumper(const sf::Vector2f &taille, TileMap& tilemap, int speed, int jumpHeight);
 
 	/**
 	* \fn Enemy* clone();
@@ -58,7 +58,7 @@ public:
 	 * @return La valeur de la poussée en Y
 	 */
 	int getJumpHeight() const;
-
+	
 private:
 	int _speed;
 	int _jumpHeight;
