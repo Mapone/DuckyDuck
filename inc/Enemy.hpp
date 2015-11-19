@@ -76,11 +76,15 @@ public:
 	*/
 	virtual unsigned int getReward() const;
 
+	bool isDead();
+
+
 protected:
 	AI* _AI; /** IA de l'ennemi */
 
 	//L'enemi doit avoir conscience de sa TileMap
 	TileMap& _tileMap; /** TileMap sur laquelle l'ennemi existe. */
+	bool _isDead;
 
 };
 

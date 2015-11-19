@@ -3,7 +3,7 @@
 #include "TileMap.hpp"
 #include "AI.hpp"
 
-Enemy::Enemy(const sf::Vector2f &taille, TileMap &tilemap) : AliveEntity(taille), _tileMap(tilemap) 
+Enemy::Enemy(const sf::Vector2f &taille, TileMap &tilemap) : AliveEntity(taille), _tileMap(tilemap), _isDead(false)
 {}
 
 Enemy::~Enemy()
@@ -18,10 +18,15 @@ void Enemy::move()
 
 void Enemy::jumpOn()
 {
-	_tileMap.killEnemy(this);
+	_isDead = true;
 }
 
 unsigned int Enemy::getReward() const
 {
 	return 10;
+}
+
+bool Enemy::isDead()
+{
+	return _isDead;
 }

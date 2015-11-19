@@ -6,6 +6,7 @@
 #include "AliveEntity.hpp"
 #include "Spawner.hpp"
 #include "Jumper.hpp"
+#include "Follower.hpp"
 #include "Boomer.hpp"
 
 using namespace std;
@@ -263,6 +264,9 @@ void TileMap::loadLayer(sf::Image layer)
     Enemy* jumperPrototype = new Jumper(sf::Vector2f(15,15),*this, 2, 3);
     Spawner* jumperSpawner = new Spawner(jumperPrototype);
 
+    Enemy* followerPrototype = new Follower(sf::Vector2f(15,15),*this, _perso,1, 3);
+    Spawner* followerSpawner = new Spawner(followerPrototype);
+
     Enemy* tmp = new Jumper(sf::Vector2f(5,5),*this, 1, 3);
     Enemy* boomerPrototype = new Boomer(sf::Vector2f(15,15),*this,1,tmp);
     Spawner* boomerSpawner = new Spawner(boomerPrototype);
@@ -314,8 +318,8 @@ void TileMap::loadLayer(sf::Image layer)
         else if( static_cast<int>(t[i]) == 127 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 127)
         {
             //FOLLOWER
-            int j = i/4;
-            Enemy* e = new Jumper(sf::Vector2f(15,15),*this, _perso, 2, 3); 
+           int j = i/4;
+            Enemy* e = followerSpawner->spawnEnemy();
             e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
             _enemies.push_back(e);
         }

@@ -17,7 +17,7 @@
 * Hérite du AI.
 */
 
-class Jumper;
+class Follower;
 class Personnage;
 
 /**
@@ -37,7 +37,7 @@ public:
 	 * @param tilemap La tileMap sur laquelle est l'ennemi
 	 * @param p Le personnage à suivre
 	 */
-    AI_Follower(Jumper* follower, const TileMap& tilemap, const Personnage& p);
+    AI_Follower(Follower* follower, const TileMap& tilemap, const Personnage& p);
 
     /**
 	* \fn virtual void move()
@@ -51,7 +51,7 @@ public:
 private:
 
 	bool _directionX; /** Bool qui vérifiant si l'on doit inverser le mouvement en X (collision) */
-	Jumper* _follower;
+	Follower* _follower;
 	const Personnage& _perso;
 };
 

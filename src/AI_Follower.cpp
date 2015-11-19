@@ -1,10 +1,10 @@
 #include <iostream>
 #include "AI_Follower.hpp"
 #include "TileMap.hpp"
-#include "Jumper.hpp"
+#include "Follower.hpp"
 #include "Personnage.hpp"
 
-AI_Follower::AI_Follower(Jumper* follower, const TileMap& tilemap, const Personnage& p) : AI(follower,tilemap), _follower(follower), _perso(p)
+AI_Follower::AI_Follower(Follower* follower, const TileMap& tilemap, const Personnage& p) : AI(follower,tilemap), _follower(follower), _perso(p)
 {
 	_directionX = false;
 }

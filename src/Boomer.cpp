@@ -30,17 +30,10 @@ unsigned int Boomer::getFatPerFrame() const
 
 void Boomer::jumpOn()
 {
-	/*
-	Enemy* tmp;
-
-	tmp = _jumperSpawn->spawnEnemy();
-	tmp->setPosition(getPosition());
-
-	Enemy = */
+	_isDead = true;
 	_tileMap.addEnemy(new Jumper(sf::Vector2f(8,8),sf::Vector2f(getPosition().x, getPosition().y + 5),_tileMap, -2, 5));
 	_tileMap.addEnemy(new Jumper(sf::Vector2f(8,8),sf::Vector2f(getPosition().x, getPosition().y + 5),_tileMap, -1, 5));
 	_tileMap.addEnemy(new Jumper(sf::Vector2f(8,8),sf::Vector2f(getPosition().x, getPosition().y + 5),_tileMap, -0, 5));
 	_tileMap.addEnemy(new Jumper(sf::Vector2f(8,8),sf::Vector2f(getPosition().x, getPosition().y + 5),_tileMap, 1, 5));
 	_tileMap.addEnemy(new Jumper(sf::Vector2f(8,8),sf::Vector2f(getPosition().x, getPosition().y + 5),_tileMap, 2, 5));
-	_tileMap.killEnemy(this);
 }
