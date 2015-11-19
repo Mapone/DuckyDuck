@@ -52,7 +52,7 @@ public:
 	* Fonction utilisant le Pattern Strategy AI pour mouvoir l'ennemi
 	* 
 	*/
-	void move();
+	virtual void move();
 
 	/**
 	* \fn virtual Enemy* clone()

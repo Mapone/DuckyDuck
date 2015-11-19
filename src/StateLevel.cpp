@@ -38,6 +38,7 @@ void StateLevel::setLevel(TileMap* t)
 
 void StateLevel::update()
 {
+
     //On check les collisions sur la map
     checkMapCollision();
     updateCamera();
@@ -90,7 +91,7 @@ bool StateLevel::collisionEnemy(Enemy *e) const
         }
         else
         { 
-            return false;
+            return true;
         }
     }
     return false;
@@ -102,6 +103,7 @@ void StateLevel::enemyMove() const
     {
         enemy->move();
         collisionEnemy(enemy);
+
 
         //Si il tombe dans un trou
         if(enemy->getPosition().y > _tilemap->getHeight()*16)

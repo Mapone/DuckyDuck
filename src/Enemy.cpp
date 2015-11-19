@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Enemy.hpp"
 #include "TileMap.hpp"
