@@ -1,4 +1,0 @@
-<map id="TileMap.hpp" name="TileMap.hpp">
-<area shape="rect" id="node3" href="$_enemy_8hpp.html" title="Classe définissant les ennemis. " alt="" coords="87,80,175,107"/>
-<area shape="rect" id="node4" href="$_alive_entity_8hpp.html" title="Classe définissant les objets &quot;vivants&quot;. " alt="" coords="75,155,185,181"/>
-</map>

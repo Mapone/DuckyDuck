@@ -1,7 +1,0 @@
-<map id="Jeu.hpp" name="Jeu.hpp">
-<area shape="rect" id="node2" href="$_state_8hpp.html" title="State. " alt="" coords="251,80,329,107"/>
-<area shape="rect" id="node3" href="$_state_esc_menu_8hpp.html" title="Menu Pause du jeu. " alt="" coords="5,155,139,181"/>
-<area shape="rect" id="node4" href="$_state_level_8hpp.html" title="Etat en jeu. " alt="" coords="163,155,272,181"/>
-<area shape="rect" id="node5" href="$_state_main_menu_8hpp.html" title="Menu principal. " alt="" coords="296,155,435,181"/>
-<area shape="rect" id="node6" href="$_state_stats_8hpp.html" title="Affichage en fin de niveau. " alt="" coords="459,155,568,181"/>
-</map>

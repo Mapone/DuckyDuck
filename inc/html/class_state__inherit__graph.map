@@ -1,6 +1,0 @@
-<map id="State" name="State">
-<area shape="rect" id="node4" href="$class_state_esc_menu.html" title="Etat EscMenu rattaché au Pattern State. " alt="" coords="5,155,112,181"/>
-<area shape="rect" id="node5" href="$class_state_level.html" title="Etat StateLevel rattaché au Pattern State. " alt="" coords="137,155,220,181"/>
-<area shape="rect" id="node6" href="$class_state_main_menu.html" title="Etat MainMenu rattaché au Pattern State. " alt="" coords="245,155,357,181"/>
-<area shape="rect" id="node7" href="$class_state_stats.html" title="Etat StateStats rattaché au Pattern State. " alt="" coords="382,155,465,181"/>
-</map>

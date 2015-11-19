@@ -1,7 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_a_i.html" title="Classe abstraites pour les IA des ennemis. " alt="" coords="6,81,45,108"/>
-<area shape="rect" id="node2" href="$class_a_i___boomer.html" title="Classe gérant l&#39;AI des ennemi qui sautent. " alt="" coords="101,5,187,32"/>
-<area shape="rect" id="node3" href="$class_a_i___follower.html" title="Classe gérant l&#39;AI des ennemi qui sautent. " alt="" coords="99,56,189,83"/>
-<area shape="rect" id="node4" href="$class_a_i___jumper.html" title="Classe gérant l&#39;AI des ennemi qui sautent. " alt="" coords="101,107,187,133"/>
-<area shape="rect" id="node5" href="$class_a_i___land_base.html" title="Classe gérant l&#39;AI des ennemi qui marchent. " alt="" coords="94,157,194,184"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="AliveEntity" name="AliveEntity">
-<area shape="rect" id="node2" href="$class_enemy.html" title="Classe abstraite qui définissant les objets &quot;vivants&quot;. " alt="" coords="53,80,115,107"/>
-<area shape="rect" id="node5" href="$class_personnage.html" title="Classe définissant un personnage. " alt="" coords="140,80,231,107"/>
-<area shape="rect" id="node3" href="$class_boomer.html" title="Classe gérant les ennemi qui explosent et se devisent. " alt="" coords="5,155,72,181"/>
-<area shape="rect" id="node4" href="$class_jumper.html" title="Classe gérant les ennemi qui marchent. " alt="" coords="97,155,161,181"/>
-</map>
