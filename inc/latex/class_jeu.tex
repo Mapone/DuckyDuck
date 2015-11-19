@@ -1,0 +1,309 @@
+\hypertarget{class_jeu}{\section{Jeu Class Reference}
+\label{class_jeu}\index{Jeu@{Jeu}}
+}
+
+
+Gère tout la fenêtre et les interactions lors d'une partie.  
+
+
+
+
+{\ttfamily \#include $<$Jeu.\+hpp$>$}
+
+
+
+Inheritance diagram for Jeu\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{class_jeu__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Jeu\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{class_jeu__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_jeu_ab1215a7dd0ff35aab33aa75d35be033d}{Jeu} (\hyperlink{class_tile_map}{Tile\+Map} \&t, \hyperlink{class_personnage}{Personnage} \&p)
+\begin{DoxyCompactList}\small\item\em Constructeur. \end{DoxyCompactList}\item 
+\hyperlink{class_jeu_a9cd19e73df169d7f09397be61ba8548c}{$\sim$\+Jeu} ()
+\begin{DoxyCompactList}\small\item\em Destructeur. \end{DoxyCompactList}\item 
+void \hyperlink{class_jeu_ae576e644696381ad0a1c165c6dc789b4}{start} ()
+\begin{DoxyCompactList}\small\item\em Lance le jeu. \end{DoxyCompactList}\item 
+void \hyperlink{class_jeu_abf2ef17f214900d6a862d9943f2f15c7}{add\+Level} (\hyperlink{class_tile_map}{Tile\+Map} $\ast$t)
+\begin{DoxyCompactList}\small\item\em Ajout d'un niveau au \hyperlink{class_jeu}{Jeu}. \end{DoxyCompactList}\item 
+\hyperlink{class_tile_map}{Tile\+Map} $\ast$ \hyperlink{class_jeu_ace73ca775ed5e7a13560a541b0c2b8a1}{get\+Current\+Level} () const 
+\begin{DoxyCompactList}\small\item\em Récupère le niveau en cours. \end{DoxyCompactList}\item 
+const sf\+::\+Font \& \hyperlink{class_jeu_afeedcd4eab224f8bfbd3d34593a06297}{get\+Font} () const 
+\begin{DoxyCompactList}\small\item\em Récupère le Font rattachée. \end{DoxyCompactList}\item 
+void \hyperlink{class_jeu_ab1e361ec100fae4090ffb062f797b7b5}{set\+State} (\hyperlink{class_state}{State} $\ast$s)
+\begin{DoxyCompactList}\small\item\em Setter du \hyperlink{class_state}{State}. \end{DoxyCompactList}\item 
+\hyperlink{class_state_level}{State\+Level} $\ast$ \hyperlink{class_jeu_a2632dcd588e4cfb6cc38076cb807190c}{get\+State\+Level} () const 
+\begin{DoxyCompactList}\small\item\em Getter du \hyperlink{class_state_level}{State\+Level}. \end{DoxyCompactList}\item 
+\hyperlink{class_state_esc_menu}{State\+Esc\+Menu} $\ast$ \hyperlink{class_jeu_af4e8d3d39a32c20fed3e397a6e2cd939}{get\+State\+Esc\+Menu} () const 
+\begin{DoxyCompactList}\small\item\em Getter du \hyperlink{class_state_esc_menu}{State\+Esc\+Menu}. \end{DoxyCompactList}\item 
+\hyperlink{class_state_main_menu}{State\+Main\+Menu} $\ast$ \hyperlink{class_jeu_a09945f1c10ce230032fcdc3f25d19171}{get\+State\+Main\+Menu} () const 
+\begin{DoxyCompactList}\small\item\em Getter du \hyperlink{class_state_main_menu}{State\+Main\+Menu}. \end{DoxyCompactList}\item 
+\hyperlink{class_state_stats}{State\+Stats} $\ast$ \hyperlink{class_jeu_a5410b8b324962476890c9a123fc70d90}{get\+State\+Stats} (bool Is\+Level\+Finished) const 
+\begin{DoxyCompactList}\small\item\em Getter du get\+State\+Stats. \end{DoxyCompactList}\item 
+void \hyperlink{class_jeu_a8bba4f66ac8ea96d51bf889a55e93ffe}{init\+State\+Level} () const 
+\begin{DoxyCompactList}\small\item\em Appelle l'initialisation des stats. \end{DoxyCompactList}\item 
+bool \hyperlink{class_jeu_a8be6f5df4a2571ded83690a842b8f962}{change\+To\+Next\+Level} ()
+\begin{DoxyCompactList}\small\item\em Passe au niveau suivant. \end{DoxyCompactList}\item 
+\hyperlink{class_tile_map}{Tile\+Map} $\ast$ \hyperlink{class_jeu_a596d11f5941768eb94a71ffedabdfd03}{reset\+Level} ()
+\begin{DoxyCompactList}\small\item\em Reset le level. \end{DoxyCompactList}\item 
+void \hyperlink{class_jeu_afd75e6f1113c08b62e9794a9c78425d3}{close} ()
+\begin{DoxyCompactList}\small\item\em Enregistre la fermeture de la fenêtre. \end{DoxyCompactList}\item 
+void \hyperlink{class_jeu_ac92789bfe84b9a8df297978643b26ed5}{restart\+Char\+Clock} () const 
+\begin{DoxyCompactList}\small\item\em Reset le timer du personnage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Gère tout la fenêtre et les interactions lors d'une partie. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_jeu_ab1215a7dd0ff35aab33aa75d35be033d}{\index{Jeu@{Jeu}!Jeu@{Jeu}}
+\index{Jeu@{Jeu}!Jeu@{Jeu}}
+\subsubsection[{Jeu}]{\setlength{\rightskip}{0pt plus 5cm}Jeu\+::\+Jeu (
+\begin{DoxyParamCaption}
+\item[{{\bf Tile\+Map} \&}]{t, }
+\item[{{\bf Personnage} \&}]{p}
+\end{DoxyParamCaption}
+)}}\label{class_jeu_ab1215a7dd0ff35aab33aa75d35be033d}
+
+
+Constructeur. 
+
+Constructeur de la classe \hyperlink{class_jeu}{Jeu}
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & \+: \hyperlink{class_tile_map}{Tile\+Map} à générer, p \+: \hyperlink{class_personnage}{Personnage} à jouer. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_jeu_a9cd19e73df169d7f09397be61ba8548c}{\index{Jeu@{Jeu}!````~Jeu@{$\sim$\+Jeu}}
+\index{````~Jeu@{$\sim$\+Jeu}!Jeu@{Jeu}}
+\subsubsection[{$\sim$\+Jeu}]{\setlength{\rightskip}{0pt plus 5cm}Jeu\+::$\sim$\+Jeu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_jeu_a9cd19e73df169d7f09397be61ba8548c}
+
+
+Destructeur. 
+
+Destructeur de la classe \hyperlink{class_jeu}{Jeu} 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_jeu_abf2ef17f214900d6a862d9943f2f15c7}{\index{Jeu@{Jeu}!add\+Level@{add\+Level}}
+\index{add\+Level@{add\+Level}!Jeu@{Jeu}}
+\subsubsection[{add\+Level}]{\setlength{\rightskip}{0pt plus 5cm}void Jeu\+::add\+Level (
+\begin{DoxyParamCaption}
+\item[{{\bf Tile\+Map} $\ast$}]{t}
+\end{DoxyParamCaption}
+)}}\label{class_jeu_abf2ef17f214900d6a862d9943f2f15c7}
+
+
+Ajout d'un niveau au \hyperlink{class_jeu}{Jeu}. 
+
+Méthode permettant d'ajouter un level depuis une \hyperlink{class_tile_map}{Tile\+Map} au \hyperlink{class_jeu}{Jeu}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & \+: La \hyperlink{class_tile_map}{Tile\+Map} à ajouter comme niveau. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_jeu_a8be6f5df4a2571ded83690a842b8f962}{\index{Jeu@{Jeu}!change\+To\+Next\+Level@{change\+To\+Next\+Level}}
+\index{change\+To\+Next\+Level@{change\+To\+Next\+Level}!Jeu@{Jeu}}
+\subsubsection[{change\+To\+Next\+Level}]{\setlength{\rightskip}{0pt plus 5cm}bool Jeu\+::change\+To\+Next\+Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_jeu_a8be6f5df4a2571ded83690a842b8f962}
+
+
+Passe au niveau suivant. 
+
+Si il reste un niveau a charger, alors on le charge en tant que niveau en cours.
+
+\begin{DoxyReturn}{Returns}
+Un boolean qui dit si le changement a été effectué. 
+\end{DoxyReturn}
+\hypertarget{class_jeu_afd75e6f1113c08b62e9794a9c78425d3}{\index{Jeu@{Jeu}!close@{close}}
+\index{close@{close}!Jeu@{Jeu}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void Jeu\+::close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_jeu_afd75e6f1113c08b62e9794a9c78425d3}
+
+
+Enregistre la fermeture de la fenêtre. 
+
+Passe un global bool en false afin d'enregistrer la fermeture de la fenêtr principale. \hypertarget{class_jeu_ace73ca775ed5e7a13560a541b0c2b8a1}{\index{Jeu@{Jeu}!get\+Current\+Level@{get\+Current\+Level}}
+\index{get\+Current\+Level@{get\+Current\+Level}!Jeu@{Jeu}}
+\subsubsection[{get\+Current\+Level}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tile\+Map} $\ast$ Jeu\+::get\+Current\+Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_jeu_ace73ca775ed5e7a13560a541b0c2b8a1}
+
+
+Récupère le niveau en cours. 
+
+Fonction permettant de récupérer la \hyperlink{class_tile_map}{Tile\+Map} du niveau en cours \hypertarget{class_jeu_afeedcd4eab224f8bfbd3d34593a06297}{\index{Jeu@{Jeu}!get\+Font@{get\+Font}}
+\index{get\+Font@{get\+Font}!Jeu@{Jeu}}
+\subsubsection[{get\+Font}]{\setlength{\rightskip}{0pt plus 5cm}const sf\+::\+Font \& Jeu\+::get\+Font (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_jeu_afeedcd4eab224f8bfbd3d34593a06297}
+
+
+Récupère le Font rattachée. 
+
+Récupère la police rattaché au \hyperlink{class_jeu}{Jeu}. \hypertarget{class_jeu_af4e8d3d39a32c20fed3e397a6e2cd939}{\index{Jeu@{Jeu}!get\+State\+Esc\+Menu@{get\+State\+Esc\+Menu}}
+\index{get\+State\+Esc\+Menu@{get\+State\+Esc\+Menu}!Jeu@{Jeu}}
+\subsubsection[{get\+State\+Esc\+Menu}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Esc\+Menu} $\ast$ Jeu\+::get\+State\+Esc\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_jeu_af4e8d3d39a32c20fed3e397a6e2cd939}
+
+
+Getter du \hyperlink{class_state_esc_menu}{State\+Esc\+Menu}. 
+
+Renvoi le \hyperlink{class_state_esc_menu}{State\+Esc\+Menu}
+
+\begin{DoxyReturn}{Returns}
+Un \hyperlink{class_state_esc_menu}{State\+Esc\+Menu} 
+\end{DoxyReturn}
+\hypertarget{class_jeu_a2632dcd588e4cfb6cc38076cb807190c}{\index{Jeu@{Jeu}!get\+State\+Level@{get\+State\+Level}}
+\index{get\+State\+Level@{get\+State\+Level}!Jeu@{Jeu}}
+\subsubsection[{get\+State\+Level}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Level} $\ast$ Jeu\+::get\+State\+Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_jeu_a2632dcd588e4cfb6cc38076cb807190c}
+
+
+Getter du \hyperlink{class_state_level}{State\+Level}. 
+
+Renvoi le \hyperlink{class_state_level}{State\+Level}
+
+\begin{DoxyReturn}{Returns}
+Un \hyperlink{class_state_level}{State\+Level} 
+\end{DoxyReturn}
+\hypertarget{class_jeu_a09945f1c10ce230032fcdc3f25d19171}{\index{Jeu@{Jeu}!get\+State\+Main\+Menu@{get\+State\+Main\+Menu}}
+\index{get\+State\+Main\+Menu@{get\+State\+Main\+Menu}!Jeu@{Jeu}}
+\subsubsection[{get\+State\+Main\+Menu}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Main\+Menu}$\ast$ Jeu\+::get\+State\+Main\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_jeu_a09945f1c10ce230032fcdc3f25d19171}
+
+
+Getter du \hyperlink{class_state_main_menu}{State\+Main\+Menu}. 
+
+/fn State\+Main\+Menu$\ast$ \hyperlink{class_jeu_a09945f1c10ce230032fcdc3f25d19171}{get\+State\+Main\+Menu() const} Renvoi le \hyperlink{class_state_main_menu}{State\+Main\+Menu}
+
+\begin{DoxyReturn}{Returns}
+Un \hyperlink{class_state_main_menu}{State\+Main\+Menu} 
+\end{DoxyReturn}
+\hypertarget{class_jeu_a5410b8b324962476890c9a123fc70d90}{\index{Jeu@{Jeu}!get\+State\+Stats@{get\+State\+Stats}}
+\index{get\+State\+Stats@{get\+State\+Stats}!Jeu@{Jeu}}
+\subsubsection[{get\+State\+Stats}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Stats}$\ast$ Jeu\+::get\+State\+Stats (
+\begin{DoxyParamCaption}
+\item[{bool}]{Is\+Level\+Finished}
+\end{DoxyParamCaption}
+) const}}\label{class_jeu_a5410b8b324962476890c9a123fc70d90}
+
+
+Getter du get\+State\+Stats. 
+
+/fn get\+State\+Stats$\ast$ \hyperlink{class_jeu_a09945f1c10ce230032fcdc3f25d19171}{get\+State\+Main\+Menu() const} Renvoi le get\+State\+Stats
+
+
+\begin{DoxyParams}{Parameters}
+{\em Is\+Level\+Finished} & \+: bool qui donne l'information si le niveau est finit ou non. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Un get\+State\+Stats 
+\end{DoxyReturn}
+\hypertarget{class_jeu_a8bba4f66ac8ea96d51bf889a55e93ffe}{\index{Jeu@{Jeu}!init\+State\+Level@{init\+State\+Level}}
+\index{init\+State\+Level@{init\+State\+Level}!Jeu@{Jeu}}
+\subsubsection[{init\+State\+Level}]{\setlength{\rightskip}{0pt plus 5cm}void Jeu\+::init\+State\+Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_jeu_a8bba4f66ac8ea96d51bf889a55e93ffe}
+
+
+Appelle l'initialisation des stats. 
+
+Appelle la procédure init du \hyperlink{class_state_level}{State\+Level}. \hypertarget{class_jeu_a596d11f5941768eb94a71ffedabdfd03}{\index{Jeu@{Jeu}!reset\+Level@{reset\+Level}}
+\index{reset\+Level@{reset\+Level}!Jeu@{Jeu}}
+\subsubsection[{reset\+Level}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tile\+Map} $\ast$ Jeu\+::reset\+Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_jeu_a596d11f5941768eb94a71ffedabdfd03}
+
+
+Reset le level. 
+
+La \hyperlink{class_tile_map}{Tile\+Map} reset. \hypertarget{class_jeu_ac92789bfe84b9a8df297978643b26ed5}{\index{Jeu@{Jeu}!restart\+Char\+Clock@{restart\+Char\+Clock}}
+\index{restart\+Char\+Clock@{restart\+Char\+Clock}!Jeu@{Jeu}}
+\subsubsection[{restart\+Char\+Clock}]{\setlength{\rightskip}{0pt plus 5cm}Jeu\+::restart\+Char\+Clock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_jeu_ac92789bfe84b9a8df297978643b26ed5}
+
+
+Reset le timer du personnage. 
+
+Appelle la fonction restart\+Clock du personnage. \hypertarget{class_jeu_ab1e361ec100fae4090ffb062f797b7b5}{\index{Jeu@{Jeu}!set\+State@{set\+State}}
+\index{set\+State@{set\+State}!Jeu@{Jeu}}
+\subsubsection[{set\+State}]{\setlength{\rightskip}{0pt plus 5cm}void Jeu\+::set\+State (
+\begin{DoxyParamCaption}
+\item[{{\bf State} $\ast$}]{s}
+\end{DoxyParamCaption}
+)}}\label{class_jeu_ab1e361ec100fae4090ffb062f797b7b5}
+
+
+Setter du \hyperlink{class_state}{State}. 
+
+Permet de modifier l'état du \hyperlink{class_state}{State}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \+: \hyperlink{class_state}{State} à modifier. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_jeu_ae576e644696381ad0a1c165c6dc789b4}{\index{Jeu@{Jeu}!start@{start}}
+\index{start@{start}!Jeu@{Jeu}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}void Jeu\+::start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_jeu_ae576e644696381ad0a1c165c6dc789b4}
+
+
+Lance le jeu. 
+
+Ouvre la fenêtre et lance le jeu 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_jeu_8hpp}{Jeu.\+hpp}\end{DoxyCompactItemize}

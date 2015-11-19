@@ -82,6 +82,7 @@ bool StateLevel::collisionEnemy(Enemy *e) const
         {
             _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x, -5));
             _perso.setCurrentKill(_perso.getCurrentKill() + 1);
+            _perso.setCurrentScore(_perso.getCurrentScore()+e->getReward());
             e->jumpOn();
             return false;
         }

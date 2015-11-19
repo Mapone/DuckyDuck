@@ -1,0 +1,5 @@
+<map id="Enemy" name="Enemy">
+<area shape="rect" id="node3" href="$class_boomer.html" title="Classe gérant les ennemi qui explosent et se devisent. " alt="" coords="5,155,72,181"/>
+<area shape="rect" id="node4" href="$class_jumper.html" title="Classe gérant les ennemi qui marchent. " alt="" coords="97,155,161,181"/>
+<area shape="rect" id="node2" href="$class_alive_entity.html" title="Classe abstraite qui définissant les objets &quot;vivants&quot;. " alt="" coords="41,5,127,32"/>
+</map>

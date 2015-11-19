@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_alive_entity.html" title="Classe abstraite qui définissant les objets &quot;vivants&quot;. " alt="" coords="5,56,91,83"/>
+<area shape="rect" id="node2" href="$class_enemy.html" title="Classe abstraite qui définissant les objets &quot;vivants&quot;. " alt="" coords="153,31,215,57"/>
+<area shape="rect" id="node5" href="$class_personnage.html" title="Classe définissant un personnage. " alt="" coords="139,81,229,108"/>
+<area shape="rect" id="node3" href="$class_boomer.html" title="Classe gérant les ennemi qui explosent et se devisent. " alt="" coords="277,5,344,32"/>
+<area shape="rect" id="node4" href="$class_jumper.html" title="Classe gérant les ennemi qui marchent. " alt="" coords="278,56,343,83"/>
+</map>

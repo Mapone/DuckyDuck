@@ -1,0 +1,3 @@
+<map id="Personnage" name="Personnage">
+<area shape="rect" id="node2" href="$class_alive_entity.html" title="Classe abstraite qui définissant les objets &quot;vivants&quot;. " alt="" coords="8,5,93,32"/>
+</map>

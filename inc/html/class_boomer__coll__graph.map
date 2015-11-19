@@ -1,0 +1,6 @@
+<map id="Boomer" name="Boomer">
+<area shape="rect" id="node2" href="$class_enemy.html" title="Classe abstraite qui définissant les objets &quot;vivants&quot;. " alt="" coords="185,173,247,200"/>
+<area shape="rect" id="node4" href="$class_a_i.html" title="Classe abstraites pour les IA des ennemis. " alt="" coords="118,264,156,291"/>
+<area shape="rect" id="node3" href="$class_alive_entity.html" title="Classe abstraite qui définissant les objets &quot;vivants&quot;. " alt="" coords="173,83,259,109"/>
+<area shape="rect" id="node5" href="$class_tile_map.html" title="Classe définissant un map. " alt="" coords="67,83,135,109"/>
+</map>

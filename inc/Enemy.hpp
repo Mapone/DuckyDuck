@@ -71,6 +71,11 @@ public:
 	 */
 	virtual void jumpOn();
 
+	/**
+	* 
+	*/
+	virtual unsigned int getReward() const;
+
 protected:
 	AI* _AI; /** IA de l'ennemi */
 

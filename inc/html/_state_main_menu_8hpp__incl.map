@@ -1,0 +1,8 @@
+<map id="StateMainMenu.hpp" name="StateMainMenu.hpp">
+<area shape="rect" id="node3" href="$_state_8hpp.html" title="State. " alt="" coords="182,80,260,107"/>
+<area shape="rect" id="node4" href="$_tile_map_8hpp.html" title="Gère les différentes interactions avec la map. " alt="" coords="123,155,216,181"/>
+<area shape="rect" id="node8" href="$_personnage_8hpp.html" title="Gère l&#39;ensemble des outils neccessaires à l&#39;éxécution des différentes méthodes du personnage..." alt="" coords="238,229,353,256"/>
+<area shape="rect" id="node9" href="$_jeu_8hpp.html" title="Gère l&#39;ensemble des outils permettant d&#39;effectuer une partie de DuckyDuck. " alt="" coords="346,304,413,331"/>
+<area shape="rect" id="node6" href="$_enemy_8hpp.html" title="Classe définissant les ennemis. " alt="" coords="125,229,213,256"/>
+<area shape="rect" id="node7" href="$_alive_entity_8hpp.html" title="Classe définissant les objets &quot;vivants&quot;. " alt="" coords="147,304,257,331"/>
+</map>

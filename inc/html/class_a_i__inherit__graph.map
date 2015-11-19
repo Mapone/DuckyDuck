@@ -1,0 +1,6 @@
+<map id="AI" name="AI">
+<area shape="rect" id="node2" href="$class_a_i___boomer.html" title="Classe gérant l&#39;AI des ennemi qui sautent. " alt="" coords="5,80,91,107"/>
+<area shape="rect" id="node3" href="$class_a_i___follower.html" title="Classe gérant l&#39;AI des ennemi qui sautent. " alt="" coords="116,80,207,107"/>
+<area shape="rect" id="node4" href="$class_a_i___jumper.html" title="Classe gérant l&#39;AI des ennemi qui sautent. " alt="" coords="231,80,316,107"/>
+<area shape="rect" id="node5" href="$class_a_i___land_base.html" title="Classe gérant l&#39;AI des ennemi qui marchent. " alt="" coords="341,80,440,107"/>
+</map>

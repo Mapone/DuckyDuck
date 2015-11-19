@@ -1,0 +1,114 @@
+\hypertarget{class_a_i}{\section{A\+I Class Reference}
+\label{class_a_i}\index{A\+I@{A\+I}}
+}
+
+
+Classe abstraites pour les I\+A des ennemis.  
+
+
+
+
+{\ttfamily \#include $<$A\+I.\+hpp$>$}
+
+
+
+Inheritance diagram for A\+I\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_i__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for A\+I\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{class_a_i__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_a_i_ac6a30583e7e676d85434d7e88eeec041}{A\+I} (\hyperlink{class_enemy}{Enemy} $\ast$enemy, const \hyperlink{class_tile_map}{Tile\+Map} \&tilemap)
+\begin{DoxyCompactList}\small\item\em Constructeur. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_a_i_ac86c87957e3d563f6ea2137a97992e0a}{$\sim$\+A\+I} ()
+\begin{DoxyCompactList}\small\item\em Destructeur. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_a_i_a029ec0ca07e6644af6662cf08300ed0c}{move} ()=0
+\begin{DoxyCompactList}\small\item\em Procédure gérant le mouvement de l'ennemi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_a_i_af918afabc099ef611231be287eb4d6df}{\hyperlink{class_enemy}{Enemy} $\ast$ {\bfseries \+\_\+enemy}}\label{class_a_i_af918afabc099ef611231be287eb4d6df}
+
+\item 
+const \hyperlink{class_tile_map}{Tile\+Map} \& \hyperlink{class_a_i_a5b798605999a06067b97a45c6e7f2dc2}{\+\_\+tile\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe abstraites pour les I\+A des ennemis. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_a_i_ac6a30583e7e676d85434d7e88eeec041}{\index{A\+I@{A\+I}!A\+I@{A\+I}}
+\index{A\+I@{A\+I}!A\+I@{A\+I}}
+\subsubsection[{A\+I}]{\setlength{\rightskip}{0pt plus 5cm}A\+I\+::\+A\+I (
+\begin{DoxyParamCaption}
+\item[{{\bf Enemy} $\ast$}]{enemy, }
+\item[{const {\bf Tile\+Map} \&}]{tilemap}
+\end{DoxyParamCaption}
+)}}\label{class_a_i_ac6a30583e7e676d85434d7e88eeec041}
+
+
+Constructeur. 
+
+Constructeur de la classe \hyperlink{class_a_i}{A\+I}
+
+
+\begin{DoxyParams}{Parameters}
+{\em enemy} & \+: Ennemi utilisant l'I\+A, tilemap \+: tilemap sur laquelle l'enemy est. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_a_i_ac86c87957e3d563f6ea2137a97992e0a}{\index{A\+I@{A\+I}!````~A\+I@{$\sim$\+A\+I}}
+\index{````~A\+I@{$\sim$\+A\+I}!A\+I@{A\+I}}
+\subsubsection[{$\sim$\+A\+I}]{\setlength{\rightskip}{0pt plus 5cm}virtual A\+I\+::$\sim$\+A\+I (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_a_i_ac86c87957e3d563f6ea2137a97992e0a}
+
+
+Destructeur. 
+
+Destructeur de la classe \hyperlink{class_a_i}{A\+I} 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_a_i_a029ec0ca07e6644af6662cf08300ed0c}{\index{A\+I@{A\+I}!move@{move}}
+\index{move@{move}!A\+I@{A\+I}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}void A\+I\+::move (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_a_i_a029ec0ca07e6644af6662cf08300ed0c}
+
+
+Procédure gérant le mouvement de l'ennemi. 
+
+Procédure qui permet de mouvoir l'ennemi en fonction de l'\hyperlink{class_a_i}{A\+I} qu'il a adopter 
+
+Implemented in \hyperlink{class_a_i___follower_a37893e7aa601169682333af093235c13}{A\+I\+\_\+\+Follower}, \hyperlink{class_a_i___boomer_a7fc6dbcfbc0a2aa557614bfb47935df6}{A\+I\+\_\+\+Boomer}, \hyperlink{class_a_i___jumper_a49e2ba05ef7f14020faf4f521370dbfa}{A\+I\+\_\+\+Jumper}, and \hyperlink{class_a_i___land_base_af536a9f2a45fd52189542761bcf285d4}{A\+I\+\_\+\+Land\+Base}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_a_i_a5b798605999a06067b97a45c6e7f2dc2}{\index{A\+I@{A\+I}!\+\_\+tile\+Map@{\+\_\+tile\+Map}}
+\index{\+\_\+tile\+Map@{\+\_\+tile\+Map}!A\+I@{A\+I}}
+\subsubsection[{\+\_\+tile\+Map}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Tile\+Map}\& A\+I\+::\+\_\+tile\+Map\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_a_i_a5b798605999a06067b97a45c6e7f2dc2}
+Ennemi qui utilise l'\hyperlink{class_a_i}{A\+I} 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_a_i_8hpp}{A\+I.\+hpp}\end{DoxyCompactItemize}

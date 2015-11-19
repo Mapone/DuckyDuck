@@ -1,0 +1,154 @@
+\hypertarget{class_enemy}{\section{Enemy Class Reference}
+\label{class_enemy}\index{Enemy@{Enemy}}
+}
+
+
+Classe abstraite qui définissant les objets \char`\"{}vivants\char`\"{}.  
+
+
+
+
+{\ttfamily \#include $<$Enemy.\+hpp$>$}
+
+
+
+Inheritance diagram for Enemy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=197pt]{class_enemy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Enemy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{class_enemy__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_enemy_aa89c4b47d518fe6aa5e84b059b19a3b0}{Enemy} (const sf\+::\+Vector2f \&taille, \hyperlink{class_tile_map}{Tile\+Map} \&tilemap)
+\begin{DoxyCompactList}\small\item\em Constructeur. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_enemy_a065a22a70c78bfc03da4c032312c6da5}{$\sim$\+Enemy} ()
+\begin{DoxyCompactList}\small\item\em Destrcuteur. \end{DoxyCompactList}\item 
+void \hyperlink{class_enemy_a9a398f8d12234f02563b27440aff7891}{move} ()
+\begin{DoxyCompactList}\small\item\em Fonction bougeant l'ennemi. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_enemy}{Enemy} $\ast$ \hyperlink{class_enemy_a21d5d2f97aa7406a985fd0ca3f3b1028}{clone} ()=0
+\begin{DoxyCompactList}\small\item\em Permet de clone l'ennemi (Pattern Prototype) \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_enemy_a85c7ff8dc9f54c92d7583c0d196d37d2}{jump\+On} ()
+\begin{DoxyCompactList}\small\item\em Actions à faire si on saute sur l'ennemi. \end{DoxyCompactList}\item 
+\hypertarget{class_enemy_a17fc0ab57aa01933301df1f7ced16b21}{virtual unsigned int {\bfseries get\+Reward} () const }\label{class_enemy_a17fc0ab57aa01933301df1f7ced16b21}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_enemy_a696bc97bd2f755fe2730d1a84602666b}{\hyperlink{class_a_i}{A\+I} $\ast$ {\bfseries \+\_\+\+A\+I}}\label{class_enemy_a696bc97bd2f755fe2730d1a84602666b}
+
+\item 
+\hyperlink{class_tile_map}{Tile\+Map} \& \hyperlink{class_enemy_a25c3a0c770a6cf5ae9cd9e4d71968aff}{\+\_\+tile\+Map}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe abstraite qui définissant les objets \char`\"{}vivants\char`\"{}. 
+
+Classe définissant un ennemi. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_enemy_aa89c4b47d518fe6aa5e84b059b19a3b0}{\index{Enemy@{Enemy}!Enemy@{Enemy}}
+\index{Enemy@{Enemy}!Enemy@{Enemy}}
+\subsubsection[{Enemy}]{\setlength{\rightskip}{0pt plus 5cm}Enemy\+::\+Enemy (
+\begin{DoxyParamCaption}
+\item[{const sf\+::\+Vector2f \&}]{taille, }
+\item[{{\bf Tile\+Map} \&}]{tilemap}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_aa89c4b47d518fe6aa5e84b059b19a3b0}
+
+
+Constructeur. 
+
+Constructeur de la classe \hyperlink{class_enemy}{Enemy}
+
+
+\begin{DoxyParams}{Parameters}
+{\em taille} & \+: taille de l'objet, tilemap \+: \hyperlink{class_tile_map}{Tile\+Map} à laquelle l'ennemi est rattaché. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_enemy_a065a22a70c78bfc03da4c032312c6da5}{\index{Enemy@{Enemy}!````~Enemy@{$\sim$\+Enemy}}
+\index{````~Enemy@{$\sim$\+Enemy}!Enemy@{Enemy}}
+\subsubsection[{$\sim$\+Enemy}]{\setlength{\rightskip}{0pt plus 5cm}virtual Enemy\+::$\sim$\+Enemy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_enemy_a065a22a70c78bfc03da4c032312c6da5}
+
+
+Destrcuteur. 
+
+Destructeur de la classe \hyperlink{class_enemy}{Enemy} 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_enemy_a21d5d2f97aa7406a985fd0ca3f3b1028}{\index{Enemy@{Enemy}!clone@{clone}}
+\index{clone@{clone}!Enemy@{Enemy}}
+\subsubsection[{clone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Enemy} $\ast$ Enemy\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_enemy_a21d5d2f97aa7406a985fd0ca3f3b1028}
+
+
+Permet de clone l'ennemi (Pattern Prototype) 
+
+Permet de cloner un objet afin d'en instancier un certain nombre facilement.
+
+\begin{DoxyReturn}{Returns}
+Retourne un nouvel \hyperlink{class_enemy}{Enemy}. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_jumper_aa28b8e0acc2f4fa045b29359692fe4ac}{Jumper}, and \hyperlink{class_boomer_a757fb2c73fad3ab04086b9bbb15208b0}{Boomer}.
+
+\hypertarget{class_enemy_a85c7ff8dc9f54c92d7583c0d196d37d2}{\index{Enemy@{Enemy}!jump\+On@{jump\+On}}
+\index{jump\+On@{jump\+On}!Enemy@{Enemy}}
+\subsubsection[{jump\+On}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Enemy\+::jump\+On (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_enemy_a85c7ff8dc9f54c92d7583c0d196d37d2}
+
+
+Actions à faire si on saute sur l'ennemi. 
+
+Actions à faire si on saute sur l'ennemi 
+
+Reimplemented in \hyperlink{class_boomer_a30a5e9732c86abc616a6d31badbb2ce8}{Boomer}.
+
+\hypertarget{class_enemy_a9a398f8d12234f02563b27440aff7891}{\index{Enemy@{Enemy}!move@{move}}
+\index{move@{move}!Enemy@{Enemy}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\+::move (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_a9a398f8d12234f02563b27440aff7891}
+
+
+Fonction bougeant l'ennemi. 
+
+Fonction utilisant le Pattern Strategy \hyperlink{class_a_i}{A\+I} pour mouvoir l'ennemi 
+
+\subsection{Member Data Documentation}
+\hypertarget{class_enemy_a25c3a0c770a6cf5ae9cd9e4d71968aff}{\index{Enemy@{Enemy}!\+\_\+tile\+Map@{\+\_\+tile\+Map}}
+\index{\+\_\+tile\+Map@{\+\_\+tile\+Map}!Enemy@{Enemy}}
+\subsubsection[{\+\_\+tile\+Map}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tile\+Map}\& Enemy\+::\+\_\+tile\+Map\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_enemy_a25c3a0c770a6cf5ae9cd9e4d71968aff}
+I\+A de l'ennemi 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_enemy_8hpp}{Enemy.\+hpp}\end{DoxyCompactItemize}

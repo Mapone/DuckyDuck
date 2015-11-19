@@ -1,0 +1,255 @@
+\hypertarget{class_state_level}{\section{State\+Level Class Reference}
+\label{class_state_level}\index{State\+Level@{State\+Level}}
+}
+
+
+Etat \hyperlink{class_state_level}{State\+Level} rattaché au Pattern \hyperlink{class_state}{State}.  
+
+
+
+
+{\ttfamily \#include $<$State\+Level.\+hpp$>$}
+
+
+
+Inheritance diagram for State\+Level\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{class_state_level__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for State\+Level\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_state_level__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_state_level_a08ef66f8eb0ed452eaeb6cf80cae0b4a}{State\+Level} (\hyperlink{class_jeu}{Jeu} $\ast$jeu, \hyperlink{class_tile_map}{Tile\+Map} $\ast$tilemap, \hyperlink{class_personnage}{Personnage} \&perso)
+\begin{DoxyCompactList}\small\item\em Constructeur. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_state_level_a8e7ec8788b8c1992781fe135a5dc5f7d}{draw} (sf\+::\+Render\+Target \&target, sf\+::\+Render\+States states) const 
+\begin{DoxyCompactList}\small\item\em Dessine un objet. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_state_level_a901fd0b511f35b0af1b6e88ceedc6748}{init} ()
+\begin{DoxyCompactList}\small\item\em initialise les coord. du spawn du personnage \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_state_level_aefa35ceeb1aa1b391392f38a71af4402}{set\+Level} (\hyperlink{class_tile_map}{Tile\+Map} $\ast$t)
+\begin{DoxyCompactList}\small\item\em Setter de la \hyperlink{class_tile_map}{Tile\+Map}. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_state_level_ab83986dcc97a8a923009b7c6a2aec6f6}{press\+Space} ()
+\begin{DoxyCompactList}\small\item\em Action à effectuer quand Espace est appuyé \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_state_level_aa16ac397de41618dc276a4984ace536c}{press\+Up} ()
+\begin{DoxyCompactList}\small\item\em Action à effectuer quand la touche Haut est appuyé \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_state_level_abc115526af37fd93a87b0eba998de49e}{press\+Down} ()
+\begin{DoxyCompactList}\small\item\em Action à effectuer quand la touche Bas est appuyé \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_state_level_ab733bd4321a90d8171710dc895ee982a}{press\+Esc} ()
+\begin{DoxyCompactList}\small\item\em Action à effectuer quand la touche Echap est appuyé \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_state_level_a0b4b1cdf50b6fa528468eea65ba09156}{press\+Left} ()
+\begin{DoxyCompactList}\small\item\em Action à effectuer quand la touche Gauche est appuyé \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_state_level_a6ec0177bd71f7f9e60dd4896322959b1}{press\+Right} ()
+\begin{DoxyCompactList}\small\item\em Action à effectuer quand la touche Droite est appuyé \end{DoxyCompactList}\item 
+void \hyperlink{class_state_level_ab2adefb4d13c7534096f9744eb183577}{update} ()
+\begin{DoxyCompactList}\small\item\em Update le niveau en cours. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Etat \hyperlink{class_state_level}{State\+Level} rattaché au Pattern \hyperlink{class_state}{State}. 
+
+\hyperlink{class_state_level}{State\+Level} 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_state_level_a08ef66f8eb0ed452eaeb6cf80cae0b4a}{\index{State\+Level@{State\+Level}!State\+Level@{State\+Level}}
+\index{State\+Level@{State\+Level}!State\+Level@{State\+Level}}
+\subsubsection[{State\+Level}]{\setlength{\rightskip}{0pt plus 5cm}State\+Level\+::\+State\+Level (
+\begin{DoxyParamCaption}
+\item[{{\bf Jeu} $\ast$}]{jeu, }
+\item[{{\bf Tile\+Map} $\ast$}]{tilemap, }
+\item[{{\bf Personnage} \&}]{perso}
+\end{DoxyParamCaption}
+)}}\label{class_state_level_a08ef66f8eb0ed452eaeb6cf80cae0b4a}
+
+
+Constructeur. 
+
+Constructeur de la classe \hyperlink{class_state}{State}
+
+
+\begin{DoxyParams}{Parameters}
+{\em jeu} & \+: \hyperlink{class_jeu}{Jeu} sur lequel le Pattern \hyperlink{class_state}{State} s'applique, perso \+: \hyperlink{class_personnage}{Personnage} jouable \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_state_level_a8e7ec8788b8c1992781fe135a5dc5f7d}{\index{State\+Level@{State\+Level}!draw@{draw}}
+\index{draw@{draw}!State\+Level@{State\+Level}}
+\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Level\+::draw (
+\begin{DoxyParamCaption}
+\item[{sf\+::\+Render\+Target \&}]{target, }
+\item[{sf\+::\+Render\+States}]{states}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_state_level_a8e7ec8788b8c1992781fe135a5dc5f7d}
+
+
+Dessine un objet. 
+
+Prends un objet target et le dessine.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & \+: objet à dessiner, states \+: applique la transformation (S\+F\+M\+L Function) \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_state_a7e115388c37a05ee165a395f3119d685}{State}.
+
+\hypertarget{class_state_level_a901fd0b511f35b0af1b6e88ceedc6748}{\index{State\+Level@{State\+Level}!init@{init}}
+\index{init@{init}!State\+Level@{State\+Level}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Level\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_state_level_a901fd0b511f35b0af1b6e88ceedc6748}
+
+
+initialise les coord. du spawn du personnage 
+
+Initialise pour les niveaux les coordonnées du \hyperlink{class_personnage}{Personnage} jouable. 
+
+Reimplemented from \hyperlink{class_state_abe618d6673b514d93ccd6e4ced6ed992}{State}.
+
+\hypertarget{class_state_level_abc115526af37fd93a87b0eba998de49e}{\index{State\+Level@{State\+Level}!press\+Down@{press\+Down}}
+\index{press\+Down@{press\+Down}!State\+Level@{State\+Level}}
+\subsubsection[{press\+Down}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Level\+::press\+Down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_state_level_abc115526af37fd93a87b0eba998de49e}
+
+
+Action à effectuer quand la touche Bas est appuyé 
+
+Gère les actions rattachées à la touche Bas. 
+
+Implements \hyperlink{class_state_a0f77b5ab3a8cbdd35fef9d0d5b414e1f}{State}.
+
+\hypertarget{class_state_level_ab733bd4321a90d8171710dc895ee982a}{\index{State\+Level@{State\+Level}!press\+Esc@{press\+Esc}}
+\index{press\+Esc@{press\+Esc}!State\+Level@{State\+Level}}
+\subsubsection[{press\+Esc}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Level\+::press\+Esc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_state_level_ab733bd4321a90d8171710dc895ee982a}
+
+
+Action à effectuer quand la touche Echap est appuyé 
+
+Gère les actions rattachées à la touche Echap. 
+
+Reimplemented from \hyperlink{class_state_a2717680ed591de1f09250b6c7548209a}{State}.
+
+\hypertarget{class_state_level_a0b4b1cdf50b6fa528468eea65ba09156}{\index{State\+Level@{State\+Level}!press\+Left@{press\+Left}}
+\index{press\+Left@{press\+Left}!State\+Level@{State\+Level}}
+\subsubsection[{press\+Left}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Level\+::press\+Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_state_level_a0b4b1cdf50b6fa528468eea65ba09156}
+
+
+Action à effectuer quand la touche Gauche est appuyé 
+
+Gère les actions rattachées à la touche Gauche. 
+
+Reimplemented from \hyperlink{class_state_aa2633a4a944f0b68bfb3bbf7b8029dcc}{State}.
+
+\hypertarget{class_state_level_a6ec0177bd71f7f9e60dd4896322959b1}{\index{State\+Level@{State\+Level}!press\+Right@{press\+Right}}
+\index{press\+Right@{press\+Right}!State\+Level@{State\+Level}}
+\subsubsection[{press\+Right}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Level\+::press\+Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_state_level_a6ec0177bd71f7f9e60dd4896322959b1}
+
+
+Action à effectuer quand la touche Droite est appuyé 
+
+Gère les actions rattachées à la touche Droite. 
+
+Reimplemented from \hyperlink{class_state_a8af37cc742f499101673fd42425a113f}{State}.
+
+\hypertarget{class_state_level_ab83986dcc97a8a923009b7c6a2aec6f6}{\index{State\+Level@{State\+Level}!press\+Space@{press\+Space}}
+\index{press\+Space@{press\+Space}!State\+Level@{State\+Level}}
+\subsubsection[{press\+Space}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Level\+::press\+Space (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_state_level_ab83986dcc97a8a923009b7c6a2aec6f6}
+
+
+Action à effectuer quand Espace est appuyé 
+
+Gère les actions rattachées à la barre d'espace. 
+
+Reimplemented from \hyperlink{class_state_a8e992fd4ce2009a2f736ec674dadec3e}{State}.
+
+\hypertarget{class_state_level_aa16ac397de41618dc276a4984ace536c}{\index{State\+Level@{State\+Level}!press\+Up@{press\+Up}}
+\index{press\+Up@{press\+Up}!State\+Level@{State\+Level}}
+\subsubsection[{press\+Up}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Level\+::press\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_state_level_aa16ac397de41618dc276a4984ace536c}
+
+
+Action à effectuer quand la touche Haut est appuyé 
+
+Gère les actions rattachées à la touche Haut. 
+
+Implements \hyperlink{class_state_ab3837b57093899dbdb323540c75a79e8}{State}.
+
+\hypertarget{class_state_level_aefa35ceeb1aa1b391392f38a71af4402}{\index{State\+Level@{State\+Level}!set\+Level@{set\+Level}}
+\index{set\+Level@{set\+Level}!State\+Level@{State\+Level}}
+\subsubsection[{set\+Level}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Level\+::set\+Level (
+\begin{DoxyParamCaption}
+\item[{{\bf Tile\+Map} $\ast$}]{t}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_state_level_aefa35ceeb1aa1b391392f38a71af4402}
+
+
+Setter de la \hyperlink{class_tile_map}{Tile\+Map}. 
+
+Initialise la \hyperlink{class_tile_map}{Tile\+Map} du level, et l'initialise
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & \+: la nouvelle \hyperlink{class_tile_map}{Tile\+Map} \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_state_level_ab2adefb4d13c7534096f9744eb183577}{\index{State\+Level@{State\+Level}!update@{update}}
+\index{update@{update}!State\+Level@{State\+Level}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Level\+::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_state_level_ab2adefb4d13c7534096f9744eb183577}
+
+
+Update le niveau en cours. 
+
+Vérifie les collisions, mets à jour la caméra On vérifie aussi la fin de niveau, les conditions de mort Et enfin on bouge les ennemis. 
+
+Reimplemented from \hyperlink{class_state_a1c39ad3bdaa33864ee474b6be0e3e44d}{State}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_state_level_8hpp}{State\+Level.\+hpp}\end{DoxyCompactItemize}

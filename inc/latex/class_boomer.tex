@@ -1,0 +1,134 @@
+\hypertarget{class_boomer}{\section{Boomer Class Reference}
+\label{class_boomer}\index{Boomer@{Boomer}}
+}
+
+
+Classe gérant les ennemi qui explosent et se devisent.  
+
+
+
+
+{\ttfamily \#include $<$Boomer.\+hpp$>$}
+
+
+
+Inheritance diagram for Boomer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=144pt]{class_boomer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Boomer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{class_boomer__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_boomer_a45e535e25b46f8ae440a929bf7c2dddd}{Boomer} (const sf\+::\+Vector2f \&taille, \hyperlink{class_tile_map}{Tile\+Map} \&tilemap, int fat\+Per\+Frame, \hyperlink{class_enemy}{Enemy} $\ast$prototype)
+\begin{DoxyCompactList}\small\item\em Constructeur du \hyperlink{class_boomer}{Boomer}. \end{DoxyCompactList}\item 
+\hyperlink{class_enemy}{Enemy} $\ast$ \hyperlink{class_boomer_a757fb2c73fad3ab04086b9bbb15208b0}{clone} ()
+\begin{DoxyCompactList}\small\item\em Clone le \hyperlink{class_boomer}{Boomer}. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_boomer_a8fa91ac287ca7f7cfd9f1cf1ce154870}{get\+Fat\+Per\+Frame} () const 
+\begin{DoxyCompactList}\small\item\em Getter du grossissement par frame. \end{DoxyCompactList}\item 
+void \hyperlink{class_boomer_a30a5e9732c86abc616a6d31badbb2ce8}{jump\+On} ()
+\begin{DoxyCompactList}\small\item\em Actions à faire si on saute sur l'ennemi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Classe gérant les ennemi qui explosent et se devisent. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_boomer_a45e535e25b46f8ae440a929bf7c2dddd}{\index{Boomer@{Boomer}!Boomer@{Boomer}}
+\index{Boomer@{Boomer}!Boomer@{Boomer}}
+\subsubsection[{Boomer}]{\setlength{\rightskip}{0pt plus 5cm}Boomer\+::\+Boomer (
+\begin{DoxyParamCaption}
+\item[{const sf\+::\+Vector2f \&}]{taille, }
+\item[{{\bf Tile\+Map} \&}]{tilemap, }
+\item[{int}]{fat\+Per\+Frame, }
+\item[{{\bf Enemy} $\ast$}]{prototype}
+\end{DoxyParamCaption}
+)}}\label{class_boomer_a45e535e25b46f8ae440a929bf7c2dddd}
+
+
+Constructeur du \hyperlink{class_boomer}{Boomer}. 
+
+Constructeur du \hyperlink{class_boomer}{Boomer}
+
+
+\begin{DoxyParams}{Parameters}
+{\em taille} & Taille de la hitbox \\
+\hline
+{\em tilemap} & Map sur laquelle est l'ennemi \\
+\hline
+{\em grossissement} & par frame \\
+\hline
+{\em l'ennemi} & qui sortiera une fois le boomer tué \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_boomer_a757fb2c73fad3ab04086b9bbb15208b0}{\index{Boomer@{Boomer}!clone@{clone}}
+\index{clone@{clone}!Boomer@{Boomer}}
+\subsubsection[{clone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Enemy} $\ast$ Boomer\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_boomer_a757fb2c73fad3ab04086b9bbb15208b0}
+
+
+Clone le \hyperlink{class_boomer}{Boomer}. 
+
+Créer un nouveau \hyperlink{class_boomer}{Boomer} avec les même caractéristiques.
+
+\begin{DoxyReturn}{Returns}
+Un clone du \hyperlink{class_boomer}{Boomer} existant 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_enemy_a21d5d2f97aa7406a985fd0ca3f3b1028}{Enemy}.
+
+\hypertarget{class_boomer_a8fa91ac287ca7f7cfd9f1cf1ce154870}{\index{Boomer@{Boomer}!get\+Fat\+Per\+Frame@{get\+Fat\+Per\+Frame}}
+\index{get\+Fat\+Per\+Frame@{get\+Fat\+Per\+Frame}!Boomer@{Boomer}}
+\subsubsection[{get\+Fat\+Per\+Frame}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Boomer\+::get\+Fat\+Per\+Frame (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_boomer_a8fa91ac287ca7f7cfd9f1cf1ce154870}
+
+
+Getter du grossissement par frame. 
+
+Getter de grossissement par frame \begin{DoxyReturn}{Returns}
+Retourne la valeure du grossissement par frame 
+\end{DoxyReturn}
+\hypertarget{class_boomer_a30a5e9732c86abc616a6d31badbb2ce8}{\index{Boomer@{Boomer}!jump\+On@{jump\+On}}
+\index{jump\+On@{jump\+On}!Boomer@{Boomer}}
+\subsubsection[{jump\+On}]{\setlength{\rightskip}{0pt plus 5cm}void Boomer\+::jump\+On (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_boomer_a30a5e9732c86abc616a6d31badbb2ce8}
+
+
+Actions à faire si on saute sur l'ennemi. 
+
+Actions à faire si on saute sur l'ennemi 
+
+Reimplemented from \hyperlink{class_enemy_a85c7ff8dc9f54c92d7583c0d196d37d2}{Enemy}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_boomer_8hpp}{Boomer.\+hpp}\end{DoxyCompactItemize}

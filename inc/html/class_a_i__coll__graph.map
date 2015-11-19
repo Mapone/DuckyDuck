@@ -1,0 +1,5 @@
+<map id="AI" name="AI">
+<area shape="rect" id="node2" href="$class_enemy.html" title="Classe abstraite qui définissant les objets &quot;vivants&quot;. " alt="" coords="89,264,151,291"/>
+<area shape="rect" id="node3" href="$class_alive_entity.html" title="Classe abstraite qui définissant les objets &quot;vivants&quot;. " alt="" coords="5,173,91,200"/>
+<area shape="rect" id="node4" href="$class_tile_map.html" title="Classe définissant un map. " alt="" coords="147,83,215,109"/>
+</map>

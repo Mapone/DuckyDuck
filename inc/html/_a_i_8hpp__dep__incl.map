@@ -1,0 +1,6 @@
+<map id="AI.hpp" name="AI.hpp">
+<area shape="rect" id="node2" href="$_a_i___boomer_8hpp.html" title="AI des boomers. " alt="" coords="5,80,116,107"/>
+<area shape="rect" id="node3" href="$_a_i___follower_8hpp.html" title="AI des enemy sautant. " alt="" coords="142,80,257,107"/>
+<area shape="rect" id="node4" href="$_a_i___jumper_8hpp.html" title="AI des enemy sautant. " alt="" coords="282,80,392,107"/>
+<area shape="rect" id="node5" href="$_a_i___land_base_8hpp.html" title="AI des enemy au sol. " alt="" coords="417,80,543,107"/>
+</map>

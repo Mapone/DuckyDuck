@@ -39,3 +39,9 @@ int Jumper::getJumpHeight() const
 {
 	return _jumpHeight;
 }
+
+unsigned int Jumper::getReward() const
+{
+
+	return std::abs(_speed)*8 + _jumpHeight*3;
+}

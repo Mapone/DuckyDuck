@@ -63,6 +63,8 @@ public:
 	 * @return La valeur de la poussée en Y
 	 */
 	int getJumpHeight() const;
+
+	unsigned int getReward() const; 
 	
 private:
 	int _speed;

@@ -1,0 +1,334 @@
+\hypertarget{class_personnage}{\section{Personnage Class Reference}
+\label{class_personnage}\index{Personnage@{Personnage}}
+}
+
+
+Classe définissant un personnage.  
+
+
+
+
+{\ttfamily \#include $<$Personnage.\+hpp$>$}
+
+
+
+Inheritance diagram for Personnage\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{class_personnage__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Personnage\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{class_personnage__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_personnage_ae031dfa471739621e0a908e4946ea6ad}{Personnage} (const sf\+::\+Vector2f \&taille, sf\+::\+Image \&i, sf\+::\+Texture \&t)
+\begin{DoxyCompactList}\small\item\em Constructeur. \end{DoxyCompactList}\item 
+\hyperlink{class_personnage_a05bdf2a469885bb1fbb6c2e8f98972ab}{$\sim$\+Personnage} ()
+\begin{DoxyCompactList}\small\item\em Destructeur. \end{DoxyCompactList}\item 
+void \hyperlink{class_personnage_acddd15a955d84943f587ba9f799c14b0}{add\+Mouvement} (const sf\+::\+Vector2f \&mvt)
+\begin{DoxyCompactList}\small\item\em Modifie le mouvement en cours, en vérifiant qu'il reste dans des limites définies. \end{DoxyCompactList}\item 
+void \hyperlink{class_personnage_a23827b5a59cc4a5372c01ec45d3c5fb7}{move} (sf\+::\+Vector2f v)
+\begin{DoxyCompactList}\small\item\em Bouge le \hyperlink{class_personnage}{Personnage}. \end{DoxyCompactList}\item 
+void \hyperlink{class_personnage_abfd05381e426b6b68eaa51309e66736c}{restart\+Clock} ()
+\begin{DoxyCompactList}\small\item\em relance la clock du personnage \end{DoxyCompactList}\item 
+sf\+::\+Time \hyperlink{class_personnage_aa226c2909c41a07f5fdf884f293e7d9b}{get\+Elapsed\+Time} () const 
+\begin{DoxyCompactList}\small\item\em Récupère le temps écoulé \end{DoxyCompactList}\item 
+void \hyperlink{class_personnage_a1fb547b3bdbd33437a7a07f8479dced3}{flip\+Right} ()
+\begin{DoxyCompactList}\small\item\em Tourne la texture vers la droite. \end{DoxyCompactList}\item 
+void \hyperlink{class_personnage_a01ec8b39bc3052b8b47e86f2f29d14a5}{flip\+Left} ()
+\begin{DoxyCompactList}\small\item\em Tourne la texture à gauche. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_personnage_ae1f499ed5540c639c974c8727b8b56d7}{get\+Current\+Kill} () const 
+\begin{DoxyCompactList}\small\item\em Getter de Current\+Kill. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_personnage_ad9dcc6e0c92a08b0947a2ec4adf1add3}{get\+Current\+Score} () const 
+\begin{DoxyCompactList}\small\item\em Getter de Current\+Score. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_personnage_a85ee701a050e63d79e10df70ebfb9ec1}{get\+Total\+Kill} () const 
+\begin{DoxyCompactList}\small\item\em Getter de Total\+Kill. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_personnage_a1f4117a6232487b0b59fff62038a3bf2}{get\+Total\+Score} () const 
+\begin{DoxyCompactList}\small\item\em Getter de Total\+Score. \end{DoxyCompactList}\item 
+void \hyperlink{class_personnage_a2ace7870446cd275ecb2d83d7cc1c65c}{set\+Current\+Kill} (unsigned int k)
+\begin{DoxyCompactList}\small\item\em Setter de Current\+Kill. \end{DoxyCompactList}\item 
+void \hyperlink{class_personnage_a2530fa41c83f03a1d65bdc70b5baf25a}{set\+Current\+Score} (unsigned int s)
+\begin{DoxyCompactList}\small\item\em Setter de Current\+Score. \end{DoxyCompactList}\item 
+void \hyperlink{class_personnage_a8f1a4f017745593d8fc5d371d38c8ae4}{set\+Total\+Kill} (unsigned int k)
+\begin{DoxyCompactList}\small\item\em Setter de Total\+Kill. \end{DoxyCompactList}\item 
+void \hyperlink{class_personnage_a90d388a1ee096f74a3fd000f5607d1fc}{set\+Total\+Score} (unsigned int s)
+\begin{DoxyCompactList}\small\item\em Setter de Total\+Score. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Classe définissant un personnage. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_personnage_ae031dfa471739621e0a908e4946ea6ad}{\index{Personnage@{Personnage}!Personnage@{Personnage}}
+\index{Personnage@{Personnage}!Personnage@{Personnage}}
+\subsubsection[{Personnage}]{\setlength{\rightskip}{0pt plus 5cm}Personnage\+::\+Personnage (
+\begin{DoxyParamCaption}
+\item[{const sf\+::\+Vector2f \&}]{taille, }
+\item[{sf\+::\+Image \&}]{i, }
+\item[{sf\+::\+Texture \&}]{t}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_ae031dfa471739621e0a908e4946ea6ad}
+
+
+Constructeur. 
+
+Constructeur de la classe \hyperlink{class_personnage}{Personnage}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em taille} & \+: taille (en 2\+D) du personnage, i \+: image du personnage, t \+: texture du personnage. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_personnage_a05bdf2a469885bb1fbb6c2e8f98972ab}{\index{Personnage@{Personnage}!````~Personnage@{$\sim$\+Personnage}}
+\index{````~Personnage@{$\sim$\+Personnage}!Personnage@{Personnage}}
+\subsubsection[{$\sim$\+Personnage}]{\setlength{\rightskip}{0pt plus 5cm}Personnage\+::$\sim$\+Personnage (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_a05bdf2a469885bb1fbb6c2e8f98972ab}
+
+
+Destructeur. 
+
+Destructeur de la classe \hyperlink{class_personnage}{Personnage}. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_personnage_acddd15a955d84943f587ba9f799c14b0}{\index{Personnage@{Personnage}!add\+Mouvement@{add\+Mouvement}}
+\index{add\+Mouvement@{add\+Mouvement}!Personnage@{Personnage}}
+\subsubsection[{add\+Mouvement}]{\setlength{\rightskip}{0pt plus 5cm}void Personnage\+::add\+Mouvement (
+\begin{DoxyParamCaption}
+\item[{const sf\+::\+Vector2f \&}]{mvt}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_acddd15a955d84943f587ba9f799c14b0}
+
+
+Modifie le mouvement en cours, en vérifiant qu'il reste dans des limites définies. 
+
+Modifie le mouvement du personnage en fonction des anciens paramètres et des limites fixées par le jeu.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & \+: vecteur 2 dimensions qui affectera le mouvement en cours \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_personnage_a01ec8b39bc3052b8b47e86f2f29d14a5}{\index{Personnage@{Personnage}!flip\+Left@{flip\+Left}}
+\index{flip\+Left@{flip\+Left}!Personnage@{Personnage}}
+\subsubsection[{flip\+Left}]{\setlength{\rightskip}{0pt plus 5cm}void Personnage\+::flip\+Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_a01ec8b39bc3052b8b47e86f2f29d14a5}
+
+
+Tourne la texture à gauche. 
+
+Fait regarder le canard à gauche \hypertarget{class_personnage_a1fb547b3bdbd33437a7a07f8479dced3}{\index{Personnage@{Personnage}!flip\+Right@{flip\+Right}}
+\index{flip\+Right@{flip\+Right}!Personnage@{Personnage}}
+\subsubsection[{flip\+Right}]{\setlength{\rightskip}{0pt plus 5cm}void Personnage\+::flip\+Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_a1fb547b3bdbd33437a7a07f8479dced3}
+
+
+Tourne la texture vers la droite. 
+
+Fait regarder le canard à droite \hypertarget{class_personnage_ae1f499ed5540c639c974c8727b8b56d7}{\index{Personnage@{Personnage}!get\+Current\+Kill@{get\+Current\+Kill}}
+\index{get\+Current\+Kill@{get\+Current\+Kill}!Personnage@{Personnage}}
+\subsubsection[{get\+Current\+Kill}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Personnage\+::get\+Current\+Kill (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_personnage_ae1f499ed5540c639c974c8727b8b56d7}
+
+
+Getter de Current\+Kill. 
+
+Récupère le nombre de kill fait par le personnage sur le niveau en cours
+
+\begin{DoxyReturn}{Returns}
+Le nombre de kill 
+\end{DoxyReturn}
+\hypertarget{class_personnage_ad9dcc6e0c92a08b0947a2ec4adf1add3}{\index{Personnage@{Personnage}!get\+Current\+Score@{get\+Current\+Score}}
+\index{get\+Current\+Score@{get\+Current\+Score}!Personnage@{Personnage}}
+\subsubsection[{get\+Current\+Score}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Personnage\+::get\+Current\+Score (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_personnage_ad9dcc6e0c92a08b0947a2ec4adf1add3}
+
+
+Getter de Current\+Score. 
+
+Récupère le score fait par le personnage sur le niveau en cours
+
+\begin{DoxyReturn}{Returns}
+Le score 
+\end{DoxyReturn}
+\hypertarget{class_personnage_aa226c2909c41a07f5fdf884f293e7d9b}{\index{Personnage@{Personnage}!get\+Elapsed\+Time@{get\+Elapsed\+Time}}
+\index{get\+Elapsed\+Time@{get\+Elapsed\+Time}!Personnage@{Personnage}}
+\subsubsection[{get\+Elapsed\+Time}]{\setlength{\rightskip}{0pt plus 5cm}sf\+::\+Time Personnage\+::get\+Elapsed\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_personnage_aa226c2909c41a07f5fdf884f293e7d9b}
+
+
+Récupère le temps écoulé 
+
+Retourne le temps passé depuis la dernière ré-\/initialisation de la clock
+
+\begin{DoxyReturn}{Returns}
+La durée qui s'est écoulé depuis le début du niveau 
+\end{DoxyReturn}
+\hypertarget{class_personnage_a85ee701a050e63d79e10df70ebfb9ec1}{\index{Personnage@{Personnage}!get\+Total\+Kill@{get\+Total\+Kill}}
+\index{get\+Total\+Kill@{get\+Total\+Kill}!Personnage@{Personnage}}
+\subsubsection[{get\+Total\+Kill}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Personnage\+::get\+Total\+Kill (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_personnage_a85ee701a050e63d79e10df70ebfb9ec1}
+
+
+Getter de Total\+Kill. 
+
+Récupère le nombre de kill fait par le personnage sur la totalité des niveaux
+
+\begin{DoxyReturn}{Returns}
+Le nombre de kill total 
+\end{DoxyReturn}
+\hypertarget{class_personnage_a1f4117a6232487b0b59fff62038a3bf2}{\index{Personnage@{Personnage}!get\+Total\+Score@{get\+Total\+Score}}
+\index{get\+Total\+Score@{get\+Total\+Score}!Personnage@{Personnage}}
+\subsubsection[{get\+Total\+Score}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Personnage\+::get\+Total\+Score (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_personnage_a1f4117a6232487b0b59fff62038a3bf2}
+
+
+Getter de Total\+Score. 
+
+Récupère le score fait par le personnage sur la totalité des niveaux
+
+\begin{DoxyReturn}{Returns}
+Le score total 
+\end{DoxyReturn}
+\hypertarget{class_personnage_a23827b5a59cc4a5372c01ec45d3c5fb7}{\index{Personnage@{Personnage}!move@{move}}
+\index{move@{move}!Personnage@{Personnage}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}void Personnage\+::move (
+\begin{DoxyParamCaption}
+\item[{sf\+::\+Vector2f}]{v}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_a23827b5a59cc4a5372c01ec45d3c5fb7}
+
+
+Bouge le \hyperlink{class_personnage}{Personnage}. 
+
+Déplace le \hyperlink{class_personnage}{Personnage} en lui appliquant les frottements
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & \+: Vector2f définissant le mouvement. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_personnage_abfd05381e426b6b68eaa51309e66736c}{\index{Personnage@{Personnage}!restart\+Clock@{restart\+Clock}}
+\index{restart\+Clock@{restart\+Clock}!Personnage@{Personnage}}
+\subsubsection[{restart\+Clock}]{\setlength{\rightskip}{0pt plus 5cm}void Personnage\+::restart\+Clock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_abfd05381e426b6b68eaa51309e66736c}
+
+
+relance la clock du personnage 
+
+Appelle un fonction de S\+F\+M\+L qui reset la clock. \hypertarget{class_personnage_a2ace7870446cd275ecb2d83d7cc1c65c}{\index{Personnage@{Personnage}!set\+Current\+Kill@{set\+Current\+Kill}}
+\index{set\+Current\+Kill@{set\+Current\+Kill}!Personnage@{Personnage}}
+\subsubsection[{set\+Current\+Kill}]{\setlength{\rightskip}{0pt plus 5cm}void Personnage\+::set\+Current\+Kill (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{k}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_a2ace7870446cd275ecb2d83d7cc1c65c}
+
+
+Setter de Current\+Kill. 
+
+Initialise le nombre de kill
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & \+: valeur d'initialisation \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_personnage_a2530fa41c83f03a1d65bdc70b5baf25a}{\index{Personnage@{Personnage}!set\+Current\+Score@{set\+Current\+Score}}
+\index{set\+Current\+Score@{set\+Current\+Score}!Personnage@{Personnage}}
+\subsubsection[{set\+Current\+Score}]{\setlength{\rightskip}{0pt plus 5cm}void Personnage\+::set\+Current\+Score (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{s}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_a2530fa41c83f03a1d65bdc70b5baf25a}
+
+
+Setter de Current\+Score. 
+
+Initialise le score
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \+: valeur d'initialisation \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_personnage_a8f1a4f017745593d8fc5d371d38c8ae4}{\index{Personnage@{Personnage}!set\+Total\+Kill@{set\+Total\+Kill}}
+\index{set\+Total\+Kill@{set\+Total\+Kill}!Personnage@{Personnage}}
+\subsubsection[{set\+Total\+Kill}]{\setlength{\rightskip}{0pt plus 5cm}void Personnage\+::set\+Total\+Kill (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{k}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_a8f1a4f017745593d8fc5d371d38c8ae4}
+
+
+Setter de Total\+Kill. 
+
+Initialise le nombre de total de kill
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & \+: valeur d'initialisation \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_personnage_a90d388a1ee096f74a3fd000f5607d1fc}{\index{Personnage@{Personnage}!set\+Total\+Score@{set\+Total\+Score}}
+\index{set\+Total\+Score@{set\+Total\+Score}!Personnage@{Personnage}}
+\subsubsection[{set\+Total\+Score}]{\setlength{\rightskip}{0pt plus 5cm}void Personnage\+::set\+Total\+Score (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{s}
+\end{DoxyParamCaption}
+)}}\label{class_personnage_a90d388a1ee096f74a3fd000f5607d1fc}
+
+
+Setter de Total\+Score. 
+
+Initialise le score total
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \+: valeur d'initialisation \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_personnage_8hpp}{Personnage.\+hpp}\end{DoxyCompactItemize}

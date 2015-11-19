@@ -1,0 +1,474 @@
+\hypertarget{class_tile_map}{\section{Tile\+Map Class Reference}
+\label{class_tile_map}\index{Tile\+Map@{Tile\+Map}}
+}
+
+
+Classe définissant un map.  
+
+
+
+
+{\ttfamily \#include $<$Tile\+Map.\+hpp$>$}
+
+
+
+Inheritance diagram for Tile\+Map\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{class_tile_map__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Tile\+Map\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{class_tile_map__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_tile_map_a20b74c68d508aefc556237ca98b6d84f}{Tile\+Map} (std\+::string niveau, sf\+::\+Vector2f \&gravity, const \hyperlink{class_personnage}{Personnage} \&p)
+\begin{DoxyCompactList}\small\item\em Constructeur. \end{DoxyCompactList}\item 
+\hyperlink{class_tile_map_a3448728e45d6a43fff3a02d4c6d72e9d}{$\sim$\+Tile\+Map} ()
+\begin{DoxyCompactList}\small\item\em Destrcuteur. \end{DoxyCompactList}\item 
+bool \hyperlink{class_tile_map_a5126cb10237b3d0c0c9cbcf4dca849ac}{load} (const std\+::string \&tileset, sf\+::\+Vector2u tile\+Size)
+\begin{DoxyCompactList}\small\item\em charge le niveau avec la texture de la tileset \end{DoxyCompactList}\item 
+bool \hyperlink{class_tile_map_a2dc99a84ead7dac1481375144a990412}{collision} (const sf\+::\+Vector2f \&point, const sf\+::\+Vector2f \&vect) const 
+\begin{DoxyCompactList}\small\item\em Vérifie la collision entre un point affecté par un vector et la map. \end{DoxyCompactList}\item 
+bool \hyperlink{class_tile_map_a543431b7e68211aad223ae8c7b1086c0}{collision\+Haut} (const \hyperlink{class_alive_entity}{Alive\+Entity} \&ae) const 
+\begin{DoxyCompactList}\small\item\em Vérifie la collision sur le haut de l'\hyperlink{class_alive_entity}{Alive\+Entity}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_tile_map_af0255568dfc16a024d6107722860db36}{collision\+Bas} (const \hyperlink{class_alive_entity}{Alive\+Entity} \&ae) const 
+\begin{DoxyCompactList}\small\item\em Vérifie la collision sur le bas de l'\hyperlink{class_alive_entity}{Alive\+Entity}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_tile_map_ae19adae862a47ff532ebd6360e6a117d}{collision\+Droite} (const \hyperlink{class_alive_entity}{Alive\+Entity} \&ae) const 
+\begin{DoxyCompactList}\small\item\em Vérifie la collision sur la droite de l'\hyperlink{class_alive_entity}{Alive\+Entity}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_tile_map_a1a01bab917e287eef1b2dd2985accc83}{collision\+Gauche} (const \hyperlink{class_alive_entity}{Alive\+Entity} \&ae) const 
+\begin{DoxyCompactList}\small\item\em Vérifie la collision sur la gauche de l'\hyperlink{class_alive_entity}{Alive\+Entity}. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_tile_map_aad3bfcbf9997269b7af18e6cd66a83d3}{get\+Width} () const 
+\begin{DoxyCompactList}\small\item\em Getter de Width. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_tile_map_aae7430209eb0f15d7a0d0476e2337c72}{get\+Height} () const 
+\begin{DoxyCompactList}\small\item\em Getter de Height. \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \hyperlink{class_tile_map_a2d2cdb4a85f60bee4204c0163c29b7cd}{get\+Gravity} () const 
+\begin{DoxyCompactList}\small\item\em Getter de la Gravité \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \hyperlink{class_tile_map_ab91140b620ac86fcce9649b385e1132f}{get\+Spawn} () const 
+\begin{DoxyCompactList}\small\item\em Getter des coordonnées de spawn. \end{DoxyCompactList}\item 
+sf\+::\+Rectangle\+Shape $\ast$ \hyperlink{class_tile_map_a9f0637a3a0afea5f28e846f11f22f6cf}{get\+Level\+End} ()
+\begin{DoxyCompactList}\small\item\em Getter de la fin du niveau. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_tile_map_ab498153694e7a79853fc6fb2a10887ad}{get\+Level\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Getter du nom du niveau. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{class_enemy}{Enemy} $\ast$ $>$ \hyperlink{class_tile_map_a67f641da59fdaab20da87bcca89a1038}{get\+Enemies} ()
+\begin{DoxyCompactList}\small\item\em Getter des ennemis. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_tile_map_a72d2f2c89b9521d8632a724b246f6e43}{next\+Tile\+Y} (float x) const 
+\begin{DoxyCompactList}\small\item\em Retourne la tuile suivante. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_tile_map_acca5310b644c02342e0d4829a887d1e7}{previous\+Tile\+Y} (float x) const 
+\begin{DoxyCompactList}\small\item\em Retourne la tuile précédante. \end{DoxyCompactList}\item 
+void \hyperlink{class_tile_map_a5ee6a66152cf4a52f3232369ac19132f}{reset} ()
+\begin{DoxyCompactList}\small\item\em Réinitialise la map. \end{DoxyCompactList}\item 
+void \hyperlink{class_tile_map_acf30f34bdb6d18a36db9f1e682afc1a9}{change\+Position\+X} (float gap)
+\begin{DoxyCompactList}\small\item\em Décale tout les objets de la \hyperlink{class_tile_map}{Tile\+Map}. \end{DoxyCompactList}\item 
+void \hyperlink{class_tile_map_a275b065e4d410f5649b4fcbddbdeae7b}{change\+Position\+Y} (float gap)
+\begin{DoxyCompactList}\small\item\em Décale tout les objets de la \hyperlink{class_tile_map}{Tile\+Map}. \end{DoxyCompactList}\item 
+void \hyperlink{class_tile_map_a2418329f152f039cf32b060ad4e0db55}{kill\+Enemy} (\hyperlink{class_enemy}{Enemy} $\ast$e)
+\begin{DoxyCompactList}\small\item\em Supprime l'\hyperlink{class_enemy}{Enemy} tué \end{DoxyCompactList}\item 
+void \hyperlink{class_tile_map_ad813990bc076f44b52ccafd5495df116}{add\+Enemy} (\hyperlink{class_enemy}{Enemy} $\ast$e)
+\begin{DoxyCompactList}\small\item\em Ajoute un enemy au niveau. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe définissant un map. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_tile_map_a20b74c68d508aefc556237ca98b6d84f}{\index{Tile\+Map@{Tile\+Map}!Tile\+Map@{Tile\+Map}}
+\index{Tile\+Map@{Tile\+Map}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{Tile\+Map}]{\setlength{\rightskip}{0pt plus 5cm}Tile\+Map\+::\+Tile\+Map (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{niveau, }
+\item[{sf\+::\+Vector2f \&}]{gravity, }
+\item[{const {\bf Personnage} \&}]{p}
+\end{DoxyParamCaption}
+)}}\label{class_tile_map_a20b74c68d508aefc556237ca98b6d84f}
+
+
+Constructeur. 
+
+Constructeur de la classe \hyperlink{class_tile_map}{Tile\+Map}
+
+
+\begin{DoxyParams}{Parameters}
+{\em niveau} & \+: string définissant le niveau par des tuiles, gravity \+: Vecteur 2\+D initialisant la gravité. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_tile_map_a3448728e45d6a43fff3a02d4c6d72e9d}{\index{Tile\+Map@{Tile\+Map}!````~Tile\+Map@{$\sim$\+Tile\+Map}}
+\index{````~Tile\+Map@{$\sim$\+Tile\+Map}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{$\sim$\+Tile\+Map}]{\setlength{\rightskip}{0pt plus 5cm}Tile\+Map\+::$\sim$\+Tile\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_tile_map_a3448728e45d6a43fff3a02d4c6d72e9d}
+
+
+Destrcuteur. 
+
+Destructeur de la classe \hyperlink{class_tile_map}{Tile\+Map} 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_tile_map_ad813990bc076f44b52ccafd5495df116}{\index{Tile\+Map@{Tile\+Map}!add\+Enemy@{add\+Enemy}}
+\index{add\+Enemy@{add\+Enemy}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{add\+Enemy}]{\setlength{\rightskip}{0pt plus 5cm}void Tile\+Map\+::add\+Enemy (
+\begin{DoxyParamCaption}
+\item[{{\bf Enemy} $\ast$}]{e}
+\end{DoxyParamCaption}
+)}}\label{class_tile_map_ad813990bc076f44b52ccafd5495df116}
+
+
+Ajoute un enemy au niveau. 
+
+Ajoute un enemy au niveau
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & L'ennemi à ajouter \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_tile_map_acf30f34bdb6d18a36db9f1e682afc1a9}{\index{Tile\+Map@{Tile\+Map}!change\+Position\+X@{change\+Position\+X}}
+\index{change\+Position\+X@{change\+Position\+X}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{change\+Position\+X}]{\setlength{\rightskip}{0pt plus 5cm}void Tile\+Map\+::change\+Position\+X (
+\begin{DoxyParamCaption}
+\item[{float}]{gap}
+\end{DoxyParamCaption}
+)}}\label{class_tile_map_acf30f34bdb6d18a36db9f1e682afc1a9}
+
+
+Décale tout les objets de la \hyperlink{class_tile_map}{Tile\+Map}. 
+
+Décale tout de gap pixels en X
+
+
+\begin{DoxyParams}{Parameters}
+{\em gap} & \+: valeur du décalage \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_tile_map_a275b065e4d410f5649b4fcbddbdeae7b}{\index{Tile\+Map@{Tile\+Map}!change\+Position\+Y@{change\+Position\+Y}}
+\index{change\+Position\+Y@{change\+Position\+Y}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{change\+Position\+Y}]{\setlength{\rightskip}{0pt plus 5cm}void Tile\+Map\+::change\+Position\+Y (
+\begin{DoxyParamCaption}
+\item[{float}]{gap}
+\end{DoxyParamCaption}
+)}}\label{class_tile_map_a275b065e4d410f5649b4fcbddbdeae7b}
+
+
+Décale tout les objets de la \hyperlink{class_tile_map}{Tile\+Map}. 
+
+Décale tout de gap pixels en Y
+
+
+\begin{DoxyParams}{Parameters}
+{\em gap} & \+: valeur du décalage \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_tile_map_a2dc99a84ead7dac1481375144a990412}{\index{Tile\+Map@{Tile\+Map}!collision@{collision}}
+\index{collision@{collision}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{collision}]{\setlength{\rightskip}{0pt plus 5cm}bool Tile\+Map\+::collision (
+\begin{DoxyParamCaption}
+\item[{const sf\+::\+Vector2f \&}]{point, }
+\item[{const sf\+::\+Vector2f \&}]{vect}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_a2dc99a84ead7dac1481375144a990412}
+
+
+Vérifie la collision entre un point affecté par un vector et la map. 
+
+Vérifie si le point est en collision avec la map après son déplacement
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & \+: point à vérifier, vect \+: mouvement à appliquer pour la vérification \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Renvoi s'il y a une collision 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_af0255568dfc16a024d6107722860db36}{\index{Tile\+Map@{Tile\+Map}!collision\+Bas@{collision\+Bas}}
+\index{collision\+Bas@{collision\+Bas}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{collision\+Bas}]{\setlength{\rightskip}{0pt plus 5cm}bool Tile\+Map\+::collision\+Bas (
+\begin{DoxyParamCaption}
+\item[{const {\bf Alive\+Entity} \&}]{ae}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_af0255568dfc16a024d6107722860db36}
+
+
+Vérifie la collision sur le bas de l'\hyperlink{class_alive_entity}{Alive\+Entity}. 
+
+Vérifie si une collision existe entre le bas du paramètre et la map
+
+
+\begin{DoxyParams}{Parameters}
+{\em ae} & \+: objet à vérifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+L'état de la collision 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_ae19adae862a47ff532ebd6360e6a117d}{\index{Tile\+Map@{Tile\+Map}!collision\+Droite@{collision\+Droite}}
+\index{collision\+Droite@{collision\+Droite}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{collision\+Droite}]{\setlength{\rightskip}{0pt plus 5cm}bool Tile\+Map\+::collision\+Droite (
+\begin{DoxyParamCaption}
+\item[{const {\bf Alive\+Entity} \&}]{ae}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_ae19adae862a47ff532ebd6360e6a117d}
+
+
+Vérifie la collision sur la droite de l'\hyperlink{class_alive_entity}{Alive\+Entity}. 
+
+Vérifie si une collision existe entre la droite du paramètre et la map
+
+
+\begin{DoxyParams}{Parameters}
+{\em ae} & \+: objet à vérifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+L'état de la collision 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_a1a01bab917e287eef1b2dd2985accc83}{\index{Tile\+Map@{Tile\+Map}!collision\+Gauche@{collision\+Gauche}}
+\index{collision\+Gauche@{collision\+Gauche}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{collision\+Gauche}]{\setlength{\rightskip}{0pt plus 5cm}bool Tile\+Map\+::collision\+Gauche (
+\begin{DoxyParamCaption}
+\item[{const {\bf Alive\+Entity} \&}]{ae}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_a1a01bab917e287eef1b2dd2985accc83}
+
+
+Vérifie la collision sur la gauche de l'\hyperlink{class_alive_entity}{Alive\+Entity}. 
+
+Vérifie si une collision existe entre la gauche du paramètre et la map
+
+
+\begin{DoxyParams}{Parameters}
+{\em ae} & \+: objet à vérifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+L'état de la collision 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_a543431b7e68211aad223ae8c7b1086c0}{\index{Tile\+Map@{Tile\+Map}!collision\+Haut@{collision\+Haut}}
+\index{collision\+Haut@{collision\+Haut}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{collision\+Haut}]{\setlength{\rightskip}{0pt plus 5cm}bool Tile\+Map\+::collision\+Haut (
+\begin{DoxyParamCaption}
+\item[{const {\bf Alive\+Entity} \&}]{ae}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_a543431b7e68211aad223ae8c7b1086c0}
+
+
+Vérifie la collision sur le haut de l'\hyperlink{class_alive_entity}{Alive\+Entity}. 
+
+Vérifie si une collision existe entre le haut du paramètre et la map
+
+
+\begin{DoxyParams}{Parameters}
+{\em ae} & \+: objet à vérifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+L'état de la collision 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_a67f641da59fdaab20da87bcca89a1038}{\index{Tile\+Map@{Tile\+Map}!get\+Enemies@{get\+Enemies}}
+\index{get\+Enemies@{get\+Enemies}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{get\+Enemies}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Enemy} $\ast$ $>$ Tile\+Map\+::get\+Enemies (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_tile_map_a67f641da59fdaab20da87bcca89a1038}
+
+
+Getter des ennemis. 
+
+Récupère un vector contenant la liste de tout les ennemis de la \hyperlink{class_tile_map}{Tile\+Map}
+
+\begin{DoxyReturn}{Returns}
+La liste des ennemis de la map 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_a2d2cdb4a85f60bee4204c0163c29b7cd}{\index{Tile\+Map@{Tile\+Map}!get\+Gravity@{get\+Gravity}}
+\index{get\+Gravity@{get\+Gravity}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{get\+Gravity}]{\setlength{\rightskip}{0pt plus 5cm}sf\+::\+Vector2f Tile\+Map\+::get\+Gravity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_a2d2cdb4a85f60bee4204c0163c29b7cd}
+
+
+Getter de la Gravité 
+
+Retourne la valeur (2\+D) de la gravité.
+
+\begin{DoxyReturn}{Returns}
+Un Vector2f de la Gravité. 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_aae7430209eb0f15d7a0d0476e2337c72}{\index{Tile\+Map@{Tile\+Map}!get\+Height@{get\+Height}}
+\index{get\+Height@{get\+Height}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{get\+Height}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Tile\+Map\+::get\+Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_aae7430209eb0f15d7a0d0476e2337c72}
+
+
+Getter de Height. 
+
+Retourne la hauteur du Level.
+
+\begin{DoxyReturn}{Returns}
+La hauteur du Level. 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_a9f0637a3a0afea5f28e846f11f22f6cf}{\index{Tile\+Map@{Tile\+Map}!get\+Level\+End@{get\+Level\+End}}
+\index{get\+Level\+End@{get\+Level\+End}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{get\+Level\+End}]{\setlength{\rightskip}{0pt plus 5cm}sf\+::\+Rectangle\+Shape $\ast$ Tile\+Map\+::get\+Level\+End (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_tile_map_a9f0637a3a0afea5f28e846f11f22f6cf}
+
+
+Getter de la fin du niveau. 
+
+Récupère la Rectangle\+Shape du bloc de fin de niveau
+
+\begin{DoxyReturn}{Returns}
+La Rectangle\+Shape de fin de niveau 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_ab498153694e7a79853fc6fb2a10887ad}{\index{Tile\+Map@{Tile\+Map}!get\+Level\+Name@{get\+Level\+Name}}
+\index{get\+Level\+Name@{get\+Level\+Name}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{get\+Level\+Name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Tile\+Map\+::get\+Level\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_ab498153694e7a79853fc6fb2a10887ad}
+
+
+Getter du nom du niveau. 
+
+Récupère le nom du niveau en cours
+
+\begin{DoxyReturn}{Returns}
+Le nom du niveau 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_ab91140b620ac86fcce9649b385e1132f}{\index{Tile\+Map@{Tile\+Map}!get\+Spawn@{get\+Spawn}}
+\index{get\+Spawn@{get\+Spawn}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{get\+Spawn}]{\setlength{\rightskip}{0pt plus 5cm}sf\+::\+Vector2f Tile\+Map\+::get\+Spawn (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_ab91140b620ac86fcce9649b385e1132f}
+
+
+Getter des coordonnées de spawn. 
+
+\begin{DoxyReturn}{Returns}
+Un Vector2f du spawn. 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_aad3bfcbf9997269b7af18e6cd66a83d3}{\index{Tile\+Map@{Tile\+Map}!get\+Width@{get\+Width}}
+\index{get\+Width@{get\+Width}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{get\+Width}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Tile\+Map\+::get\+Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_aad3bfcbf9997269b7af18e6cd66a83d3}
+
+
+Getter de Width. 
+
+Retourne la largeur du Level.
+
+\begin{DoxyReturn}{Returns}
+La largeur du Level. 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_a2418329f152f039cf32b060ad4e0db55}{\index{Tile\+Map@{Tile\+Map}!kill\+Enemy@{kill\+Enemy}}
+\index{kill\+Enemy@{kill\+Enemy}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{kill\+Enemy}]{\setlength{\rightskip}{0pt plus 5cm}void Tile\+Map\+::kill\+Enemy (
+\begin{DoxyParamCaption}
+\item[{{\bf Enemy} $\ast$}]{e}
+\end{DoxyParamCaption}
+)}}\label{class_tile_map_a2418329f152f039cf32b060ad4e0db55}
+
+
+Supprime l'\hyperlink{class_enemy}{Enemy} tué 
+
+Supprime un ennemi lors de sa mort
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \+: ennemi tué \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_tile_map_a5126cb10237b3d0c0c9cbcf4dca849ac}{\index{Tile\+Map@{Tile\+Map}!load@{load}}
+\index{load@{load}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}bool Tile\+Map\+::load (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{tileset, }
+\item[{sf\+::\+Vector2u}]{tile\+Size}
+\end{DoxyParamCaption}
+)}}\label{class_tile_map_a5126cb10237b3d0c0c9cbcf4dca849ac}
+
+
+charge le niveau avec la texture de la tileset 
+
+Fonction chargeant le niveau, en utilisant comme texture la tileset prise en entrée.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tileset} & \+: string contenant le nom du fichier contenant les tuiles, tile\+Size \+: taille des tuiles \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_tile_map_a72d2f2c89b9521d8632a724b246f6e43}{\index{Tile\+Map@{Tile\+Map}!next\+Tile\+Y@{next\+Tile\+Y}}
+\index{next\+Tile\+Y@{next\+Tile\+Y}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{next\+Tile\+Y}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Tile\+Map\+::next\+Tile\+Y (
+\begin{DoxyParamCaption}
+\item[{float}]{x}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_a72d2f2c89b9521d8632a724b246f6e43}
+
+
+Retourne la tuile suivante. 
+
+Renvoi le pixel ou commence la tuile suivant celle en parametre
+
+\begin{DoxyReturn}{Returns}
+La tuile suivante 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_acca5310b644c02342e0d4829a887d1e7}{\index{Tile\+Map@{Tile\+Map}!previous\+Tile\+Y@{previous\+Tile\+Y}}
+\index{previous\+Tile\+Y@{previous\+Tile\+Y}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{previous\+Tile\+Y}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Tile\+Map\+::previous\+Tile\+Y (
+\begin{DoxyParamCaption}
+\item[{float}]{x}
+\end{DoxyParamCaption}
+) const}}\label{class_tile_map_acca5310b644c02342e0d4829a887d1e7}
+
+
+Retourne la tuile précédante. 
+
+Renvoi le pixel ou commence la tuile précédant celle en parametre
+
+\begin{DoxyReturn}{Returns}
+La tuile précédante 
+\end{DoxyReturn}
+\hypertarget{class_tile_map_a5ee6a66152cf4a52f3232369ac19132f}{\index{Tile\+Map@{Tile\+Map}!reset@{reset}}
+\index{reset@{reset}!Tile\+Map@{Tile\+Map}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Tile\+Map\+::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_tile_map_a5ee6a66152cf4a52f3232369ac19132f}
+
+
+Réinitialise la map. 
+
+Supprime tout les ennemis et recharge le layer 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_tile_map_8hpp}{Tile\+Map.\+hpp}\end{DoxyCompactItemize}

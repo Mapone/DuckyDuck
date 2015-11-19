@@ -20,3 +20,8 @@ void Enemy::jumpOn()
 {
 	_tileMap.killEnemy(this);
 }
+
+unsigned int Enemy::getReward() const
+{
+	return 10;
+}
