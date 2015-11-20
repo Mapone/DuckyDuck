@@ -7,7 +7,6 @@
 
 Follower::Follower(const sf::Vector2f &taille,  TileMap& tilemap, const Personnage& perso, float speed, float jumpHeight) : Enemy(taille, tilemap), _perso(perso),_speed(speed), _jumpHeight(jumpHeight)
 {
-	_shape.setFillColor(sf::Color::Magenta);
 	_AI = new AI_Follower(this, tilemap, perso);
 }
 
@@ -33,5 +32,4 @@ unsigned int Follower::getReward() const
 
 void Follower::jumpOn()
 {
-	_shape.setFillColor(sf::Color::Black);
 }

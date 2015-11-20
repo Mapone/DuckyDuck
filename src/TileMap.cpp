@@ -262,7 +262,7 @@ void TileMap::loadLayer(sf::Image layer)
     t = layer.getPixelsPtr();
 
 
-    Enemy* jumperPrototype = new Jumper(sf::Vector2f(15,15),*this, 2, 3);
+    Enemy* jumperPrototype = new Jumper(sf::Vector2f(15,15),*this, 5, 5);
     Spawner* jumperSpawner = new Spawner(jumperPrototype);
 
     Enemy* followerPrototype = new Follower(sf::Vector2f(15,15),*this, _perso,1, 3);
@@ -270,7 +270,7 @@ void TileMap::loadLayer(sf::Image layer)
 
     Enemy* tmp = new Jumper(sf::Vector2f(5,5),*this, 1, 3);
 
-    Enemy* boomerPrototype = new Boomer(sf::Vector2f(15,15),*this,1,tmp);
+    Enemy* boomerPrototype = new Boomer(sf::Vector2f(15,15),*this,3,tmp);
     Spawner* boomerSpawner = new Spawner(boomerPrototype);
 
 /*
@@ -331,9 +331,8 @@ void TileMap::loadLayer(sf::Image layer)
         else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 0)
         {
             //SPAWNER
-            
            int j = i/4;
-            Enemy* e = new EnemySpawner(*this, tmp, 0.1);
+            Enemy* e = new EnemySpawner(*this, tmp, 3);
             e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
             _enemies.push_back(e);
         }
@@ -351,6 +350,9 @@ void TileMap::loadLayer(sf::Image layer)
                 cerr << "#ERROR: Pas de spawn trouvé pour \"" + _levelName + "\"" << endl;
     if(_levelEnd.getPosition().x == -1)
                 cerr << "#ERROR: Pas de fin de niveau trouvé pour \"" + _levelName + "\"" << endl;
+
+
+    //TODO LES DELETE §§§§
 }
 
 

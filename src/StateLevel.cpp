@@ -52,6 +52,7 @@ void StateLevel::checkCollision()
     if(checkCollision(_perso.getShape(), *_tilemap->getLevelEnd()))
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        _tilemap = _jeu->resetLevel();
         _jeu->setState(_jeu->getStateStats(true));
     }
 

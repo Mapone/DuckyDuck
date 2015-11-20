@@ -135,7 +135,12 @@ bool Jeu::changeToNextLevel()
         _stateLevel->setLevel(getCurrentLevel());
         return true;
     }
-    return false;
+    else
+    {   
+        _currentLevel = 0;
+        _stateLevel->setLevel(getCurrentLevel());
+        return false;
+    }
 }
 
 

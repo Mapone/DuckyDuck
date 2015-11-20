@@ -5,7 +5,10 @@
 #include "AI.hpp"
 
 Enemy::Enemy(const sf::Vector2f &taille, TileMap &tilemap) : AliveEntity(taille), _tileMap(tilemap), _isDead(false)
-{}
+{
+	_texture.loadFromFile("cat.png");
+	_shape.setTexture(&_texture, true);
+}
 
 Enemy::~Enemy()
 {

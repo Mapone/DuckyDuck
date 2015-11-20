@@ -8,6 +8,7 @@ EnemySpawner::EnemySpawner(TileMap& tilemap, Enemy* enemy, float spawnfreq): Ene
 {
 	_shape.setFillColor(sf::Color::Black);
 	_enemySpawn = new Spawner(enemy);
+	_AI = NULL;
 }
 
 EnemySpawner::~EnemySpawner()
