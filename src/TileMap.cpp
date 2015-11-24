@@ -231,8 +231,7 @@ void TileMap::loadBMP(sf::Image niveau)
 
     for (unsigned int i = 0; i < (niveau.getSize().x*niveau.getSize().y*4); i+=4)
     {
-        if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 200)
-            level[i/4] = 2; //BLOC CIEL
+        if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 200) level[i/4] = 2; //BLOC CIEL
 
         else if( static_cast<int>(t[i]) == 220 && static_cast<int>(t[i+1]) == 220 && static_cast<int>(t[i+2]) == 220)
             level[i/4] = 3; //BLOC CIEL + NUAGE GAUCHE
@@ -267,11 +266,8 @@ void TileMap::loadBMP(sf::Image niveau)
         else if( static_cast<int>(t[i]) == 96 && static_cast<int>(t[i+1]) == 56 && static_cast<int>(t[i+2]) == 98)
             level[i/4] = 8; //BLOC TERRE N°2
 
-        else if( static_cast<int>(t[i]) == 96 && static_cast<int>(t[i+1]) == 56 && static_cast<int>(t[i+2]) == 98)
+        else if( static_cast<int>(t[i]) == 130 && static_cast<int>(t[i+1]) == 70 && static_cast<int>(t[i+2]) == 50)
             level[i/4] = 9; //BLOC TERRE N°3
-
-        else if( static_cast<int>(t[i]) == 96 && static_cast<int>(t[i+1]) == 56 && static_cast<int>(t[i+2]) == 98)
-            level[i/4] = 8; //BLOC TERRE N°2
 
         else if( static_cast<int>(t[i]) == 1 && static_cast<int>(t[i+1]) == 1 && static_cast<int>(t[i+2]) == 1)
             level[i/4] = 12; //BLOC CIEL INVISIBLE

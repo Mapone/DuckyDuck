@@ -216,8 +216,8 @@ void StateLevel::checkMapCollision() const
     if(colHaut)
     {
         _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x,0));
-        sf::Vector2f position = _perso.getShape().getPosition();
-        _perso.setPosition(sf::Vector2f( position.x ,_tilemap->previousTileY(position.y) + 0.01));
+        //sf::Vector2f position = _perso.getShape().getPosition();
+        //_perso.setPosition(sf::Vector2f( position.x ,_tilemap->previousTileY(position.y) + 0.01));
     }
 
     if(!(colHaut && colBas && colDroite && colGauche))
