@@ -1,34 +1,24 @@
 #include <iostream>
-#include "TileMap.hpp"
 #include "Enemy.hpp"
-#include "ESpike.hpp"
-#include "Spawner.hpp"
+#include "Personnage.hpp"
+#include "Spike.hpp"
 
-EnemySpawner::EnemySpawner(TileMap& tilemap, Enemy* enemy, float spawnfreq): Enemy (sf::Vector2f(15,15),tilemap), _tilemap(tilemap), _spawnfreq(spawnfreq)
+Spike::Spike(const sf::Vector2f taille, TileMap& tilemap): Enemy(taille, tilemap)
 {
-	_shape.setFillColor(sf::Color::Black);
-	_enemySpawn = new Spawner(enemy);
+	_texture.loadFromFile("spike.png");
 	_AI = NULL;
 }
 
-EnemySpawner::~EnemySpawner()
+
+Enemy* Spike::clone()
 {
-	delete _enemySpawn;
+	return new Spike(_shape.getSize(),_tileMap);
 }
 
-Enemy* EnemySpawner::clone()
+bool Spike::jumpOn()
 {
-	return new EnemySpawner(_tilemap, _enemySpawn->spawnEnemy(), _spawnfreq);
+	return true;	
 }
 
-void  EnemySpawner::move()
-{
-	
-	if (_clock.getElapsedTime().asSeconds() > _spawnfreq)
-	{
-		Enemy* e = _enemySpawn->spawnEnemy();
-		e->setPosition(_shape.getPosition());
-		_tilemap.addEnemy(e);
-		_clock.restart();
-	}	
-}
+void Spike::move()
+{}

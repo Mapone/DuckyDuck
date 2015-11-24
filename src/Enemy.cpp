@@ -20,9 +20,10 @@ void Enemy::move()
 	_AI->move();
 }
 
-void Enemy::jumpOn()
+bool Enemy::jumpOn()
 {
 	_isDead = true;
+	return false;
 }
 
 unsigned int Enemy::getReward() const

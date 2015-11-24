@@ -9,6 +9,8 @@
 #include "Follower.hpp"
 #include "Boomer.hpp"
 #include "EnemySpawner.hpp"
+#include "Spike.hpp"
+
 
 using namespace std;
 
@@ -309,6 +311,8 @@ void TileMap::loadLayer(sf::Image layer)
     Enemy* SpawnerPrototype = new EnemySpawner(*this, tmp, 0.5);
     Spawner* SpawnerSpawner = new Spawner(SpawnerPrototype);*/
 
+    Enemy* spikePrototype = new Spike(sf::Vector2f(15,15), *this);
+    Spawner* spikeSpawner = new Spawner(spikePrototype);
 
 
     for (unsigned int i = 0; i < (layer.getSize().x*layer.getSize().y*4); i+=4)
@@ -355,7 +359,7 @@ void TileMap::loadLayer(sf::Image layer)
         else if( static_cast<int>(t[i]) == 127 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 127)
         {
             //FOLLOWER
-           int j = i/4;
+            int j = i/4;
             Enemy* e = followerSpawner->spawnEnemy();
             e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
             _enemies.push_back(e);
@@ -365,6 +369,14 @@ void TileMap::loadLayer(sf::Image layer)
             //SPAWNER
            int j = i/4;
             Enemy* e = new EnemySpawner(*this, tmp, 3);
+            e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
+            _enemies.push_back(e);
+        }
+        else if( static_cast<int>(t[i]) == 74 && static_cast<int>(t[i+1]) == 74 && static_cast<int>(t[i+2]) == 74)
+        {
+            //Spike
+            int j = i/4;
+            Enemy* e = spikeSpawner->spawnEnemy();
             e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
             _enemies.push_back(e);
         }

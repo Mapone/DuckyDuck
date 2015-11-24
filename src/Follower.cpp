@@ -30,6 +30,7 @@ unsigned int Follower::getReward() const
 	return std::abs(_speed)*8 + _jumpHeight*3;
 }
 
-void Follower::jumpOn()
+bool Follower::jumpOn()
 {
+	return false;
 }

@@ -58,10 +58,15 @@ void StateLevel::checkCollision()
 
     if(_perso.getShape().getPosition().y > 450 || collisionEnemy())
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(800));
-        _tilemap = _jeu->resetLevel();
-        _jeu->setState(_jeu->getStateStats(false));
+        death();
     }
+}
+
+void StateLevel::death()
+{
+     std::this_thread::sleep_for(std::chrono::milliseconds(800));
+    _tilemap = _jeu->resetLevel();
+    _jeu->setState(_jeu->getStateStats(false));
 }
 
 bool StateLevel::collisionEnemy() const
@@ -83,12 +88,13 @@ bool StateLevel::collisionEnemy(Enemy *e) const
         if((_perso.getPosition().y + _perso.getSize().y) <= e->getPosition().y + 5)
         {
             _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x, -5));
-            _perso.setCurrentKill(_perso.getCurrentKill() + 1);
-            _perso.setCurrentScore(_perso.getCurrentScore()+e->getReward());
-            e->jumpOn();
             if(e->isDead())
+            {
+                _perso.setCurrentKill(_perso.getCurrentKill() + 1);
+                _perso.setCurrentScore(_perso.getCurrentScore()+e->getReward());
                 _tilemap->killEnemy(e);
-            return false;
+            }
+            return e->jumpOn();
         }
         else
         { 

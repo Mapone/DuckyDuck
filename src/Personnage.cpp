@@ -108,7 +108,7 @@ unsigned int Personnage::getCurrentKill() const
 {
 	return _currentKill;
 }
-unsigned int Personnage::getCurrentScore() const
+int Personnage::getCurrentScore() const
 {
 	return _currentScore;
 }
@@ -116,7 +116,7 @@ unsigned int Personnage::getTotalKill() const
 {
 	return _totalKill;
 }
-unsigned int Personnage::getTotalScore() const
+int Personnage::getTotalScore() const
 {
 	return _totalScore;
 }

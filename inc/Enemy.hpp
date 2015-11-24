@@ -69,7 +69,7 @@ public:
 	 * @brief Actions à faire si on saute sur l'ennemi
 	 * @details Actions à faire si on saute sur l'ennemi
 	 */
-	virtual void jumpOn();
+	virtual bool jumpOn();
 
 	/**
 	* 

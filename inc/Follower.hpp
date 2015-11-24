@@ -61,7 +61,7 @@ public:
 	 */
 	float getJumpHeight() const;
 
-	void jumpOn();
+	bool jumpOn();
 
 	unsigned int getReward() const; 
 	

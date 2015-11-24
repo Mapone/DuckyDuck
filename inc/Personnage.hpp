@@ -115,7 +115,7 @@ public:
 	*
 	* \return Le score
 	*/
-	unsigned int getCurrentScore() const;
+	int getCurrentScore() const;
 
 	/**
 	* \fn unsigned int getTotalKill() const
@@ -137,7 +137,7 @@ public:
 	*
 	* \return Le score total
 	*/
-	unsigned int getTotalScore() const;
+	int getTotalScore() const;
 
 	/**
 	* \fn void setCurrentKill(unsigned int k)
@@ -185,9 +185,9 @@ private:
 	sf::Image _imgDuck; /** Image du personnage */
 	sf::Texture _textureDuck; /** Texture créer par l'image */
 	bool _lookRight; /** Direction D/G vers ou le personnage est touné */
-	unsigned int _currentScore; /** Score temporaire du personnage*/
+	int _currentScore; /** Score temporaire du personnage*/
 	unsigned int _currentKill; /** Nombre d'enemis tué temporaire du personnage */
-	unsigned int _totalScore; /** Score total du personnage */
+	int _totalScore; /** Score total du personnage */
 	unsigned int _totalKill; /** Nombre total d'ennemis tués */
 };
 

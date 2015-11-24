@@ -113,6 +113,8 @@ public:
 
   void update();
 
+  void death();
+
 private:
 
   TileMap* _tilemap; /** TileMap du niveau */

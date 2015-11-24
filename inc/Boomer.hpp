@@ -55,7 +55,7 @@ public:
 	 */
 	unsigned int getFatPerFrame() const;
 
-	void jumpOn();
+	bool jumpOn();
 
 
 private:
