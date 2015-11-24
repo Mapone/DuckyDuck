@@ -44,7 +44,7 @@ int main()
 //----------------------------------------------------------------
     
     sf::Vector2f gravity(0,0.2);
-    TileMap map("lvl4", gravity, ducky);
+    TileMap map("LEVEL 3", gravity, ducky);
 
 //-------------------Création du Jeu------------------------------
 //----------------------------------------------------------------
@@ -54,9 +54,9 @@ int main()
     
 //--------- Création et ajout des niveaux -----------------
 //---------------------------------------------------------
-    TileMap map1("montagne", gravity, ducky);
+    TileMap map1("LEVEL 2", gravity, ducky);
     jeu.addLevel(&map1);
-    TileMap map2("lvl3", gravity, ducky);
+    TileMap map2("LEVEL 1", gravity, ducky);
     jeu.addLevel(&map2);
 
 ///////////////////////////////////////
