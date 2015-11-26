@@ -84,17 +84,18 @@ bool StateLevel::collisionEnemy(Enemy *e) const
     //Si il y a collision avec le perso
     if(checkCollision(_perso.getShape(),e->getShape()))
     { 
-        //Si le perso est situé au dessus de l'ennemi, avec une marge de 5 pixels (vitesse max du perso en Y), on le tue
+        //Si le perso est situé au dessus de l'ennemi, avec une marge de 5 pixels (vitesse max du perso en Y)
         if((_perso.getPosition().y + _perso.getSize().y) <= e->getPosition().y + 5)
         {
             _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x, -5));
+            bool tmp = e->jumpOn();
             if(e->isDead())
             {
                 _perso.setCurrentKill(_perso.getCurrentKill() + 1);
                 _perso.setCurrentScore(_perso.getCurrentScore()+e->getReward());
                 _tilemap->killEnemy(e);
             }
-            return e->jumpOn();
+            return tmp;
         }
         else
         { 

@@ -7,10 +7,11 @@
 
 Boomer::Boomer(const sf::Vector2f &taille, TileMap& tilemap, int fatPerFrame, Enemy* prototype) : Enemy(taille, tilemap), _fatPerFrame(fatPerFrame)
 {
-	_shape.setFillColor(sf::Color::Green);
 	_AI = new AI_Boomer(this, tilemap);
 	_prototype = prototype;
     _jumperSpawn = new Spawner(_prototype);
+   	_texture.loadFromFile("creeper.png");
+	_shape.setTexture(&_texture, true);
 }
 
 Boomer::~Boomer()

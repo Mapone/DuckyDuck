@@ -1,5 +1,5 @@
 /**************************************
-JEU ALAKON
+DUCKYDUCK
 **************************************/
 
 #include <iostream>
@@ -15,7 +15,6 @@ using namespace std;
 Si y'a le temps:
     - Arret du programme si la map n'est pas valide (pas de spawn ou de fin)
     - Remplacer la touche entrée par espace dans les menus (chiant à faire)
-
 */
 
 ////////////////////////////////////
@@ -44,7 +43,8 @@ int main()
 //----------------------------------------------------------------
     
     sf::Vector2f gravity(0,0.2);
-    TileMap map("LEVEL 2", gravity, ducky);
+    sf::Vector2f lowGravity(0,0.01);
+    TileMap map("LEVEL 3", gravity, ducky);
 
 //-------------------Création du Jeu------------------------------
 //----------------------------------------------------------------
@@ -56,8 +56,10 @@ int main()
 //---------------------------------------------------------
     TileMap map1("LEVEL 2", gravity, ducky);
     jeu.addLevel(&map1);
-    TileMap map2("LEVEL 3", gravity, ducky);
+    TileMap map2("lowGrav", lowGravity, ducky);
     jeu.addLevel(&map2);
+    TileMap map3("Cave", gravity, ducky);
+    jeu.addLevel(&map3);
 
 ///////////////////////////////////////
 ////////////LANCEMENT DU JEU//////////

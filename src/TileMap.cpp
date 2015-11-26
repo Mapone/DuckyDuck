@@ -292,7 +292,7 @@ void TileMap::loadLayer(sf::Image layer)
     t = layer.getPixelsPtr();
 
 
-    Enemy* jumperPrototype = new Jumper(sf::Vector2f(15,15),*this, 5, 5);
+    Enemy* jumperPrototype = new Jumper(sf::Vector2f(15,15),*this, 3, 2);
     Spawner* jumperSpawner = new Spawner(jumperPrototype);
 
     Enemy* followerPrototype = new Follower(sf::Vector2f(15,15),*this, _perso,1, 3);
@@ -300,7 +300,7 @@ void TileMap::loadLayer(sf::Image layer)
 
     Enemy* tmp = new Jumper(sf::Vector2f(5,5),*this, 1, 3);
 
-    Enemy* boomerPrototype = new Boomer(sf::Vector2f(15,15),*this,3,tmp);
+    Enemy* boomerPrototype = new Boomer(sf::Vector2f(15,15),*this,1,tmp);
     Spawner* boomerSpawner = new Spawner(boomerPrototype);
 
 /*
@@ -373,7 +373,7 @@ void TileMap::loadLayer(sf::Image layer)
             //Spike
             int j = i/4;
             Enemy* e = spikeSpawner->spawnEnemy();
-            e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16));
+            e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16 +1));
             _enemies.push_back(e);
         }
         else
