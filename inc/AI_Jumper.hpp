@@ -12,9 +12,8 @@
 * \version 1.0
 * \date 14/11/2015
 *
-* Gère les mouvement d'un Enemy ayant pour base
-* le mouvement de saut sur une TileMap définie.
-* Hérite du AI.
+* Gère les mouvement d'un Enemy qui 
+* pourra sauter et/ou se déplacer latéralement
 */
 
 class Jumper;
@@ -33,7 +32,7 @@ public:
 	*
 	* Constructeur de la classe AI_Jumper.
 	*
-	* \param enemy : Ennemi utilisant l'IA, tilemap : TileMap sur laquelle l'Enemy est.
+	* \param jumper : Ennemi utilisant l'IA, tilemap : TileMap sur laquelle l'Enemy est.
 	*/
     AI_Jumper(Jumper* jumper, const TileMap& tilemap);
 

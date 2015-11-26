@@ -51,8 +51,8 @@ public:
 private:
 
 	bool _directionX; /** Bool qui vérifiant si l'on doit inverser le mouvement en X (collision) */
-	Follower* _follower;
-	const Personnage& _perso;
+	Follower* _follower; /** l'ennemi à deplacer */
+	const Personnage& _perso; /**Le personnage à suivre*/
 };
 
 #endif

@@ -12,16 +12,15 @@
 * \version 1.0
 * \date 14/11/2015
 *
-* Gère les mouvement d'un Enemy ayant pour base
-* le mouvement de saut sur une TileMap définie.
-* Hérite du AI.
+*Gère les mouvements d'une ennemi qui va grossir
+* et retrecir continuellement
+*
 */
 
 class Boomer;
 
 /**
 * \class AI_Boomer
-* \brief Classe gérant l'AI des ennemi qui sautent.
 */
 class AI_Boomer : public AI
 {
@@ -47,7 +46,7 @@ public:
     virtual void move();
 
 private:
-	Boomer* _boomer;
+	Boomer* _boomer; /** l'ennemi qui utilise l'IA */
 	sf::Clock _clock; /** Clock gérer par SFML */
 
 };
