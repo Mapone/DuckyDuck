@@ -33,6 +33,7 @@ void AI_Follower::move()
     if(colGauche || colDroite)
         _follower->setMouvement(sf::Vector2f(0,_follower->getMouvement().y));
     
+    //On saute quand on touche le sol et qu'on detecte un collision latérale
     if(colBas && (colGauche || colDroite))
         _follower->addMouvement(sf::Vector2f(0,-_follower->getJumpHeight()));
         

@@ -21,7 +21,7 @@ class TileMap;
 
 /**
 * \class Enemy
-* \brief Classe abstraite qui définissant les objets "vivants"
+* \brief Classe abstraite qui définissant les ennemis
 *
 * Classe définissant un ennemi.
 */

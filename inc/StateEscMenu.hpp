@@ -9,7 +9,7 @@
 * \version 1.0
 * \date 3/11/2015
 *
-* Etat EscMenu rattaché au Pattern State.
+* Etat StateEscMenu rattaché au Pattern State.
 */
 
 #include <SFML/Graphics.hpp>
@@ -18,7 +18,7 @@ class Jeu;
 
 /**
 * \classe StateEscMenu
-* \brief Etat EscMenu rattaché au Pattern State
+* \brief Etat StateEscMenu rattaché au Pattern State
 */
 class StateEscMenu : public State
 {

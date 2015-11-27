@@ -33,7 +33,7 @@ void AI_Jumper::move()
         _jumper->setMouvement(sf::Vector2f(0,_jumper->getMouvement().y));
         
     }
-
+    //Le jumper saute si il detecte une collision en bas
     if(colBas)
         _jumper->setMouvement(sf::Vector2f(_jumper->getMouvement().x,-_jumper->getJumpHeight()));
 

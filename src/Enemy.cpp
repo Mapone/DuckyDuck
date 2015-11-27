@@ -22,6 +22,7 @@ void Enemy::move()
 
 bool Enemy::jumpOn()
 {
+	//Comportement par défaut quand on saute sur un ennemi, celui-ci meurt et ne tue pas le personnage (return false)
 	_isDead = true;
 	return false;
 }

@@ -39,10 +39,13 @@ void StateLevel::setLevel(TileMap* t)
 void StateLevel::update()
 {
 
-    //On check les collisions sur la map
+    //On check les collisions entre la map est le personnage
     checkMapCollision();
+    //On vérifie le scrolling de la camera
     updateCamera();
+    //On vérifie ensuite la collision entre chaque ennemis présents
     checkCollision();
+    //On fait ensuite bouger tous les ennemis
     enemyMove();
 }
 
@@ -56,14 +59,17 @@ void StateLevel::checkCollision()
         _jeu->setState(_jeu->getStateStats(true));
     }
 
+    //Si le personnage est tombé en bas du niveau ou qu'il s'est fait tuer par un ennemi
     if(_perso.getShape().getPosition().y > 450 || collisionEnemy())
     {
+        //On le tue
         death();
     }
 }
 
 void StateLevel::death()
 {
+    //Sleep afin d'avoir le temps de comprendre ce qui nous a tué
      std::this_thread::sleep_for(std::chrono::milliseconds(800));
     _tilemap = _jeu->resetLevel();
     _jeu->setState(_jeu->getStateStats(false));
@@ -71,6 +77,7 @@ void StateLevel::death()
 
 bool StateLevel::collisionEnemy() const
 {
+    //On parcours tous les annemis de la map
     for (auto *enemy : _tilemap->getEnemies())
     {
         if(collisionEnemy(enemy))
@@ -87,14 +94,17 @@ bool StateLevel::collisionEnemy(Enemy *e) const
         //Si le perso est situé au dessus de l'ennemi, avec une marge de 5 pixels (vitesse max du perso en Y)
         if((_perso.getPosition().y + _perso.getSize().y) <= e->getPosition().y + 5)
         {
+            //On fait cauter le personnage
             _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x, -5));
             bool tmp = e->jumpOn();
+            //On supprime l'ennemis si celui-ci meurt 
             if(e->isDead())
             {
                 _perso.setCurrentKill(_perso.getCurrentKill() + 1);
                 _perso.setCurrentScore(_perso.getCurrentScore()+e->getReward());
                 _tilemap->killEnemy(e);
             }
+            //On retourne le booléen de JumpOn, qui nous indique si l'on décède
             return tmp;
         }
         else

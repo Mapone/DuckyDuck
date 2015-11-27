@@ -31,6 +31,7 @@ unsigned int Boomer::getFatPerFrame() const
 
 bool Boomer::jumpOn()
 {
+	//Quand le boomer se fait sauter dessus, il faut spawn 6 minis jumpers qui partent chacuns dans une direction différente.
 	_isDead = true;
 	_tileMap.addEnemy(new Jumper(sf::Vector2f(8,8),sf::Vector2f(getPosition().x, getPosition().y + 5),_tileMap, -2, 5));
 	_tileMap.addEnemy(new Jumper(sf::Vector2f(8,8),sf::Vector2f(getPosition().x, getPosition().y + 5),_tileMap, -1, 5));

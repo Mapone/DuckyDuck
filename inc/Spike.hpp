@@ -18,7 +18,7 @@ class TileMap;
 class Personnage;
 
 /**
-* \class Follower
+* \class Spike
 * \brief Classe gérant les pics
 */
 class Spike : public Enemy

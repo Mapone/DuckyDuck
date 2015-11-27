@@ -143,7 +143,6 @@ bool Jeu::changeToNextLevel()
     }
 }
 
-
 StateLevel* Jeu::getStateLevel() const
 {
     return _stateLevel;
@@ -164,8 +163,6 @@ StateMainMenu* Jeu::getStateMainMenu() const
 {
     return _stateMainMenu;
 }
-
-
 
 void Jeu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
@@ -209,6 +206,7 @@ void Jeu::restartCharClock() const
 
 TileMap* Jeu::resetLevel()
 {
+    //On recrée conplétement la tilemap
     string name = _levels[_currentLevel]->getLevelName();
     sf::Vector2f grav = _levels[_currentLevel]->getGravity();
     _levels[_currentLevel] = new TileMap(name, grav, _perso);

@@ -22,7 +22,7 @@ class Personnage;
 
 /**
 * \class AI_Follower
-* \brief Classe gérant l'AI des ennemi qui sautent.
+* \brief Classe gérant l'AI des Follower
 */
 class AI_Follower : public AI
 {

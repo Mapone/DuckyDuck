@@ -20,5 +20,6 @@ bool Spike::jumpOn()
 	return true;	
 }
 
+//On redéfini la fonction move pour qu'elle n'appelle pas l'AI
 void Spike::move()
 {}

@@ -8,6 +8,7 @@ EnemySpawner::EnemySpawner(TileMap& tilemap, Enemy* enemy, float spawnfreq): Ene
 {
 	_shape.setFillColor(sf::Color::Black);
 	_enemySpawn = new Spawner(enemy);
+	//Un spawner n'a pas d'AI
 	_AI = NULL;
 }
 
@@ -23,7 +24,7 @@ Enemy* EnemySpawner::clone()
 
 void  EnemySpawner::move()
 {
-	
+	//Comme il n'a pas d'AI, sa methode move est redéfinie
 	if (_clock.getElapsedTime().asSeconds() > _spawnfreq)
 	{
 		Enemy* e = _enemySpawn->spawnEnemy();

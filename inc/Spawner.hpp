@@ -13,8 +13,8 @@
 class Enemy;
 
 /**
-* \class Personnage
-* \brief Classe définissant un personnage.
+* \class Spawner
+* \brief Classe définissant un Spawner.
 */
 class Spawner
 {

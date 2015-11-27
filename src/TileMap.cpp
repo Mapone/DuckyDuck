@@ -102,25 +102,27 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
             quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
             quad[3].texCoords = sf::Vector2f(tu * tileSize.x+tu, (tv + 1) * tileSize.y+tv);
             
-            
+            //Definition du tableau de collisions:
+            //0 si traversable, 1 sinon
             switch(level[i + j * width])
             {
+                //BLOC CIEL
                 case 2:
                     mapCollisions[i + j * width] = 0;
                     break;
-
+                //BLOC NUAGE GAUCHE
                 case 3:
                     mapCollisions[i + j * width] = 0;
                     break;
-
+                //BLOC NUAGE DROIT
                 case 4:
                     mapCollisions[i + j * width] = 0;
                     break;
-
+                //BLOC PIERRE GROTTE
                 case 122:
                     mapCollisions[i + j * width] = 0;
                     break;
-
+                //SINON
                 default:
                     mapCollisions[i + j * width] = 1;
                     break;
@@ -141,6 +143,7 @@ bool TileMap::collision(const sf::Vector2f& point, const sf::Vector2f& vect) con
     i = (point.x + vect.x - getPosition().x);   
     j = (point.y + vect.y - getPosition().y);
 
+    //Cas de sortie de map (gauche, droite et haut)
     if(i < 0 || j< 0 || i > (int)(width*16-1))
         return true;
     else
@@ -225,7 +228,6 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void TileMap::loadBMP(sf::Image niveau)
 {
-
     const uint8_t *t;
     t = niveau.getPixelsPtr();
 
@@ -291,7 +293,6 @@ void TileMap::loadLayer(sf::Image layer)
     const uint8_t *t;
     t = layer.getPixelsPtr();
 
-
     Enemy* jumperPrototype = new Jumper(sf::Vector2f(15,15),*this, 3, 2);
     Spawner* jumperSpawner = new Spawner(jumperPrototype);
 
@@ -303,17 +304,13 @@ void TileMap::loadLayer(sf::Image layer)
     Enemy* boomerPrototype = new Boomer(sf::Vector2f(15,15),*this,1,tmp);
     Spawner* boomerSpawner = new Spawner(boomerPrototype);
 
-/*
-    Enemy* SpawnerPrototype = new EnemySpawner(*this, tmp, 0.5);
-    Spawner* SpawnerSpawner = new Spawner(SpawnerPrototype);*/
-
     Enemy* spikePrototype = new Spike(sf::Vector2f(15,15), *this);
     Spawner* spikeSpawner = new Spawner(spikePrototype);
 
 
     for (unsigned int i = 0; i < (layer.getSize().x*layer.getSize().y*4); i+=4)
     { 
-        //Si on est sur la couleur "transparent" (0,0,0,0), on passe au prochain tour de boucle
+        //Si on detecte la couleur de fond (blanc), on passe au prochain tour de boucle
         int check = static_cast<int>(t[i]) + static_cast<int>(t[i+1]) + static_cast<int>(t[i+2]);
         if(check == 765)
             continue;
@@ -392,7 +389,14 @@ void TileMap::loadLayer(sf::Image layer)
                 cerr << "#ERROR: Pas de fin de niveau trouvé pour \"" + _levelName + "\"" << endl;
 
 
-    //TODO LES DELETE §§§§
+    delete jumperPrototype;
+    delete jumperSpawner;
+    delete followerPrototype;
+    delete followerSpawner;
+    delete boomerPrototype;
+    delete boomerSpawner;
+    delete spikePrototype;
+    delete spikeSpawner;
 }
 
 
@@ -432,16 +436,18 @@ void TileMap::addEnemy(Enemy *e)
     _enemies.push_back(e);
 }
 
+//Retourne le début de la prochaine tuile en Y
 unsigned int TileMap::nextTileY(float x) const
 {
     return ((int)(x/16) + 1)*16;
 } 
-
+//Retourne la fin de la tuile précédente en Y
 unsigned int TileMap::previousTileY(float x) const
 {
     return ((int)(x/16))*16;
 } 
 
+//Methode rechargeant simplement le layer de la map
 void TileMap::reset()
 {
     for (auto *e : _enemies)

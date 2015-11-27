@@ -21,7 +21,7 @@ class Jumper;
 
 /**
 * \class AI_Jumper
-* \brief Classe gérant l'AI des ennemi qui sautent.
+* \brief Classe gérant l'AI des Jumper
 */
 class AI_Jumper : public AI
 {

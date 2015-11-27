@@ -14,7 +14,7 @@
 * \version 1.0
 * \date 3/11/2015
 *
-* Etat MainMenu rattaché au Pattern State.
+* Etat StateMainMenu rattaché au Pattern State.
 */
 
 
@@ -23,7 +23,7 @@ class Jeu;
 
 /**
 * \classe StateMainMenu
-* \brief Etat MainMenu rattaché au Pattern State.
+* \brief Etat StateMainMenu rattaché au Pattern State.
 */
 class StateMainMenu : public State
 {

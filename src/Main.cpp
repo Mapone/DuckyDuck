@@ -10,13 +10,6 @@ DUCKYDUCK
 
 using namespace std;
 
-//TODO
-/*
-Si y'a le temps:
-    - Arret du programme si la map n'est pas valide (pas de spawn ou de fin)
-    - Remplacer la touche entrée par espace dans les menus (chiant à faire)
-*/
-
 ////////////////////////////////////
 ////////////INITIALISATION//////////
 ////////////////////////////////////
@@ -44,7 +37,7 @@ int main()
     
     sf::Vector2f gravity(0,0.2);
     sf::Vector2f lowGravity(0,0.01);
-    TileMap map("LEVEL 3", gravity, ducky);
+    TileMap map("first", gravity, ducky);
 
 //-------------------Création du Jeu------------------------------
 //----------------------------------------------------------------
@@ -54,12 +47,14 @@ int main()
     
 //--------- Création et ajout des niveaux -----------------
 //---------------------------------------------------------
-    TileMap map1("LEVEL 2", gravity, ducky);
+    TileMap map1("prairie", gravity, ducky);
     jeu.addLevel(&map1);
     TileMap map2("lowGrav", lowGravity, ducky);
     jeu.addLevel(&map2);
     TileMap map3("Cave", gravity, ducky);
     jeu.addLevel(&map3);
+    TileMap map4("troll", gravity, ducky);
+    jeu.addLevel(&map4);
 
 ///////////////////////////////////////
 ////////////LANCEMENT DU JEU//////////

@@ -19,7 +19,7 @@ class Spawner;
 
 /**
 * \class Boomer
-* \brief Classe gérant les ennemi qui explosent et se devisent
+* \brief Classe gérant les ennemi qui explosent et se divisent
 */
 class Boomer : public Enemy
 {

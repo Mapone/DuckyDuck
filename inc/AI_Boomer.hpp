@@ -12,7 +12,7 @@
 * \version 1.0
 * \date 14/11/2015
 *
-* Gère les mouvements d'une ennemi qui va grossir
+* Gère les mouvements d'un ennemi qui va grossir
 * et retrecir continuellement.
 * Hérite de AI.
 */
@@ -21,6 +21,7 @@ class Boomer;
 
 /**
 * \class AI_Boomer
+* \brief Classe gérant l'AI des Boomer
 */
 class AI_Boomer : public AI
 {

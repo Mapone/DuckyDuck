@@ -19,7 +19,7 @@ class TileMap;
 
 /**
 * \class EnemySpawner
-* \brief Classe gérant les ennemi qui explosent et se devisent
+* \brief Classe gérant les spawners d'Enemy
 */
 class EnemySpawner : public Enemy
 {

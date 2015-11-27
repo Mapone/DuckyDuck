@@ -23,12 +23,6 @@ Personnage::~Personnage(){}
 
 void Personnage::addMouvement(const Vector2f &mvt)
 {
-/*
-	cout << "MOVE param "<< mvt.x << ":" << mvt.y << endl;
-	cout << "MOVE OP en y"<< mvt.y + _mouvement.y << endl;
-	cout << "MOVE AVANT "<< getMouvement().x << ":" << getMouvement().y << endl;*/
-
-
 	if(_mouvement.x + mvt.x <= MAX_SPEED_X)
 	{
 		if(_mouvement.x + mvt.x >= -MAX_SPEED_X)
@@ -49,9 +43,6 @@ void Personnage::addMouvement(const Vector2f &mvt)
 	}
 	else
 		_mouvement.y = MAX_SPEED_Y;
-
-	/*cout << "MOVE APRES "<< getMouvement().x << ":" << getMouvement().y << endl;
-	cout << endl;*/
 }
 
 void Personnage::move(sf::Vector2f v)
