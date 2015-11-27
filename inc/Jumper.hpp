@@ -35,6 +35,17 @@ public:
 	 */
 	Jumper(const sf::Vector2f &taille, TileMap& tilemap, int speed, int jumpHeight);
 
+	/**
+	* \brief Constructeur
+	* 
+	* Constructeur de la classe Jumper
+	*
+	* \param taille Taille de la HitBox
+	* \param position Coordonnées de spawn du Jumper
+	* \param tileMap TileMap sur laquelle l'enemi va exister
+	* \param speed Vitesse du Jumper
+	* \param jumpHeight Hauteur du saut du Jumper
+	*/
 	Jumper(const sf::Vector2f &taille, const sf::Vector2f &position,  TileMap& tilemap, int speed, int jumpHeight);
 
 	/**
@@ -61,11 +72,17 @@ public:
 	 */
 	int getJumpHeight() const;
 
+	/**
+	* \fn unsigned int getReward() const 
+	* \brief Récompense lors de la mort de l'Enemy
+	*
+	* \return Le nombre de point gagné
+	*/
 	unsigned int getReward() const; 
 	
 private:
-	int _speed;
-	int _jumpHeight;
+	int _speed; /** Vitesse du Jumper */
+	int _jumpHeight; /** Force de la poussé pour les sauts */
 };
 
 

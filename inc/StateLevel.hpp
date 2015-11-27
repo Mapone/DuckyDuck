@@ -111,8 +111,20 @@ public:
   */
   virtual void pressRight();
 
+  /**
+  * \fn void update()
+  * \brief Mets à jour le niveau
+  * 
+  * Mets à jour le niveau en cours (Caméra/Collision/Ennemis)
+  */
   void update();
 
+  /**
+  * \fn void death()
+  * \brief Gère la mort du personnage
+  *
+  * Est appelé à la mort du personnage
+  */
   void death();
 
 private:

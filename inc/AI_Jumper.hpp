@@ -13,7 +13,8 @@
 * \date 14/11/2015
 *
 * Gère les mouvement d'un Enemy qui 
-* pourra sauter et/ou se déplacer latéralement
+* pourra sauter et/ou se déplacer latéralement.
+* Hérite de AI.
 */
 
 class Jumper;
@@ -48,7 +49,7 @@ public:
 private:
 
 	bool _directionX; /** Bool qui vérifiant si l'on doit inverser le mouvement en X (collision) */
-	Jumper* _jumper;
+	Jumper* _jumper; /** L'enemy à déplacer */
 };
 
 #endif

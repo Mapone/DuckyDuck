@@ -32,8 +32,8 @@ public:
 	 * @param taille Taille de la hitbox
 	 * @param tilemap Map sur laquelle est l'ennemi
 	 * @param perso Le personnage à suivre
-	 * @param float Sa vitesse, en pixels par frame
-	 * @param float Sa hauteur de saut, poussée en Y
+	 * @param speed Sa vitesse, en pixels par frame
+	 * @param jumpHeight Sa hauteur de saut, poussée en Y
 	 */
 	Follower(const sf::Vector2f &taille, TileMap& tilemap, const Personnage& perso, float speed, float jumpHeight);
 
@@ -48,6 +48,7 @@ public:
 	Enemy* clone();
 
 	/**
+	 * \fn float getSpeed() const
 	 * @brief Getter de la vitesse du l'ennemi
 	 * @details Getter de la vitesse de l'ennemi, en pixels par frame
 	 * @return Le deplacement de l'ennemi à chaque frame
@@ -55,20 +56,33 @@ public:
 	float getSpeed() const;
 
 	/**
+	 * \fn float getJumpHeight() const
 	 * @brief Getter de la hauteur de saut de l'ennemi
 	 * @details Getter de la Hauteur de saut de l'ennemi, soit la pourssée en Y lors du saut
 	 * @return La valeur de la poussée en Y
 	 */
 	float getJumpHeight() const;
 
+	/**
+	* \fn bool jumpOn()
+	* \brief Action lorsque que l'on saute sur un Boomer
+	*
+	* \return Return true si le personnage dois mourir
+	*/
 	bool jumpOn();
 
-	unsigned int getReward() const; 
+	/**
+	* \fn unsigned int getReward() const 
+	* \brief Récompense lors de la mort de l'Enemy
+	*
+	* \return Le nombre de point gagné
+	*/
+	virtual unsigned int getReward() const; 
 	
 private:
-	const Personnage& _perso;
-	float _speed;
-	float _jumpHeight;
+	const Personnage& _perso; /** Personnage à suivre */
+	float _speed; /** Vitesse de l'ennemi */
+	float _jumpHeight; /** Poussé pour le saut */
 };
 
 

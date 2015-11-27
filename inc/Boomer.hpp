@@ -36,6 +36,11 @@ public:
 	 */
 	Boomer(const sf::Vector2f &taille, TileMap& tilemap, int fatPerFrame, Enemy* prototype);
 
+	/**
+	* \brief Destructeur
+	*
+	* Destructeur de la classe Boomer
+	*/
 	~Boomer();
 
 	/**
@@ -49,19 +54,26 @@ public:
 	Enemy* clone();
 
 	/**
+	 * \fn unsigned int getFatPerFrame() const
 	 * @brief Getter du grossissement par frame
 	 * @details Getter de grossissement par frame
 	 * @return Retourne la valeure du grossissement par frame
 	 */
 	unsigned int getFatPerFrame() const;
 
+	/**
+	* \fn bool jumpOn()
+	* \brief Action lorsque que l'on saute sur un Boomer
+	*
+	* \return Return true si le personnage dois mourir
+	*/
 	bool jumpOn();
 
 
 private:
-	unsigned int _fatPerFrame;
-	Spawner* _jumperSpawn;
-	Enemy* _prototype;
+	unsigned int _fatPerFrame; /** Grossissement par Frame */
+	Spawner* _jumperSpawn; /** Spawner générant les Jumpers à la mort du Boomer */
+	Enemy* _prototype;/** Enemy à cloner */
 };
 
 

@@ -26,7 +26,7 @@ class EnemySpawner : public Enemy
 public:
 
 	/**
-	 * @brief Constructeur du EnemySpawner
+	 * @brief Constructeur
 	 * @details Constructeur du EnemySpawner
 	 * 
 	 * @param taille Taille de la hitbox
@@ -39,7 +39,7 @@ public:
 	~EnemySpawner();
 
 	/**
-	* \fn Enemy* clone();
+	* \fn Enemy* clone()
 	* \brief Clone le EnemySpawner
 	*
 	* Créer un nouveau EnemySpawner avec les même caractéristiques.
@@ -48,13 +48,19 @@ public:
 	*/
 	Enemy* clone();
 
+	/**
+	* \fn void move()
+	* \brief Action de l'ennemi
+	*
+	* Bouge l'Enemy
+	*/
 	void move();
 
 private:
-	Spawner* _enemySpawn;
-	TileMap& _tilemap;
-	float _spawnfreq;
-	sf::Clock _clock;
+	Spawner* _enemySpawn; /** Ennemi à faire spawn */
+	TileMap& _tilemap; /** TileMap sur laquelle l'Enemy est */
+	float _spawnfreq; /** Fréquence de spawn */
+	sf::Clock _clock; /** Clock pour le spawn d'ennemi */
 };
 
 

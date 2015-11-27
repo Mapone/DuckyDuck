@@ -168,7 +168,7 @@ public:
 	void close();
 
 	/**
-	* \fn restartCharClock
+	* \fn restartCharClock() const
 	* \brief Reset le timer du personnage.
 	*
 	* Appelle la fonction restartClock du personnage.
@@ -185,7 +185,7 @@ private:
 	*
 	* Affiche le personnage et lui applique les actions correspondantes. 
 	*
-	* \param target : objet à afficher, states : ???
+	* \param target : objet à afficher, states : applique la transformation (SFML Function)
 	*/
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	

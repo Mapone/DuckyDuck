@@ -4,12 +4,12 @@
 
 /**
 * \file AI.hpp
-* \brief Pattern Stratégie gérant les IA des ennemis
+* \brief Pattern Stratégy gérant les IA des ennemis
 * \author {N. Guittonneau, P. Raballand}
 * \version 1.0
 * \date 14/11/2015
 *
-* Gère les mouvements d'un Enemy sur un map définit.
+* Gère les mouvements d'un Enemy sur une map définit.
 */
 
 class Enemy;
@@ -17,7 +17,7 @@ class TileMap;
 
 /**
 * \class AI
-* \brief Classe abstraites pour les IA des ennemis
+* \brief Classe abstraite pour les IA des ennemis
 */
 class AI
 {

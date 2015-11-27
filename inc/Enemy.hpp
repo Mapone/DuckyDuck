@@ -66,16 +66,30 @@ public:
 	virtual Enemy* clone() = 0;
 
 	/**
+	 * \fn bool jumpOn()
 	 * @brief Actions à faire si on saute sur l'ennemi
 	 * @details Actions à faire si on saute sur l'ennemi
+	 *
+	 * \return Retourne vrai si le personnage doit mourir
 	 */
 	virtual bool jumpOn();
 
 	/**
-	* 
+	* \fn unsigned int getReward() const 
+	* \brief Récompense lors de la mort de l'Enemy
+	*
+	* \return Le nombre de point gagné
 	*/
 	virtual unsigned int getReward() const;
 
+	/**
+	* \fn bool isDead()
+	* \brief Getter de _isDead
+	*
+	* Retourne l'état (Mort ou vif) de l'Enemy
+	*
+	* \return La valeur de _isDead
+	*/
 	bool isDead();
 
 
@@ -84,8 +98,8 @@ protected:
 
 	//L'enemi doit avoir conscience de sa TileMap
 	TileMap& _tileMap; /** TileMap sur laquelle l'ennemi existe. */
-	bool _isDead;
-	sf::Texture _texture;
+	bool _isDead; /** Boolean définissant son état */
+	sf::Texture _texture; /** Texture de l'Enemy */
 };
 
 

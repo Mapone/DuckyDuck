@@ -1,3 +1,4 @@
+
 #ifndef TILEMAP_H
 #define TILEMAP_H
 
@@ -253,7 +254,7 @@ private:
     *
     * Procédure dessinant le personnage en paramètre.
     *
-    * \param target : objet à afficher, states : ???
+    * \param target : objet à afficher, states : applique la transformation (SFML Function)
     */
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     

@@ -14,7 +14,7 @@
 *
 * Gère les mouvement d'un Enemy ayant pour base
 * le mouvement de saut sur une TileMap définie.
-* Hérite du AI.
+* Hérite de AI.
 */
 
 class Follower;

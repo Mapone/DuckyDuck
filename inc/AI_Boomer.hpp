@@ -12,9 +12,9 @@
 * \version 1.0
 * \date 14/11/2015
 *
-*Gère les mouvements d'une ennemi qui va grossir
-* et retrecir continuellement
-*
+* Gère les mouvements d'une ennemi qui va grossir
+* et retrecir continuellement.
+* Hérite de AI.
 */
 
 class Boomer;
