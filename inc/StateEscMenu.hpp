@@ -85,6 +85,7 @@ class StateEscMenu : public State
     private:
       sf::Text _gameName; /** Nom du jeu */
       sf::Text _Reprendre; /** Affichage pour reprendre */
+      sf::Text _Recommencer; /** Affichage pour recommencer le niveau */
       sf::Text _Quitter; /** Affichage pour quitter */
       sf::CircleShape _triangle; /** Curseur pour le choix */
       unsigned int _current; /** Choix en cours */

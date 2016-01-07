@@ -163,7 +163,7 @@ public:
 	* \brief Enregistre la fermeture de la fenêtre
 	*
 	* Passe un global bool en false afin d'enregistrer
-	* la fermeture de la fenêtr principale.
+	* la fermeture de la fenêtre principale.
 	*/
 	void close();
 
