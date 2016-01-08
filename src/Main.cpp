@@ -47,6 +47,8 @@ int main()
     
 //--------- Création et ajout des niveaux -----------------
 //---------------------------------------------------------
+    TileMap map0("Level",gravity, ducky);
+    jeu.addLevel(&map0);
     TileMap map1("prairie", gravity, ducky);
     jeu.addLevel(&map1);
     TileMap map2("lowGrav", lowGravity, ducky);

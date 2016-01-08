@@ -248,10 +248,13 @@ void TileMap::loadBMP(sf::Image niveau)
             level[i/4] = 7; //BLOC HERBE N°2
 
         else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 100 && static_cast<int>(t[i+2]) == 0)
-            level[i/4] = 191; //BLOC HERBE BORDURE GAUCHE
+            level[i/4] = 13; //BLOC HERBE BORDURE GAUCHE
 
         else if( static_cast<int>(t[i]) == 0 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 0)
             level[i/4] = 10; //BLOC HERBE BORDURE DROITE
+
+        else if( static_cast<int>(t[i]) == 96 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 76)
+            level[i/4] = 14; //BLOC TERRE BORDURE GAUCHE
 
         else if( static_cast<int>(t[i]) == 96 && static_cast<int>(t[i+1]) == 56 && static_cast<int>(t[i+2]) == 76)
             level[i/4] = 11; //BLOC TERRE BORDURE DROITE
@@ -273,6 +276,9 @@ void TileMap::loadBMP(sf::Image niveau)
 
         else if( static_cast<int>(t[i]) == 1 && static_cast<int>(t[i+1]) == 1 && static_cast<int>(t[i+2]) == 1)
             level[i/4] = 12; //BLOC CIEL INVISIBLE
+
+        else if( static_cast<int>(t[i]) == 16 && static_cast<int>(t[i+1]) == 132 && static_cast<int>(t[i+2]) == 132)
+            level[i/4] = 15; //BRIQUE
 
         else if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 0)
         {
