@@ -1,6 +1,6 @@
 CXX=g++
 CXXFLAGS=-std=c++11 -W -Wall -g
-CXXLINK= -L SMFL-2.1/lib -lsfml-graphics -lsfml-window -lsfml-system
+CXXLINK= -L SFML-2.3.2/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 DIR_SRC=src/
 DIR_INC=inc/
@@ -25,7 +25,7 @@ $(EXE): $(OBJ)
 # -MMD pour generer les makefiles
 # Crée DIR_BIN si celui-ci n'existe pas
 $(DIR_BIN)%.o: $(DIR_SRC)%.cpp | $(DIR_BIN)
-	$(CXX) $(CXXFLAGS) -I$(DIR_INC) -MMD -c -o $@ -I SFML-2.1/include $<
+	$(CXX) $(CXXFLAGS) -I$(DIR_INC) -MMD -c -o $@ -I SFML-2.3.2/include $<
 
 run: $(EXE)
 	cd $(DIR_RUN) && ../$<
