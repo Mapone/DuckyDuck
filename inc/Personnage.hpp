@@ -29,7 +29,7 @@ public:
 	*
 	* \param taille : taille (en 2D) du personnage, i : image du personnage, t : texture du personnage.
 	*/
-	Personnage(const sf::Vector2f &taille, sf::Image &i, sf::Texture &t);
+	Personnage(const sf::Vector2f &taille);
 
 	/**
 	* \brief Destructeur
@@ -78,22 +78,6 @@ public:
 	* \return La durée qui s'est écoulé depuis le début du niveau
 	*/
 	sf::Time getElapsedTime() const;
-
-	/**
-	* \fn void flipRight()
-	* \brief Tourne la texture vers la droite
-	*
-	* Fait regarder le canard à droite
-	*/
-	void flipRight();
-	
-	/**
-	* \fn void flipLeft()
-	* \brief Tourne la texture à gauche
-	*
-	* Fait regarder le canard à gauche
-	*/
-	void flipLeft();
 
 	/**
 	* \fn unsigned int getCurrentKill() const
@@ -179,12 +163,8 @@ public:
 	*/
 	void setTotalScore(unsigned int s);
 
-
 private:
 	sf::Clock _clock; /** Clock gérer par SFML */
-	sf::Image _imgDuck; /** Image du personnage */
-	sf::Texture _textureDuck; /** Texture créer par l'image */
-	bool _lookRight; /** Direction D/G vers ou le personnage est touné */
 	int _currentScore; /** Score temporaire du personnage*/
 	unsigned int _currentKill; /** Nombre d'enemis tué temporaire du personnage */
 	int _totalScore; /** Score total du personnage */

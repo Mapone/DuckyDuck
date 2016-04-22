@@ -56,7 +56,6 @@ void Jeu::start()
 
     bool pressEsc = true;
     bool pressEnter = true;
-
     while (window.isOpen() && isOpen)
     {
         Event event;
@@ -206,9 +205,17 @@ void Jeu::restartCharClock() const
 
 TileMap* Jeu::resetLevel()
 {
+    //On flip le personnage si besoin
+    sf::Vector2f gravIni = _levels[_currentLevel]->getInitialGravity();
+    sf::Vector2f grav = _levels[_currentLevel]->getGravity();
+
+    //Si la gravIni et la grav actuelle sont fe signe different, on flip le perso
+    if((gravIni.y >=0 && grav.y < 0) || (gravIni.y < 0 && grav.y >=0))
+        _perso.flipVertically();
+    
+
     //On recrée conplétement la tilemap
     string name = _levels[_currentLevel]->getLevelName();
-    sf::Vector2f grav = _levels[_currentLevel]->getGravity();
-    _levels[_currentLevel] = new TileMap(name, grav, _perso);
+    _levels[_currentLevel] = new TileMap(name, gravIni, _perso);
     return _levels[_currentLevel];
 }

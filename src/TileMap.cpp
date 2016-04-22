@@ -10,6 +10,7 @@
 #include "Boomer.hpp"
 #include "EnemySpawner.hpp"
 #include "Spike.hpp"
+#include "InvertGravityBlock.hpp"
 
 
 using namespace std;
@@ -17,7 +18,7 @@ using namespace std;
 TileMap::TileMap(string levelName, sf::Vector2f &gravity, const Personnage& p): _perso(p)
 {
     _levelName = levelName;
-    _gravity = gravity;
+    _initialGravity = _gravity = gravity;
     string img_level = levelName + ".png";
     string layer_level = levelName + "_layer.png";
     sf::Image niveau;
@@ -133,7 +134,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize)
 }
 
 /**********************************************************/
-/*************************COLLISIONS**********************/
+/************************ COLLISIONS *********************/
 /********************************************************/
 
 
@@ -205,6 +206,36 @@ bool TileMap::collisionGauche(const AliveEntity& ae) const
     colXBasGauche = collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(mvt.x,0));
 
     return colXHautGauche || colXBasGauche;
+}
+
+bool TileMap::collisionInvertGravBloc(const AliveEntity& ae) const
+{
+    for (auto & gb : _invertBlocks)
+    {
+        if(checkCollision(ae.getShape(), gb->getShape()))
+            return true;
+    }
+    return false;
+}
+
+void TileMap::rotateGravityBlock()
+{
+    for (auto & gb : _invertBlocks)
+    {
+        gb->flipBlock();
+    }  
+}
+
+
+bool TileMap::checkCollision(const sf::RectangleShape& s1, const sf::RectangleShape& s2) const
+{
+    sf::FloatRect boundingBoxS1 = s1.getGlobalBounds();
+    sf::FloatRect boundingBoxS2 = s2.getGlobalBounds();
+
+    if (boundingBoxS1.intersects(boundingBoxS2))
+        return true;
+    else 
+        return false;
 }
 
 
@@ -280,13 +311,6 @@ void TileMap::loadBMP(sf::Image niveau)
         else if( static_cast<int>(t[i]) == 16 && static_cast<int>(t[i+1]) == 132 && static_cast<int>(t[i+2]) == 132)
             level[i/4] = 15; //BRIQUE
 
-        else if( static_cast<int>(t[i]) == 255 && static_cast<int>(t[i+1]) == 255 && static_cast<int>(t[i+2]) == 0)
-        {
-            level[i/4] = 2; //BLOC DE SPAWN, on place donc un bloc ciel
-            int j = i/4;
-            _spawn.x = (j%width)* 16;
-            _spawn.y = ((int)(j/width)+1)* 16;
-        }
         else
         {
             cerr << "#ERROR: loadBMP(niveau), couleur non existante RGBA: " << static_cast<int>(t[i]) << "," << static_cast<int>(t[i+1]) << "," << static_cast<int>(t[i+2]) << "," << static_cast<int>(t[i+3]) << endl;
@@ -311,11 +335,12 @@ void TileMap::loadLayer(sf::Image layer)
     Spawner* boomerSpawner = new Spawner(boomerPrototype);
 
     Enemy* spikePrototype = new Spike(sf::Vector2f(15,15), *this);
+    spikePrototype->flipVertically();
     Spawner* spikeSpawner = new Spawner(spikePrototype);
 
 
     for (unsigned int i = 0; i < (layer.getSize().x*layer.getSize().y*4); i+=4)
-    { 
+    {
         //Si on detecte la couleur de fond (blanc), on passe au prochain tour de boucle
         int check = static_cast<int>(t[i]) + static_cast<int>(t[i+1]) + static_cast<int>(t[i+2]);
         if(check == 765)
@@ -379,6 +404,14 @@ void TileMap::loadLayer(sf::Image layer)
             e->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16 +1));
             _enemies.push_back(e);
         }
+        else if( static_cast<int>(t[i]) == 127 && static_cast<int>(t[i+1]) == 0 && static_cast<int>(t[i+2]) == 0)
+        {
+            //INVERT_GRAVITY
+            int j = i/4;
+            InvertGravityBlock* invBlock = new InvertGravityBlock(sf::Vector2f(16,16));
+            invBlock->setPosition(sf::Vector2f((j%width)* 16,((int)(j/width))* 16 +1));
+            addInvertblock(invBlock);
+        }
         else
         {
             int j,k,l;
@@ -405,12 +438,14 @@ void TileMap::loadLayer(sf::Image layer)
     delete spikeSpawner;
 }
 
-
-
-
 /**********************************************************/
 /*********** GETTER ET PETITES METHODES ******************/
 /********************************************************/
+
+void TileMap::addInvertblock(InvertGravityBlock* gb)
+{
+    _invertBlocks.push_back(gb);
+}
 
 void TileMap::changePositionX(float gap)
 {
@@ -419,6 +454,10 @@ void TileMap::changePositionX(float gap)
     for (auto *enemy : getEnemies())
     {
         enemy->setPosition(enemy->getPosition().x - gap, enemy->getPosition().y);
+    }
+    for (auto gb : getBlocks())
+    {
+        gb->setPosition(gb->getPosition().x - gap, gb->getPosition().y);
     }
 }
 
@@ -469,6 +508,17 @@ sf::Vector2f TileMap::getGravity() const
     return _gravity;
 }
 
+sf::Vector2f TileMap::getInitialGravity() const
+{
+    return _initialGravity;
+}
+
+
+void TileMap::setGravity(sf::Vector2f newGrav)
+{
+    _gravity = newGrav;
+}
+
 unsigned int TileMap::getWidth() const
 {
     return width;
@@ -497,4 +547,9 @@ string TileMap::getLevelName() const
 std::vector<Enemy*> TileMap::getEnemies()
 {
     return _enemies;
+}
+
+std::vector<InvertGravityBlock*> TileMap::getBlocks()
+{
+    return _invertBlocks;
 }

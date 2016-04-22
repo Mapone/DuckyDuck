@@ -8,16 +8,19 @@ const int MAX_SPEED_X = 3;
 const int MAX_SPEED_Y = 5;
 const float FROTTEMENTS = 0.1;
 
-Personnage::Personnage(const Vector2f &taille, Image &i, Texture &t) : AliveEntity(taille), _imgDuck(i), _textureDuck(t)
+Personnage::Personnage(const Vector2f &taille) : AliveEntity(taille)
 {
-	_textureDuck.loadFromImage(_imgDuck);
-	_shape.setTexture(&_textureDuck, true);
-	_textureDuck.update(_imgDuck);
-	_lookRight = true;
+	string strImg = "Duck.png";
+	if(!_img.loadFromFile(strImg))
+		cerr << "#ERROR, fail to load duck.png" << endl;
+	_img.flipHorizontally();
+	_texture.loadFromImage(_img);
+	_shape.setTexture(&_texture, true);
+	_texture.update(_img);
 	_currentScore = 0;
 	_currentKill = 0;
 	_totalScore = 0;
-	_totalKill = 0;
+	_totalKill = 0;	
 }
 Personnage::~Personnage(){}
 
@@ -73,26 +76,6 @@ void Personnage::restartClock()
 sf::Time Personnage::getElapsedTime() const
 {
 	return _clock.getElapsedTime();
-}
-
-void Personnage::flipRight()
-{
-	if(!_lookRight)
-	{
-		_imgDuck.flipHorizontally();
-		_textureDuck.update(_imgDuck);
-		_lookRight = true;
-	}
-}
-
-void Personnage::flipLeft()
-{
-	if(_lookRight)
-	{
-		_imgDuck.flipHorizontally();
-		_textureDuck.update(_imgDuck);
-		_lookRight = false;
-	}
 }
 
 unsigned int Personnage::getCurrentKill() const

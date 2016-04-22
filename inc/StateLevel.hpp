@@ -131,6 +131,7 @@ private:
 
   TileMap* _tilemap; /** TileMap du niveau */
   Personnage& _perso; /** Personnage jouable */
+  sf::Clock _clockInvertGravBloc; //
 
   /**
   * \fn void checkMapCollision() const

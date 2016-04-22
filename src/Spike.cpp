@@ -5,7 +5,13 @@
 
 Spike::Spike(const sf::Vector2f taille, TileMap& tilemap): Enemy(taille, tilemap)
 {
-	_texture.loadFromFile("spike.png");
+	if(!_img.loadFromFile("spike.png"))
+		std::cerr << "#ERROR, fail to load duck.png" << std::endl;
+	_img.flipVertically();
+	_texture.loadFromImage(_img);
+	_shape.setTexture(&_texture, true);
+	_texture.update(_img);
+
 	_AI = NULL;
 }
 

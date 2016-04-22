@@ -135,10 +135,33 @@ public:
 	*/
 	const sf::Vector2f & getSize() const;
 
+	/**
+	* \fn void flipRight()
+	* \brief Tourne la texture vers la droite
+	*
+	* Fait regarder le canard à droite
+	*/
+	void flipRight();
+
+	void flipVertically();
+
+	
+	/**
+	* \fn void flipLeft()
+	* \brief Tourne la texture à gauche
+	*
+	* Fait regarder le canard à gauche
+	*/
+	void flipLeft();
+
 
 protected:
 	sf::Vector2f _mouvement; /** Prochain mouvement */
 	sf::RectangleShape _shape; /** HitBox de l'objet */
+	sf::Texture _texture;
+	sf::Image _img;
+	bool _lookRight; /** Direction D/G vers l'ae est touné */
+
 };
 
 #endif

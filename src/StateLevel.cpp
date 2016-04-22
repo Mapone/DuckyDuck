@@ -9,6 +9,8 @@
 #include "StateStats.hpp"
 #include "StateEscMenu.hpp"
 #include "Enemy.hpp"
+#include "InvertGravityBlock.hpp"
+
 
 using namespace std;
 
@@ -18,7 +20,9 @@ const unsigned int TAILLE_TUILE = 16;
 
 
 StateLevel::StateLevel(Jeu* jeu, TileMap* tilemap, Personnage& perso) : State(jeu), _tilemap(tilemap), _perso(perso)
-{}
+{
+    _clockInvertGravBloc.restart();
+}
 
 void  StateLevel::init()
 {
@@ -38,7 +42,6 @@ void StateLevel::setLevel(TileMap* t)
 
 void StateLevel::update()
 {
-
     //On check les collisions entre la map est le personnage
     checkMapCollision();
     //On vérifie le scrolling de la camera
@@ -64,6 +67,16 @@ void StateLevel::checkCollision()
     {
         //On le tue
         death();
+    }
+
+    //Bloc inversion gravité
+    if(_tilemap->collisionInvertGravBloc(_perso) && _clockInvertGravBloc.getElapsedTime().asSeconds() > 0.4)
+    {
+        //Inversion de la texture + reset du chrono + inverse fleches + invert grav (obviousproof)
+        _tilemap->setGravity(sf::Vector2f(_tilemap->getGravity().x*-1,_tilemap->getGravity().y*-1));
+        _clockInvertGravBloc.restart();
+        _perso.flipVertically();
+        _tilemap->rotateGravityBlock();
     }
 }
 
@@ -139,6 +152,11 @@ void StateLevel::draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         target.draw(enemy->getShape());
     }
+    for (auto block : _tilemap->getBlocks())
+    {
+        target.draw(block->getShape());
+    }
+
 }
 
 void StateLevel::pressUp()
@@ -161,17 +179,36 @@ void StateLevel::pressRight()
 
 void StateLevel::pressSpace()
 {
-    //Si il y a une collision en bas, on a la droit de sauter
-    bool colYBasGauche, colYBasDroit, colBas;
-    sf::Vector2f position = _perso.getShape().getPosition();
-    sf::Vector2f size = _perso.getShape().getSize();
+    //Puissance du saut
+    int jump = 5;
+    //On regarde le sens de la gravité
+    //grav négative
+    if(_tilemap->getGravity().y < 0)
+    {
+        bool colYHautDroit, colYHautGauche;
 
-    colYBasGauche = _tilemap->collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(0,1));
-    colYBasDroit = _tilemap->collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(0,1));
-    colBas = colYBasDroit || colYBasGauche;
+        sf::Vector2f position = _perso.getPosition();
+        sf::Vector2f size = _perso.getShape().getSize();
 
-    if(colBas)
-        _perso.addMouvement(sf::Vector2f(0,-20));
+        colYHautDroit = _tilemap->collision(sf::Vector2f(position.x + size.x, position.y), sf::Vector2f(0,-1));
+        colYHautGauche = _tilemap->collision(position, sf::Vector2f(0,-1));
+
+        if(colYHautDroit || colYHautGauche)
+            _perso.addMouvement(sf::Vector2f(0,jump));
+    }
+    //gravité positive ou nulle
+    else
+    {
+        bool colYBasGauche, colYBasDroit;
+        sf::Vector2f position = _perso.getShape().getPosition();
+        sf::Vector2f size = _perso.getShape().getSize();
+
+        colYBasGauche = _tilemap->collision(sf::Vector2f(position.x, position.y + size.y), sf::Vector2f(0,1));
+        colYBasDroit = _tilemap->collision(sf::Vector2f(position.x + size.x, position.y + size.y), sf::Vector2f(0,1));
+
+        if(colYBasDroit || colYBasGauche)
+            _perso.addMouvement(sf::Vector2f(0,-jump));
+    }
 }
 
 void StateLevel::pressEsc()

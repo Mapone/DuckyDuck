@@ -2,9 +2,12 @@
 #include "AliveEntity.hpp"
 
 AliveEntity::AliveEntity(const sf::Vector2f &taille)
-{
+{/*
+	_texture = new sf::Texture();
+	_img = new sf::Image();*/
 	_shape.setSize(taille);
 	_mouvement = sf::Vector2f(0,0);
+	_lookRight = true; //Precond: La texture regarde vers la droite 
 }
 
 sf::Vector2f AliveEntity::getMouvement() const
@@ -56,5 +59,31 @@ const sf::Vector2f & AliveEntity::getPosition() const
 const sf::Vector2f & AliveEntity::getSize() const
 {
 	return _shape.getSize();
+}
+
+void AliveEntity::flipVertically()
+{
+	_img.flipVertically();
+	_texture.update(_img);
+}
+
+void AliveEntity::flipRight()
+{
+	if(!_lookRight)
+	{
+		_img.flipHorizontally();
+		_texture.update(_img);
+		_lookRight = true;
+	}
+}
+
+void AliveEntity::flipLeft()
+{
+	if(_lookRight)
+	{
+		_img.flipHorizontally();
+		_texture.update(_img);
+		_lookRight = false;
+	}
 }
 

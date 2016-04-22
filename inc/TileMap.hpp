@@ -6,6 +6,7 @@
 #include "Enemy.hpp"
 
 class AliveEntity;
+class InvertGravityBlock;
 class Personnage;
 /**
 * \file TileMap.hpp
@@ -108,6 +109,9 @@ public:
     */
     bool collisionGauche(const AliveEntity& ae) const;
 
+    bool collisionInvertGravBloc(const AliveEntity& ae) const;
+
+    bool checkCollision(const sf::RectangleShape& s1, const sf::RectangleShape& s2) const;
     
     /**
     * \fn unsigned int getWidth() const
@@ -138,6 +142,8 @@ public:
     * \return Un Vector2f de la Gravité.
     */
     sf::Vector2f getGravity() const;
+    sf::Vector2f getInitialGravity() const;
+    void setGravity(sf::Vector2f newGrav);
 
     /**
     * \fn sf::Vector2f getSpawn() const;
@@ -177,6 +183,7 @@ public:
     * \return La liste des ennemis de la map
     */
     std::vector<Enemy*> getEnemies();
+    std::vector<InvertGravityBlock*> getBlocks();
 
     /**
     * \fn unsigned int nextTileY(float x) const
@@ -246,6 +253,9 @@ public:
      * @param e L'ennemi à ajouter
      */
     void addEnemy(Enemy *e);
+    
+    void rotateGravityBlock();
+
 
 private:
 
@@ -280,6 +290,8 @@ private:
     */
     void loadLayer(sf::Image layer);
 
+    void addInvertblock(InvertGravityBlock* gb);
+
 
     sf::VertexArray m_vertices; /** Tableau contenant le niveau */
     sf::Texture m_tileset; /** TileSet */
@@ -287,6 +299,7 @@ private:
     bool *mapCollisions; /** Tableau de collisions du niveau */
     unsigned int width; /** CONST Largeur */
     unsigned int height; /** CONST Hauteur */
+    sf::Vector2f _initialGravity; /** Gravité (2D) */
     sf::Vector2f _gravity; /** Gravité (2D) */
     sf::Vector2f _spawn;  /** Point de spawn, en bas à gauche de la tuile */
     sf::RectangleShape _levelEnd; /** Bloc de fin de niveau */
@@ -295,5 +308,6 @@ private:
     std::vector<Enemy*> _enemies; /** Liste des Enemy */
     sf::Image _layer; /** Layer du niveau */
     const Personnage& _perso;/** Le personnage principal, necessaire pour la création de certains ennemis*/
+    std::vector<InvertGravityBlock*> _invertBlocks;
 };
 #endif

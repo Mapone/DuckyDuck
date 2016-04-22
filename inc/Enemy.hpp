@@ -99,7 +99,6 @@ protected:
 	//L'enemi doit avoir conscience de sa TileMap
 	TileMap& _tileMap; /** TileMap sur laquelle l'ennemi existe. */
 	bool _isDead; /** Boolean définissant son état */
-	sf::Texture _texture; /** Texture de l'Enemy */
 };
 
 
