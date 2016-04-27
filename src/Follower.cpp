@@ -7,6 +7,12 @@
 //Un follower doit connaitre le personnage pour pouvoir le suivre.
 Follower::Follower(const sf::Vector2f &taille,  TileMap& tilemap, const Personnage& perso, float speed, float jumpHeight) : Enemy(taille, tilemap), _perso(perso),_speed(speed), _jumpHeight(jumpHeight)
 {
+    std::string strImg = "cat.png";
+    if(!_img.loadFromFile(strImg))
+        std::cerr << "#ERROR, fail to load " << strImg << std::endl;
+    _texture.loadFromImage(_img);
+    _shape.setTexture(&_texture, true);
+    _texture.update(_img);
 	_AI = new AI_Follower(this, tilemap, perso);
 }
 

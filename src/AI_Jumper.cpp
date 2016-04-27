@@ -33,13 +33,25 @@ void AI_Jumper::move()
         _jumper->setMouvement(sf::Vector2f(0,_jumper->getMouvement().y));
         
     }
-    //Le jumper saute si il detecte une collision en bas
-    if(colBas)
-        _jumper->setMouvement(sf::Vector2f(_jumper->getMouvement().x,-_jumper->getJumpHeight()));
+    //Le jumper saute si il detecte une collision en bas (ou en "haut" si la gravité est inversée)
+    //Si grav negative, on inverse colBas et colHaut
+    bool gravPosi = _tileMap.getGravity().y >= 0;
+    if(!gravPosi)
+    {
+        if(colBas)
+            _jumper->setMouvement(sf::Vector2f(_jumper->getMouvement().x,0));
 
+        if(colHaut)
+            _jumper->setMouvement(sf::Vector2f(_jumper->getMouvement().x,_jumper->getJumpHeight()));
+    }
+    else
+    {
+        if(colBas)
+            _jumper->setMouvement(sf::Vector2f(_jumper->getMouvement().x,-_jumper->getJumpHeight()));
 
-    if(colHaut)
-    _jumper->setMouvement(sf::Vector2f(_jumper->getMouvement().x,0));
+        if(colHaut)
+            _jumper->setMouvement(sf::Vector2f(_jumper->getMouvement().x,0));
+    }
     	
 
     if(!(colDroite && colGauche))

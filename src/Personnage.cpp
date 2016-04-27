@@ -4,9 +4,9 @@
 using namespace sf;
 using namespace std;
 
-const int MAX_SPEED_X = 3;
-const int MAX_SPEED_Y = 5;
-const float FROTTEMENTS = 0.1;
+const float MAX_SPEED_X = 3;
+const float MAX_SPEED_Y = 5;
+const float FROTTEMENTS = 0.15;
 
 Personnage::Personnage(const Vector2f &taille) : AliveEntity(taille)
 {
@@ -36,7 +36,7 @@ void Personnage::addMouvement(const Vector2f &mvt)
 	else
 		_mouvement.x = MAX_SPEED_X;
 
-	//
+
 	if(_mouvement.y + mvt.y <= MAX_SPEED_Y)
 	{
 		if(_mouvement.y + mvt.y >= -MAX_SPEED_Y)

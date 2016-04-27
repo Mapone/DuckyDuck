@@ -1,4 +1,5 @@
-#include "iostream"
+#include <iostream>
+#include <string>
 #include "Enemy.hpp"
 #include "Jumper.hpp"
 #include "AI_Jumper.hpp"
@@ -7,7 +8,12 @@
 
 Jumper::Jumper(const sf::Vector2f &taille, TileMap& tilemap, int speed, int jumpHeight) : Enemy(taille, tilemap),_speed(speed), _jumpHeight(jumpHeight)
 {
-	_shape.setFillColor(sf::Color::Red);
+	std::string strImg = "Jumper.png";
+	if(!_img.loadFromFile(strImg))
+		std::cerr << "#ERROR, fail to load " << strImg << std::endl;
+	_texture.loadFromImage(_img);
+	_shape.setTexture(&_texture, true);
+	_texture.update(_img);
 	_AI = new AI_Jumper(this, tilemap);
 }
 

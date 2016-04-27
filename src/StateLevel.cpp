@@ -77,6 +77,10 @@ void StateLevel::checkCollision()
         _clockInvertGravBloc.restart();
         _perso.flipVertically();
         _tilemap->rotateGravityBlock();
+        for (auto *enemy : _tilemap->getEnemies())
+        {
+            enemy->flipVertically();
+        }
     }
 }
 
@@ -90,7 +94,7 @@ void StateLevel::death()
 
 bool StateLevel::collisionEnemy() const
 {
-    //On parcours tous les annemis de la map
+    //On parcours tous les annemis de la map, on en profite pour les flip si il le faut
     for (auto *enemy : _tilemap->getEnemies())
     {
         if(collisionEnemy(enemy))
@@ -100,6 +104,46 @@ bool StateLevel::collisionEnemy() const
 }
 
 bool StateLevel::collisionEnemy(Enemy *e) const
+{
+    bool gravPosi = _tilemap->getGravity().y > 0;
+    bool jumpOn = false;
+    //Si il y a collision avec le perso
+    if(checkCollision(_perso.getShape(),e->getShape()))
+    {
+        //Si le perso est situé au dessus (ou en dessous si grav inversée) de l'ennemi, avec une marge de 5 pixels (vitesse max du perso en Y)
+        if(gravPosi)
+        {        
+            jumpOn = (_perso.getPosition().y + _perso.getSize().y) <= e->getPosition().y + 5;
+        }
+        else
+        {  
+            jumpOn = _perso.getPosition().y >= (e->getPosition().y + e->getSize().y - 5);
+        }
+
+        if(jumpOn)
+        {
+            //On fait sauter le personnage
+            _perso.setMouvement(sf::Vector2f(_perso.getMouvement().x,gravPosi ? -5 : 5));
+            bool tmp = e->jumpOn();
+            //On supprime l'ennemis si celui-ci meurt 
+            if(e->isDead())
+            {
+                _perso.setCurrentKill(_perso.getCurrentKill() + 1);
+                _perso.setCurrentScore(_perso.getCurrentScore()+e->getReward());
+                _tilemap->killEnemy(e);
+            }
+            //On retourne le booléen de JumpOn, qui nous indique si l'on décède
+            return tmp;
+        }
+        else
+        { 
+            return true;
+        }
+    }
+    return false;
+}
+
+/*bool StateLevel::collisionEnemy(Enemy *e) const
 {
     //Si il y a collision avec le perso
     if(checkCollision(_perso.getShape(),e->getShape()))
@@ -127,6 +171,7 @@ bool StateLevel::collisionEnemy(Enemy *e) const
     }
     return false;
 }
+*/
 
 void StateLevel::enemyMove() const
 {
